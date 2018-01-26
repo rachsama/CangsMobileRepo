@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Log-in
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style= "background-color: #0847ad"> 
+
+<!--<ion-list style = "padding-top: 140px">
+  <ion-item>
+    <ion-label fixed style ="color: black">Username</ion-label>
+    <ion-input type="text" value=""></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label fixed style ="color: black">Password</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+</ion-list>-->
+
+<ion-list style="padding-top: 110px">
+<div>
+ <img alt="cangs" height="90" src="assets/imgs/cangs.png" >
+ <h4 text-center style="color: white">Cang's Inc.</h4> 
+</div>
+
+ <ion-label text-center style="font-size: 12px; color: white">Authentication</ion-label>
+
+  <ion-item id="user">
+    <ion-input  placeholder="Username" type="text" name="user" [(ngModel)]="user"></ion-input>
+  </ion-item>
+
+  <ion-item id="pw">
+    <ion-input  placeholder="Password" type="password" name="pass" [(ngModel)]="pass"></ion-input>
+  </ion-item>
+</ion-list>
+<div text-center> 
+    <button ion-button outline round style="color: white; background-color:#0847ad" (click)="login($event)">Log-in</button>
+</div>
+
+
+</ion-content>

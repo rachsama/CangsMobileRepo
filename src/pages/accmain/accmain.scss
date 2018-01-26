@@ -1,0 +1,49 @@
+
+page-accmain {
+
+img {
+     height: 25vh;
+     width: auto;
+     margin: auto;
+     display: block;
+   }
+
+ #btn
+ {
+   outline-color: white;
+ }  
+
+  #pw
+{ 
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+     margin-bottom: 8px; 
+     border-radius: 10px;
+}
+
+  .btn
+{
+  line-height: 4vh !important;
+  width: 0%;
+  background: transparent; 
+  color: white;
+  
+}
+
+ion-icon
+{
+  font-size: 30px;
+  position: relative;
+  left: 200%;
+ 
+}
+
+h4
+{
+  text-color: white;
+}
+
+}
+
+
+
