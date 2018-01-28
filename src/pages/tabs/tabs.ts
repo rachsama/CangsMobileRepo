@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
-import { LoginPage } from '../login/login';
-
+@IonicPage()
 @Component({
-  templateUrl: 'tabs.html'
+    selector: 'page-tabs',
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
+    TabOrderRoot = 'OrderPage';
+    TabHistoryRoot = 'HistoryPage';
+    myIndex: number;
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
-
-  constructor() {
-
-  }
+    constructor(public navCtrl: NavController, public navParam: NavParams) {
+        this.myIndex = navParam.data.tabIndex || 0;
+    }
 }

@@ -1,18 +1,17 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Http } from '@angular/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
 import { OrderPage } from '../pages/order/order';
+import { HistoryPage } from '../pages/history/history';
 import { LoginService } from '../pages/login/login.service';
 
 
 import { AuthProvider } from '../providers/auth/auth';
-
 import { LoadingController } from 'ionic-angular';
 
 
@@ -20,7 +19,8 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'app.html'
 })
 export class MyApp {
-rootPage: any = LoginPage;
+  @ViewChild(Nav) nav: Nav;
+  rootPage: any = LoginPage;
 
   constructor(public auth: AuthProvider, public loadingCtrl: LoadingController) {
 
@@ -45,5 +45,5 @@ rootPage: any = LoginPage;
     });
     loader.present();
   }*/
-}
+  }
 }

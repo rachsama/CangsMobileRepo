@@ -8,6 +8,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { LoginService } from '../pages/login/login.service';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
+import { HistoryPage } from '../pages/history/history';
 
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -20,6 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     LoginPage,
     OrderPage,
+    HistoryPage
   ],
   imports: [
     HttpModule,
@@ -31,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     LoginPage,
     OrderPage,
+    HistoryPage
   ],
   providers: [
     StatusBar,
