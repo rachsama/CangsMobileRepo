@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Http } from '@angular/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Md5 } from 'ts-md5/dist/md5';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
@@ -19,31 +20,10 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
   rootPage: any = LoginPage;
 
-  constructor(public auth: AuthProvider, public loadingCtrl: LoadingController) {
+  pages: Array<{title: string, component: any}>;
 
-    /*this.presentLoading();
-
-    this.auth.login().then((isLoggedIn) => {
-      if(isLoggedIn){
-        this.rootPage = OrderPage;
-      }
-
-      else{
-        this.rootPage = LoginPage;
-      }
-
-      //this.loader.dismiss();
-    })
-  }
-
-  presentLoading() {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait..."
-    });
-    loader.present();
-  }*/
+  constructor(public platform: Platform) {
   }
 }

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from './login.service';
 import { OrderPage } from '../../pages/order/order';
 
-@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

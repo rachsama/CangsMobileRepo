@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
+import { NavController, NavParams, Nav } from 'ionic-angular';
 import { HistoryPage } from '../../pages/history/history';
 
 
-@IonicPage()
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html'
