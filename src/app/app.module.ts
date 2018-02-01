@@ -10,6 +10,8 @@ import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
 import { LoginService } from '../pages/login/login.service';
+import { ListService } from '../pages/list/list.service';
+import { OrderService } from '../pages/order/order.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -40,6 +42,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     LoginService,
+    ListService,
     Md5
   ]
 })

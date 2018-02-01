@@ -3,9 +3,8 @@ import { NavController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from './login.service';
+import { ListPage } from '../../pages/list/list';
 import { OrderPage } from '../../pages/order/order';
-import { HomePage } from '../../pages/home/home';
-import { HistoryPage } from '../../pages/history/history';
 
 
 @Component({

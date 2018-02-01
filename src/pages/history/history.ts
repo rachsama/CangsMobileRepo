@@ -7,9 +7,9 @@ import { NavController, NavParams, Nav } from 'ionic-angular';
 })
 export class HistoryPage {
 
-    constructor(public navCtrl: NavController, public navParam: NavParams) {
-      console.log(this.navParam.get('data1'));
-      console.log(this.navParam.get('data2'));
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+      console.log(this.navParams.get('data1'));
+      console.log(this.navParams.get('data2'));
   }
 
 }

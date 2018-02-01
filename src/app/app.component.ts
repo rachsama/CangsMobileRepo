@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
 import { LoginService } from '../pages/login/login.service';
+import { OrderService } from '../pages/order/order.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { LoginService } from '../pages/login/login.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ListPage;
 
   pages: Array<{title: string, component: any}>;
 
