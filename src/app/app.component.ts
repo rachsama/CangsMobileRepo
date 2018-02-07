@@ -8,9 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
-import { LoginService } from '../pages/login/login.service';
-import { OrderService } from '../pages/order/order.service';
-
+import { CartPage } from '../pages/cart/cart';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +16,7 @@ import { OrderService } from '../pages/order/order.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ListPage;
+  rootPage: any = OrderPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -29,6 +27,7 @@ export class MyApp {
     this.pages = [
       { title: 'List', component: ListPage },
       { title: 'Orders', component: OrderPage },
+      { title: 'Cart', component: CartPage },
       { title: 'History', component: HistoryPage }
     ];
 

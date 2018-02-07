@@ -13,18 +13,18 @@ export class OrderService{
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http ){
-        console.log("LOGIN");
+        console.log("GetItems");
         
 
     }
      
-    getCustomer(){
+    getItem(){
 
         return new Promise(resolve => {
-          this._http.get('http://192.168.0.24:1025/item/all').map(res => res.json()).subscribe(data => {
-          this.post = data;
-          resolve(this.post);
-          console.log(this.post);
+            this._http.get('http://192.168.0.24:1025/item/all').map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
         });
         }
      )};

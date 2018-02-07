@@ -36,7 +36,7 @@ export class LoginPage {
 
   constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController){
 				this.log.getCustomer().then(res =>{
-							this.cus=res;
+					this.cus=res;
 				});
 	}
 

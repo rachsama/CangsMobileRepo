@@ -8,16 +8,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
+  <button (click)="gotoCart()"><ion-icon name="cart"></ion-icon></button>
+  <ion-list *ngFor="let items of item">
+    <ion-item>
+      <ion-thumbnail item-left>
+      <img src="{{items.picture}}"></ion-thumbnail>
+      <h2>{{items.itemName}}</h2>
+      <h3>{{items.itemDescription}}</h3>
+      <h3>₱{{items.itemPrice}}</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <h5><button ion-button (click)="sendtoCart(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture)"><ion-icon name="add" ></ion-icon></button></h5>
+          </ion-col>
+          <!--<ion-col col-6>
+            <h4><button ion-button (click)="gotoTemplate()"><ion-icon name="basket" ></ion-icon></button></h4>
+          </ion-col>-->
+        </ion-row>
+      </ion-grid>
+    </ion-item>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  
 </ion-content>
