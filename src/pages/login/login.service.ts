@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class LoginService{
     post: any;
+    public static customerID;
     private _loginUrl =  'http://192.168.0.24:1025/customer/all';
     private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http ){
@@ -28,5 +29,9 @@ export class LoginService{
         });
         }
      )};
+     getCustomerID(id){
+
+            LoginService.customerID=id;
+     }
      
 }

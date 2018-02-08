@@ -33,7 +33,7 @@ export class LoginPage {
   public inputuser: string = '';
 	public inputpass: string ='';
 	public inputusername: string ='';
-
+	public static customerID=0;
   constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController){
 				this.log.getCustomer().then(res =>{
 					this.cus=res;
@@ -56,7 +56,7 @@ export class LoginPage {
           console.log(data);
 					this.inputuser=data.customerID;
 					this.inputpass=data.cusPassword;
-					
+					this.log.getCustomerID(data.customerID);
 					this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
 					this.logindetails=true;
 					this.error=""

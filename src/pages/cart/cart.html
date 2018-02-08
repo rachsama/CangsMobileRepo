@@ -15,7 +15,7 @@
       <img src="{{item.picture}}"></ion-thumbnail>
       <ion-label color="black" floating>{{item.itemName}}</ion-label>
       <ion-label color="black" floating>₱{{item.itemPrice}}</ion-label>
-      <ion-input type="number" [(ngModel)]="item.quantity" name="quantity" min="1" max="999"></ion-input>
+      <ion-input type="number" [(ngModel)]="item.quantity" min="1" max="999"></ion-input>
     </ion-item>
   </ion-list>
 
@@ -39,7 +39,11 @@
       <ion-label color="black" stacked>Remarks</ion-label>
       <ion-textarea type="text" [(ngModel)]="remarks"></ion-textarea>
     </ion-item>
-    <button ion-button (click)="addOrder(delLocation, packaging, delTime, remarks)">Order</button>
+    <ion-item>
+      <ion-label color="black" stacked>Cash on Hand</ion-label>
+      <ion-input type="number" [(ngModel)]="coh" min="1"></ion-input>
+    </ion-item>
+    <button ion-button (click)="addOrder(delLocation, packaging, delTime, remarks, coh)">Order</button>
   </ion-list>
 
 

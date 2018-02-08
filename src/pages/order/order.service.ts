@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -28,12 +28,16 @@ export class OrderService{
         });
         }
      )};
-     makeOrder(){
+     makeOrder(data){
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+            headers: headers
+        })
 
-        
-            this._http.get(this._apiUrl+'/item/all').map(res => res.json()).subscribe(data => {
-            this.post = data;        
-            console.log(this.post);
+        this._http.post(this._apiUrl + "/orders/addOrder",JSON.stringify(data), reqopt).subscribe(function(res){
+            this.response=res;
+            alert("The Order has been Successfully Updated!");
         });
-        }   
+    }
 }
