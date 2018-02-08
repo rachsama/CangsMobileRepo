@@ -21,12 +21,19 @@ export class OrderService{
     getItem(){
 
         return new Promise(resolve => {
-            this._http.get('http://192.168.0.24:1025/item/all').map(res => res.json()).subscribe(data => {
+            this._http.get(this._apiUrl + '/item/all').map(res => res.json()).subscribe(data => {
             this.post = data;        
             resolve(this.post);
             console.log(this.post);
         });
         }
      )};
-     
+     makeOrder(){
+
+        
+            this._http.get(this._apiUrl+'/item/all').map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            console.log(this.post);
+        });
+        }   
 }

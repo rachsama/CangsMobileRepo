@@ -17,6 +17,10 @@ import { OrderPage } from '../../pages/order/order';
 export class CartPage {
   public item: any=[];
   public orderData: any=[];
+  public sendOrder: any=[];
+  public sendOrderDetails: any=[];
+  curDate: String = new Date().toISOString();
+  total: number;
 
   constructor( public navCtrl: NavController, public navParams: NavParams) {
       for(var i=0; i<this.navParams.get('cartData').length; i++){
@@ -24,12 +28,39 @@ export class CartPage {
       }
 
     console.log(this.navParams.get('cartData')); 
+    console.log(this.navParams.get('data1')); 
   }
 
   ionViewDidLoad() {
   }
 
-  addOrder(){ 
+  addOrder(delLocation, packaging, delTime, remarks){
+      for(var i=0; i<this.orderData.length; i++){
+        this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
+      }    console.log(this.total);
+      
+      this.sendOrder.push({
+      orderDate: this.curDate,
+      orderTotal: this.total,
+      orderStatus: 'pending',
+      orderRemarks: remarks,
+      location: delLocation,
+      orderTime: delTime,
+      packaging: packaging,
+      customerID: this.navParams.get('data1'),
+    });
+    console.log(this.sendOrder)
+    
+    /*this.sendOrderDetails.push({
+      ordetQuantity: quantity,
+      ordetPrice: itemPrice,
+      ordetSubtotal: total,
+      orderID: ,
+      itemID: itemID,
+      itemName: itemName,
+      itemDescription: itemDescription
+    });*/
+        //date total status(pending) remarks location ordertime packaging cusid
   }
 
 }
