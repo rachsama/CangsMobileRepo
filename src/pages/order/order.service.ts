@@ -9,6 +9,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class OrderService{
+    public sendOrderDetails: any=[];
+    public static orderID: any;
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
@@ -28,16 +30,42 @@ export class OrderService{
         });
         }
      )};
-     makeOrder(data){
+     makeOrder(data,orderData){
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
             headers: headers
         })
-
+        console.log(data);
         this._http.post(this._apiUrl + "/orders/addOrder",JSON.stringify(data), reqopt).subscribe(function(res){
-            this.response=res;
+            var num;
+            num=res;
+            OrderService.orderID=num._body;
+            console.log(this.orderID);
             alert("The Order has been Successfully Updated!");
         });
+
+        setTimeout(() => {
+            console.log(orderData);
+            for(var i=0; i<orderData.length; i++){
+                console.log(OrderService.orderID);
+                this.sendOrderDetails.push({
+                ordetQuantity: orderData[i].quantity,
+                ordetPrice: orderData[i].itemPrice,
+                ordetSubtotal: orderData[i].itemPrice * orderData[i].quantity,
+                orderID: OrderService.orderID,
+                itemID: orderData[i].itemID,
+                itemName: orderData[i].itemName,
+                itemDescription: orderData[i].itemDescription
+            });
+            console.log(this.sendOrderDetails[i]);
+            this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
+            this.orderID=res;
+            alert("The OrderDetail has been Successfully Updated!");
+            });
+            }
+        }, 3000)
+        
     }
 }

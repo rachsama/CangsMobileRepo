@@ -19,8 +19,6 @@ export class CartPage {
   public item: any=[];
   public orderData: any=[];
   public sendOrder: any=[];
-  public sendOrderDetails: any=[];
-  //curDate: String = new Date().toISOString();
   total: number=0;
   coh: number;
 
@@ -63,18 +61,7 @@ export class CartPage {
       "cashTendered": coh,
     });
     console.log(this.sendOrder);
-    this.ord.makeOrder(this.sendOrder[0]);
-    
-    /*this.sendOrderDetails.push({
-      ordetQuantity: quantity,
-      ordetPrice: itemPrice,
-      ordetSubtotal: total,
-      orderID: ,
-      itemID: itemID,
-      itemName: itemName,
-      itemDescription: itemDescription
-    });*/
-        //date total status(pending) remarks location ordertime packaging cusid
+    this.ord.makeOrder(this.sendOrder[0],this.orderData);
   }
 
 }
