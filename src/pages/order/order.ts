@@ -25,7 +25,7 @@ export class OrderPage {
     console.log(this.navParams.get('data1'));
     console.log(this.navParams.get('data2'));
   }
-
+  
   sendtoCart(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture){
     this.cartData.push({
       itemID: itemID,
@@ -42,7 +42,7 @@ export class OrderPage {
 		console.log("to cart");
 		this.navCtrl.push(CartPage,{
 			cartData: this.cartData,
-      user:this.navParams.get('data1'),
+      user:10016,//this.navParams.get('data1')
 		});
 	}
 

@@ -15,7 +15,7 @@ export class LoginPage {
 
 	user: any;
 	pass: any;
-
+	test:any ="";
 	MoveToOrder(){
 		//10016
 		//ed9d07d5
@@ -42,13 +42,17 @@ export class LoginPage {
 
   login(event : any)
   {
+		
 		console.log(this.user);
 		console.log(Md5.hashStr(this.pass));
+		console.log(this.cus);
+		//this.test=this.cus["0"].customerID;
 		for(let data of this.cus)
 		{
-			
+		
 			if(this.user == data.customerID)
       {	
+				
 				this.error="Incorrect Password";
 				console.log("matchuser");
 				if(Md5.hashStr(this.pass) == data.cusPassword)

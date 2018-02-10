@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -28,5 +28,13 @@ export class LoginService{
         });
         }
      )};
-     
+     get1Customer(customer:any){
+         return new Promise(resolve => {      
+            this._http.get(this._apiUrl + "/customer/getCustomer/"+customer).map(res => res.json()).subscribe(data => {
+                    this.post = data;        
+                    resolve(this.post);
+                    console.log(this.post);
+             });
+          }
+     )};
 }

@@ -8,7 +8,11 @@ import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
+
 import { HistoryPage } from '../pages/history/history';
+
+import { ModalPage } from '../pages/history/modal-page';
+
 import { LoginService } from '../pages/login/login.service';
 import { OrderService } from '../pages/order/order.service';
 import { CartPage } from '../pages/cart/cart';
@@ -23,6 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
+    ModalPage,
     CartPage
   ],
   imports: [
@@ -37,6 +42,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
+    ModalPage,
     CartPage
   ],
   providers: [
