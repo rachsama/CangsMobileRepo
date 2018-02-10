@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <button (click)="gotoCart()"><ion-icon name="cart"></ion-icon></button>
+  <div text-center>
+  <button ion-button round (click)="gotoCart()"><ion-icon name="cart" class="orderIcon"></ion-icon></button>
+  </div>
   <ion-list *ngFor="let items of item">
     <ion-item>
       <ion-thumbnail item-left>

@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Template View</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let items of item">
+        <ion-item>
+            <h2>{{items.templateID}}</h2>
+            <h3>{{items.customerID}}</h3>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

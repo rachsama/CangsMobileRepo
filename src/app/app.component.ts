@@ -8,7 +8,8 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
-import { CartPage } from '../pages/cart/cart';
+import { TemplatePage } from '../pages/template/template';
+import { TempViewPage } from '../pages/tempview/tempview';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +17,7 @@ import { CartPage } from '../pages/cart/cart';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = TemplatePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -26,9 +27,10 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'List', component: ListPage },
-      { title: 'Orders', component: OrderPage },
-      { title: 'Cart', component: CartPage },
-      { title: 'History', component: HistoryPage }
+      { title: 'Make Orders', component: OrderPage },
+      { title: 'Set Templates', component: TemplatePage },
+      { title: 'View Templates', component: TempViewPage },
+      { title: 'Purchase History', component: HistoryPage }
     ];
 
   }

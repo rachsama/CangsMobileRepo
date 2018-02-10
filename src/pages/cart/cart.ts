@@ -30,9 +30,6 @@ export class CartPage {
     console.log(this.navParams.get('cartData')); 
   }
 
-  ionViewDidLoad() {
-  }
-
   addOrder(delLocation, packaging, delTime, remarks, coh){
       for(var i=0; i<this.orderData.length; i++){
         console.log(this.orderData[i].quantity)

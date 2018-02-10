@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tempget\</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list *ngFor="let items of tempgetData">
+        <ion-item>
+            <ion-thumbnail item-left>
+            <img src="{{items.picture}}"></ion-thumbnail>
+            <h2>{{items.itemName}}</h2>
+            <h3>{{items.itemDescription}}</h3>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <button ion-button (click)="addTemplate()">Make Template</button>
+    </ion-list>
+
+</ion-content>

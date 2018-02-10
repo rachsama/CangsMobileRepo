@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Template</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div text-center>
+    <button ion-button round (click)="gotoTempGet()"><ion-icon name="basket" class="tempIcon"></ion-icon></button>
+    </div>
+    <ion-list *ngFor="let items of item">
+    <ion-item>
+      <ion-thumbnail item-left>
+      <img src="{{items.picture}}"></ion-thumbnail>
+      <h2>{{items.itemName}}</h2>
+      <h3>{{items.itemDescription}}</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <h5><button ion-button (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.picture)"><ion-icon name="add" ></ion-icon></button></h5>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

@@ -9,9 +9,15 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
-import { LoginService } from '../pages/login/login.service';
-import { OrderService } from '../pages/order/order.service';
 import { CartPage } from '../pages/cart/cart';
+import { TemplatePage } from '../pages/template/template';
+import { TempGetPage } from '../pages/tempget/tempget';
+import { TempViewPage } from '../pages/tempview/tempview';
+
+import { LoginService } from '../pages/login/login.service';
+import { TemplateService } from '../pages/template/template.service';
+import { OrderService } from '../pages/order/order.service';
+import { TempViewService } from '../pages/tempview/tempview.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +29,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
-    CartPage
+    CartPage,
+    TemplatePage,
+    TempGetPage,
+    TempViewPage
   ],
   imports: [
     HttpModule,
@@ -37,7 +46,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
-    CartPage
+    CartPage,
+    TemplatePage,
+    TempGetPage,
+    TempViewPage
   ],
   providers: [
     StatusBar,
@@ -46,6 +58,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginService,
     OrderService,
     OrderPage,
+    TemplateService,
+    TempViewService,
     Md5
   ]
 })
