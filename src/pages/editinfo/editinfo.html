@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Change Info</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding style= "background-color: #0847ad"> 
+<ion-list style="padding-top: 50px">
+<div>
+ <h4 text-center style="color: white">User Information</h4> <br>
+</div>
+  <ion-item id="user">
+    <ion-input  placeholder="Enter New Number" type="number" name="number" [(ngModel)]="number"></ion-input>
+  </ion-item>
+  <ion-item id="pw">
+    <ion-input  placeholder="Enter New Address" type="text" name="address" [(ngModel)]="address"></ion-input>
+  </ion-item>
+  <ion-item id="pw">
+    <ion-input  placeholder="Enter Verification Code" type="text" name="verificationCode" [(ngModel)]="verificationCode"></ion-input>
+  </ion-item>
+</ion-list>
+<div text-center> 
+    <button ion-button outline round style="color: white; background-color:#0847ad" (click)="changeInfo($event)">Confirm</button>
+</div>
+</ion-content>

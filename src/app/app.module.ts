@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { MyApp } from './app.component';
-import { ListPage } from '../pages/list/list';
+
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
@@ -13,6 +13,8 @@ import { CartPage } from '../pages/cart/cart';
 import { TemplatePage } from '../pages/template/template';
 import { TempGetPage } from '../pages/tempget/tempget';
 import { TempViewPage } from '../pages/tempview/tempview';
+import { ResetPage } from '../pages/resetpass/resetpass';
+import { EditInfoPage } from '../pages/editinfo/editinfo';
 
 import { LoginService } from '../pages/login/login.service';
 import { TemplateService } from '../pages/template/template.service';
@@ -25,13 +27,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    ListPage,
+    EditInfoPage,
     LoginPage,
     OrderPage,
     HistoryPage,
     CartPage,
     TemplatePage,
     TempGetPage,
+    ResetPage,
     TempViewPage
   ],
   imports: [
@@ -42,13 +45,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage,
+    EditInfoPage,
     LoginPage,
     OrderPage,
     HistoryPage,
     CartPage,
     TemplatePage,
     TempGetPage,
+    ResetPage,
     TempViewPage
   ],
   providers: [
