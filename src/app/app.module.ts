@@ -13,11 +13,13 @@ import { CartPage } from '../pages/cart/cart';
 import { TemplatePage } from '../pages/template/template';
 import { TempGetPage } from '../pages/tempget/tempget';
 import { TempViewPage } from '../pages/tempview/tempview';
+import { SeeTempPage } from '../pages/seetemp/seetemp';
 
 import { LoginService } from '../pages/login/login.service';
 import { TemplateService } from '../pages/template/template.service';
 import { OrderService } from '../pages/order/order.service';
 import { TempViewService } from '../pages/tempview/tempview.service';
+import { SeeTempService } from '../pages/seetemp/seetemp.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -32,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CartPage,
     TemplatePage,
     TempGetPage,
-    TempViewPage
+    TempViewPage,
+    SeeTempPage
   ],
   imports: [
     HttpModule,
@@ -49,7 +52,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CartPage,
     TemplatePage,
     TempGetPage,
-    TempViewPage
+    TempViewPage,
+    SeeTempPage
   ],
   providers: [
     StatusBar,
@@ -60,6 +64,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     OrderPage,
     TemplateService,
     TempViewService,
+    SeeTempService,
     Md5
   ]
 })

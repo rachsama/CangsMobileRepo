@@ -3,7 +3,7 @@ import { NavController, NavParams, Nav } from 'ionic-angular';
 
 import { LoginService } from '../../pages/login/login.service';
 import { TempViewService } from '../../pages/tempview/tempview.service';
-import { CartPage } from '../../pages/cart/cart';
+import { SeeTempPage } from '../../pages/seetemp/seetemp';
 
 @Component({
   selector: 'page-tempview',
@@ -11,22 +11,15 @@ import { CartPage } from '../../pages/cart/cart';
 })
 export class TempViewPage {
   public item: any=[];
-  public cartData: any=[];
   selected:any = [];
 
   constructor( private tempv: TempViewService ,public navCtrl: NavController, public navParams: NavParams) {
     this.tempv.getTemplate().then(res => {
+		  this.item=res;
+      console.log(this.item);
 
-		this.item=res;
-        console.log(this.item);
-
-        for(var i=0; i<this.item.length; i++){
-
-            if(this.item.customerID=10016/*LoginService.customerID*/){
-                for(var x=0; i<this.item.length; x++){
-                    this.item[x] = this.item[i];
-                }
-            }
+      for(var i=0; i<this.item.length; i++){
+                this.item[i] = this.item[i];
       }
     });
     console.log(this.navParams.get('data1'));
@@ -34,6 +27,12 @@ export class TempViewPage {
     console.log(this.item);
   }
 
+  seeTemplate(templateID){
+    this.navCtrl.push(SeeTempPage, {
+      templateID: templateID
+    })
+    console.log(templateID);
+  }
   /*sendtoCart(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture){
     this.cartData.push({
       itemID: itemID,

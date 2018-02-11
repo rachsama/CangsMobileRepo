@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cart</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngFor="let items of item">
+    <ion-item>
+      <h2>{{items.tempDetailID}}</h2>
+      <h3>{{items.itemID}}</h3>
+      <h3>₱{{items.templateID}}</h3>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

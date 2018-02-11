@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
+import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 import { LoginService } from '../../pages/login/login.service';
-import { OrderPage } from '../../pages/order/order';
+import { TempViewService } from '../../pages/tempview/tempview.service';
 /**
  * Generated class for the CartPage page.
  *
@@ -13,29 +14,26 @@ import { OrderPage } from '../../pages/order/order';
 
 @IonicPage()
 @Component({
-  selector: 'page-cart',
-  templateUrl: 'cart.html',
+  selector: 'page-seetemp',
+  templateUrl: 'seetemp.html',
 })
-export class CartPage {
-  public item: any=[];
-  public orderData: any=[];
-  public sendOrder: any=[];
-  packaging: string;
-  ngOnInit () {
-    this.packaging = 'Plastic';
-  }
-  total: number=0;
-  coh: number;
+export class SeeTempPage {
+    public item: any=[];
+    public orderData: any=[];
+    public sendOrder: any=[];
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public ord: OrderService, public log:LoginService) {
-      for(var i=0; i<this.navParams.get('cartData').length; i++){
-        this.orderData[i] = this.navParams.get('cartData')[i];
+    constructor( public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService) {
+        this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
+		  this.item=res;
+      console.log();
+
+      for(var i=0; i<this.item.length; i++){
+                this.item[i] = this.item[i];
       }
+    });
+    }
 
-    console.log(this.navParams.get('cartData')); 
-  }
-
-  addOrder(delLocation, packaging, delTime, remarks, coh){
+    /*addOrder(delLocation, packaging, delTime, remarks, coh){
       for(var i=0; i<this.orderData.length; i++){
         console.log(this.orderData[i].quantity)
         this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
@@ -59,13 +57,11 @@ export class CartPage {
       "location": delLocation,
       "orderTime": delTime,
       "packaging": packaging,
-      "customerID": '10016'/*LoginService.customerID*/,
+      "customerID": LoginService.customerID,
       "cashTendered": coh,
     });
     console.log(this.sendOrder);
     this.ord.makeOrder(this.sendOrder[0],this.orderData);
-
-    this.navCtrl.setRoot(OrderPage)
-  }
+  }*/
 
 }

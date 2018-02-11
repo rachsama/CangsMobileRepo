@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-list *ngFor="let items of item">
+    <ion-list *ngFor="let items of item" (click)="seeTemplate(items.templateID)">
         <ion-item>
             <h2>{{items.templateID}}</h2>
             <h3>{{items.customerID}}</h3>

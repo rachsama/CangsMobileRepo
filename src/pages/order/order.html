@@ -9,7 +9,7 @@
 
 <ion-content>
   <div text-center>
-  <button ion-button round (click)="gotoCart()"><ion-icon name="cart" class="orderIcon"></ion-icon></button>
+  <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>   Order</button>
   </div>
   <ion-list *ngFor="let items of item">
     <ion-item>

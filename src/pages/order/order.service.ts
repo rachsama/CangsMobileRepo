@@ -42,7 +42,7 @@ export class OrderService{
             var num;
             num=res;
             OrderService.orderID=num._body;
-            console.log(this.orderID);
+            console.log(OrderService.orderID);
             alert("The Order has been Successfully Updated!");
         });
 
@@ -59,7 +59,7 @@ export class OrderService{
                 itemName: orderData[i].itemName,
                 itemDescription: orderData[i].itemDescription
             });
-            console.log(this.sendOrderDetails[i]);
+            console.log(this.sendOrderDetails);
             this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
             this.orderID=res;
             alert("The OrderDetail has been Successfully Updated!");

@@ -42,7 +42,6 @@ export class OrderPage {
 		console.log("to cart");
 		this.navCtrl.push(CartPage,{
 			cartData: this.cartData,
-      user:this.navParams.get('data1'),
 		});
 	}
 
