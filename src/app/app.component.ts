@@ -21,7 +21,7 @@ import { TempViewPage } from '../pages/tempview/tempview';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = OrderPage;
 
   pages: Array<{title: string, component: any}>;
   logout: Array<{title: string, component: any}>;
