@@ -7,13 +7,20 @@
   </ion-navbar>
 </ion-header>
 
+<ion-footer>
+  <ion-toolbar>
+     <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
+  </ion-toolbar>
+</ion-footer>
 
 <ion-content>
-  <ion-list *ngFor="let items of item">
+  <ion-list *ngFor="let item of cartData">
     <ion-item>
-      <h2>{{items.tempDetailID}}</h2>
-      <h3>{{items.itemID}}</h3>
-      <h3>₱{{items.templateID}}</h3>
+      <ion-thumbnail item-left>
+      <img src="{{item.picture}}"></ion-thumbnail>
+      <h2>{{item.itemName}}</h2>
+      <h3>{{item.itemDescription}}</h3>
+      <h3>₱{{item.itemPrice}}</h3>
     </ion-item>
   </ion-list>
 

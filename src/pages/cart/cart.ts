@@ -20,7 +20,7 @@ export class CartPage {
   public item: any=[];
   public orderData: any=[];
   public sendOrder: any=[];
-  packaging: string;
+  packaging: string='Plastic';
   ngOnInit () {
     this.packaging = 'Plastic';
   }

@@ -6,11 +6,12 @@
     <ion-title>Order</ion-title>
   </ion-navbar>
 </ion-header>
-
+<ion-footer>
+  <ion-toolbar>
+     <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
+  </ion-toolbar>
+</ion-footer>
 <ion-content>
-  <div text-center>
-  <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>   Order</button>
-  </div>
   <ion-list *ngFor="let items of item">
     <ion-item>
       <ion-thumbnail item-left>
@@ -23,9 +24,6 @@
           <ion-col col-6>
             <h5><button ion-button (click)="sendtoCart(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture)"><ion-icon name="add" ></ion-icon></button></h5>
           </ion-col>
-          <!--<ion-col col-6>
-            <h4><button ion-button (click)="gotoTemplate()"><ion-icon name="basket" ></ion-icon></button></h4>
-          </ion-col>-->
         </ion-row>
       </ion-grid>
     </ion-item>

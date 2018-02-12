@@ -19,7 +19,7 @@ export class OrderPage {
       console.log(this.item);
 
       for(var i=0; i<this.item.length; i++){
-                this.item[i].picture = "http://" + this.item[i].picture;
+        this.item[i].picture = "http://" + this.item[i].picture;
       }
     });
     console.log(this.navParams.get('data1'));

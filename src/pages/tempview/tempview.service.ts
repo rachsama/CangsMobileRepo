@@ -22,9 +22,8 @@ export class TempViewService{
     }
      
     getTemplate(){
-
         return new Promise(resolve => {
-            this._http.get(this._apiUrl + '/template/returnCustomerID/'+ '10016'/*LoginService.customerID*/ ).map(res => res.json()).subscribe(data => {
+            this._http.get(this._apiUrl + '/template/returnCustomerID/'+ 10016 /*LoginService.customerID*/ ).map(res => res.json()).subscribe(data => {
             this.post = data;        
             resolve(this.post);
             console.log(this.post);

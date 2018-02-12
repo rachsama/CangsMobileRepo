@@ -17,7 +17,7 @@ import { TempViewPage } from '../pages/tempview/tempview';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = OrderPage;
+  rootPage: any = TemplatePage;
 
   pages: Array<{title: string, component: any}>;
 

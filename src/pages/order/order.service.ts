@@ -5,7 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
-
+import { TempViewService } from '../../pages/tempview/tempview.service';
+import { SeeTempPage} from '../../pages/seetemp/seetemp';
 
 @Injectable()
 export class OrderService{
@@ -16,12 +17,9 @@ export class OrderService{
     private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http ){
         console.log("GetItems");
-        
-
     }
      
     getItem(){
-
         return new Promise(resolve => {
             this._http.get(this._apiUrl + '/item/all').map(res => res.json()).subscribe(data => {
             this.post = data;        
@@ -30,8 +28,20 @@ export class OrderService{
         });
         }
      )};
-     makeOrder(data,orderData){
 
+    getTempItem(itemID){
+        return new Promise(resolve => {
+            this._http.get(this._apiUrl + '/item/returnItem/' + itemID ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+        });
+        }
+    )};
+
+
+    
+    makeOrder(data,orderData){
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
@@ -66,6 +76,5 @@ export class OrderService{
             });
             }
         }, 3000)
-        
     }
 }

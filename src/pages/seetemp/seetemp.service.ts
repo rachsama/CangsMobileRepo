@@ -7,7 +7,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
-import { TempViewService } from '../../pages/tempview/tempview.service';
 
 @Injectable()
 export class SeeTempService{
@@ -32,6 +31,7 @@ export class SeeTempService{
         });
         }
     )};
+    
 
     /*makeOrder(data,orderData){
 
