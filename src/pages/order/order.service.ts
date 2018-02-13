@@ -7,11 +7,14 @@ import 'rxjs/add/operator/catch';
 
 import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage} from '../../pages/seetemp/seetemp';
+import { OrderPage } from '../../pages/order/order';
 
 @Injectable()
 export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
+    public refresh: any=[];
+    public data: any=[];
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
@@ -37,6 +40,33 @@ export class OrderService{
             console.log(this.post);
         });
         }
+    )};
+
+    getCategoryItem(category){
+
+          let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+            headers: headers
+        })
+
+        console.log(category);
+        if (typeof category === "string"){
+            console.log(category);
+            this.data.push({
+                "category": category
+            });
+            console.log(this.data);
+        }
+        return new Promise(resolve => {
+            this._http.post(this._apiUrl + '/item/returnCategory/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+            this.data.pop();
+            });
+        }
+
     )};
 
 
@@ -69,12 +99,17 @@ export class OrderService{
                 itemName: orderData[i].itemName,
                 itemDescription: orderData[i].itemDescription
             });
+            
             console.log(this.sendOrderDetails);
             this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
             this.orderID=res;
             alert("The OrderDetail has been Successfully Updated!");
+            orderData.length = 0;
+            console.log(orderData);
             });
             }
         }, 3000)
+        this.sendOrderDetails.length = 0;
+
     }
 }

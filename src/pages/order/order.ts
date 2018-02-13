@@ -3,6 +3,7 @@ import { NavController, NavParams, Nav } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
 import { CartPage } from '../../pages/cart/cart';
+import { CategoryPage }from '../../pages/category/category';
 
 @Component({
   selector: 'page-order',
@@ -14,10 +15,10 @@ export class OrderPage {
   selected:any = [];
 
   constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams) {
-    this.log.getItem().then(res => {
+    console.log(this.navParams.get('category'));
+    this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item=res;
-      console.log(this.item);
-
+      
       for(var i=0; i<this.item.length; i++){
         this.item[i].picture = "http://" + this.item[i].picture;
       }

@@ -4,7 +4,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from './login.service';
 import { ListPage } from '../../pages/list/list';
-import { OrderPage } from '../../pages/order/order';
+import { CategoryPage } from '../../pages/category/category';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginPage {
 		//10016
 		//ed9d07d5
 		console.log("move page");
-		this.navCtrl.setRoot(OrderPage, {
+		this.navCtrl.setRoot(CategoryPage, {
 			data1: this.user,
 			data2: this.pass
 		});

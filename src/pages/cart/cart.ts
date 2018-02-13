@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
 import { OrderPage } from '../../pages/order/order';
+import { CategoryPage } from '../../pages/category/category';
 /**
  * Generated class for the CartPage page.
  *
@@ -65,7 +66,7 @@ export class CartPage {
     console.log(this.sendOrder);
     this.ord.makeOrder(this.sendOrder[0],this.orderData);
 
-    this.navCtrl.setRoot(OrderPage)
+    this.navCtrl.setRoot(CategoryPage)
   }
 
 }

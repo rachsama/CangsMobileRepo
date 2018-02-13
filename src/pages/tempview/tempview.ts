@@ -33,24 +33,6 @@ export class TempViewPage {
     })
     console.log(templateID);
   }
-  /*sendtoCart(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture){
-    this.cartData.push({
-      itemID: itemID,
-      itemName: itemName,
-      itemDescription: itemDescription,
-      itemPrice: itemPrice,
-      itemQuantityStored: itemQuantityStored,
-      picture: picture
-    }); 
-    console.log(this.cartData);
-  }
-
-  gotoCart(){
-		console.log("to cart");
-		this.navCtrl.push(CartPage,{
-			cartData: this.cartData,
-      user:this.navParams.get('data1'),
-		});
-	}*/
+  
 
 }
