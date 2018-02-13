@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button clear  (click)="dismiss()">
+       <ion-icon class="big" name="arrow-back"></ion-icon> Back
+    </button>
+    <ion-title>Purchase History</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>Qty</ion-col>
+            <ion-col>Item ID</ion-col>
+            <ion-col>Description</ion-col>
+            <ion-col>Price</ion-col>
+            <ion-col>Amount</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let detail of details">
+            <ion-col>{{detail.itemID}}</ion-col>
+            <ion-col>{{detail.itemName}} {{detail.itemDescription}}</ion-col> 
+            <ion-col>{{detail.ordetPrice}}</ion-col>
+            <ion-col>{{detail.ordetSubtotal}}</ion-col>                    
+            <ion-col>{{detail.ordetQuantity}}</ion-col>
+        </ion-row>
+        <ion-row justify-content-end>
+            <ion-col col-5>TOTAL: {{total | currency:'PHP':true:'1.2-2'}}</ion-col>
+        </ion-row>
+        <ion-row justify-content-start *ngFor="let customers of customer" >
+            <ion-col col-5>Customer Name: {{customers.cusLastName}}, {{customers.cusFirstName}} {{customers.cusMiddleName}}</ion-col>
+        </ion-row>
+        <ion-row justify-content-start *ngFor="let customers of customer" >
+            <ion-col col-5>Customer Address: {{customers.address}}</ion-col>    
+        </ion-row>
+         <h5><button ion-button block color="light" (click)="order()">Re-Order</button></h5>
+    </ion-grid>
+  
+   
+          
+   
+       
+</ion-content>

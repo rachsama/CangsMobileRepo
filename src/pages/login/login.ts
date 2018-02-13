@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { LoginService } from './login.service';
@@ -34,10 +34,12 @@ export class LoginPage {
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
-  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController){
+  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController,public menu :MenuController){
 				this.log.getCustomer().then(res =>{
 					this.cus=res;
 				});
+			
+				this.menu.enable(false,"myMenu");
 	}
 
   login(event : any)

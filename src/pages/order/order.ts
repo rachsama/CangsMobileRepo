@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Nav } from 'ionic-angular';
+import { NavController, NavParams, Nav,MenuController } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
 import { CartPage } from '../../pages/cart/cart';
@@ -13,7 +13,8 @@ export class OrderPage {
   public cartData: any=[];
   selected:any = [];
 
-  constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams) {
+  constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
+    this.menu.enable(true,"myMenu");
     this.log.getItem().then(res => {
 		  this.item=res;
       console.log(this.item);

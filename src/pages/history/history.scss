@@ -1,0 +1,40 @@
+
+page-history, page-modal {
+        ion-icon.big {
+        font-size: 50px; //Preferred size here
+    }
+    .content{
+       background: #3232ff;//#ffff7f
+    }
+    .toolbar-title {
+        color : #02359d;
+    }
+    .input-wrapper{
+        border-style:none;
+    }     
+    ion-item{
+        background-color:#02359d;
+    }
+    ion-card {
+        background-color:#02359d;
+        position: relative;
+    }
+    ion-card-header{
+        color:yellow;
+        background-color:#ffff4c;
+    }
+    ion-card-content{
+        color:white;
+        background-color:#02359d;//#02359d
+    }
+    ion-col{
+        color:white;
+    }
+   
+}
+page-modal {
+        ion-icon.big {
+        font-size: 50px; //Preferred size here
+    }
+  
+}

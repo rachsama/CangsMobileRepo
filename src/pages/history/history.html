@@ -7,10 +7,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="margin-top: 50px; background-color:#0847ad">
-  <div>
-  <ion-list>
-       <ion-label text-left style="font-size: 15px; color: white">yeyeyeyeyee</ion-label>
+<ion-content>
+  <ion-list *ngFor="let hist of history" inset no-lines>
+         <ion-card (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal)">
+              <ion-card-header>
+                  Order ID: {{hist.orderID}}
+              </ion-card-header>
+              <ion-card-content>
+                <br>
+                  Date: {{hist.orderDate}}<br>
+                  Status: {{hist.orderStatus}}<br>
+                  Customer Username:{{hist.customerID}}<br>
+                  Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<br>
+              </ion-card-content>
+        </ion-card>
   </ion-list>
-  </div>
 </ion-content>

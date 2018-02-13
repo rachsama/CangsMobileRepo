@@ -8,8 +8,11 @@ import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
+import { ResetPage } from '../pages/resetpass/resetpass';
 import { HistoryPage } from '../pages/history/history';
+import { EditInfoPage } from '../pages/editinfo/editinfo';
 import { CartPage } from '../pages/cart/cart';
+import { ModalPage } from '../pages/history/modal-page';
 import { TemplatePage } from '../pages/template/template';
 import { TempGetPage } from '../pages/tempget/tempget';
 import { TempViewPage } from '../pages/tempview/tempview';
@@ -35,7 +38,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TemplatePage,
     TempGetPage,
     TempViewPage,
-    SeeTempPage
+    SeeTempPage,
+    EditInfoPage,
+    ResetPage,
+    ModalPage
   ],
   imports: [
     HttpModule,
@@ -53,7 +59,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TemplatePage,
     TempGetPage,
     TempViewPage,
-    SeeTempPage
+    SeeTempPage,
+    EditInfoPage,
+    ResetPage,
+    ModalPage
   ],
   providers: [
     StatusBar,
