@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, Platform , NavParams, ViewController,NavController } from 'ionic-angular';
 import { CartPage } from '../../pages/cart/cart';
 import { OrderService } from '../../pages/order/order.service';
+import { SharedService } from '../../app/app.service';
 @Component({
   selector: 'page-modal',
   templateUrl: 'modal.html'
@@ -14,7 +15,8 @@ export class ModalPage {
   constructor(public navParams: NavParams,
               public navCtrl: NavController,
               public ord:OrderService,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              public shared:SharedService) {
       this.customer = this.navParams.get('customer');
       this.details = this.navParams.get('details');
       this.total = this.navParams.get('total');
@@ -50,7 +52,7 @@ export class ModalPage {
             setTimeout (() => {
                 this.navCtrl.push(CartPage,{
                     cartData: this.newcart,
-                    user:10016,//this.navParams.get('data1')
+                    user:this.shared.getUserName(),//this.navParams.get('data1')
                 });
             }, 1000)
 	  }

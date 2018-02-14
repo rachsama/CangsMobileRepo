@@ -43,6 +43,7 @@ export class OrderPage {
 		console.log("to cart");
 		this.navCtrl.push(CartPage,{
 			cartData: this.cartData,
+      data1:this.navParams.get('data1'),
 		});
 	}
 

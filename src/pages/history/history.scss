@@ -4,7 +4,7 @@ page-history, page-modal {
         font-size: 50px; //Preferred size here
     }
     .content{
-       background: #3232ff;//#ffff7f
+       background: #02359d;//#ffff7f //#3232ff
     }
     .toolbar-title {
         color : #02359d;
@@ -30,7 +30,20 @@ page-history, page-modal {
     ion-col{
         color:white;
     }
+    b{
+        float:right;
+        font-size:18px;
+        color:yellow;
+    }
+    
    
+}
+page-history{
+    button{
+        float:right;
+        size:5px;
+        color:red;
+    }
 }
 page-modal {
         ion-icon.big {

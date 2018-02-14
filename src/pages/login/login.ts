@@ -6,6 +6,7 @@ import { LoginService } from './login.service';
 import { ListPage } from '../../pages/list/list';
 import { OrderPage } from '../../pages/order/order';
 
+import { SharedService } from '../../app/app.service';
 
 @Component({
   selector: 'page-login',
@@ -19,6 +20,7 @@ export class LoginPage {
 	MoveToOrder(){
 		//10016
 		//ed9d07d5
+		this.shared.setUserName(this.user);
 		console.log("move page");
 		this.navCtrl.setRoot(OrderPage, {
 			data1: this.user,
@@ -34,7 +36,11 @@ export class LoginPage {
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
-  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController,public menu :MenuController){
+  constructor(private _md5: Md5, 
+							private log: LoginService, 
+							public navCtrl: NavController,
+							public menu :MenuController,
+							public shared:SharedService){
 				this.log.getCustomer().then(res =>{
 					this.cus=res;
 				});

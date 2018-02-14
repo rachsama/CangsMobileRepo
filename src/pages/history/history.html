@@ -8,18 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let hist of history" inset no-lines>
-         <ion-card (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal)">
-              <ion-card-header>
-                  Order ID: {{hist.orderID}}
-              </ion-card-header>
+         <ion-card #card *ngFor="let hist of history">
               <ion-card-content>
-                <br>
-                  Date: {{hist.orderDate}}<br>
-                  Status: {{hist.orderStatus}}<br>
-                  Customer Username:{{hist.customerID}}<br>
-                  Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<br>
+                  Date: {{hist.orderDate}} <b>{{hist.orderStatus}}</b><br>
+
+                  Order ID: {{hist.orderID}}<br>
+                  Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<button [disabled]="clicked" (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal,card)" ion-button round small color="light">View</button><br>
               </ion-card-content>
         </ion-card>
-  </ion-list>
 </ion-content>

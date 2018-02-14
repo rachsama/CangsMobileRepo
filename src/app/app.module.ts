@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { MyApp } from './app.component';
+import { SharedService } from './app.service';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
@@ -74,6 +75,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TemplateService,
     TempViewService,
     SeeTempService,
+    SharedService,
     Md5
   ]
 })

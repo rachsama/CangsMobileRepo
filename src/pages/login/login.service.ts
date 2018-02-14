@@ -37,7 +37,6 @@ export class LoginService{
           return this._http.get(this._apiUrl +"/customer/getCustomer/"+id).map(res => res.json())
      }
      getCustomerID(id){
-
             LoginService.customerID=id;
      }
      editCustomer(data){

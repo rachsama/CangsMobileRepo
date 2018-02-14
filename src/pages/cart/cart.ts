@@ -31,7 +31,7 @@ export class CartPage {
       for(var i=0; i<this.navParams.get('cartData').length; i++){
         this.orderData[i] = this.navParams.get('cartData')[i];
       }
-
+      console.log(this.navParams.get('data1'));
     console.log(this.navParams.get('cartData')); 
   }
 
@@ -59,7 +59,7 @@ export class CartPage {
       "location": delLocation,
       "orderTime": delTime,
       "packaging": packaging,
-      "customerID": '10016'/*LoginService.customerID*/,
+      "customerID": this.navParams.get('data1'),
       "cashTendered": coh,
     });
     console.log(this.sendOrder);
