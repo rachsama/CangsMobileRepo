@@ -42,7 +42,8 @@ export class ModalPage {
                           itemDescription: data[0].itemDescription,
                           itemPrice: data[0].itemPrice,
                           itemQuantityStored: data[0].itemQuantityStored,
-                          picture: data[0].picture
+                          picture: data[0].picture,
+                          subTotal:data[0].itemPrice,
                     });
                     //this.newcart[i].
                });

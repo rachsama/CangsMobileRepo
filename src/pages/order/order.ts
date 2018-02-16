@@ -34,7 +34,8 @@ export class OrderPage {
       itemDescription: itemDescription,
       itemPrice: itemPrice,
       itemQuantityStored: itemQuantityStored,
-      picture: picture
+      picture: picture,
+      subTotal:itemPrice,
     }); 
     console.log(this.cartData);
   }

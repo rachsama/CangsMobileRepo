@@ -34,9 +34,7 @@ page-history, page-modal {
         float:right;
         font-size:18px;
         color:yellow;
-    }
-    
-   
+    }  
 }
 page-history{
     button{
@@ -47,7 +45,35 @@ page-history{
 }
 page-modal {
         ion-icon.big {
-        font-size: 50px; //Preferred size here
+        font-size: 40px; //Preferred size here
     }
   
 }
+/*
+page-cart{
+    ion-icon.big {
+        font-size: 50px; //Preferred size here
+    }
+     .content{
+        background: #02359d;
+    }
+    .toolbar-title {
+        margin-top:20px;
+        color : #02359d;
+    }
+    .menu-inner .item {
+        background-color: #02359d;
+        color:white;
+        
+    }
+    .menu-inner > ion-header, 
+    .menu-inner > ion-content, 
+    .menu-inner > ion-footer {
+       
+        background-color: #02359d; 
+    }
+    .input-wrapper{
+        border-style:none;
+    }    
+}
+*/

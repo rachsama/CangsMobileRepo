@@ -24,6 +24,7 @@ export class CartPage {
   ngOnInit () {
     this.packaging = 'Plastic';
   }
+  currentval:number = 1;
   total: number=0;
   coh: number;
 
@@ -31,8 +32,9 @@ export class CartPage {
       for(var i=0; i<this.navParams.get('cartData').length; i++){
         this.orderData[i] = this.navParams.get('cartData')[i];
       }
+      console.log(this.orderData);
       console.log(this.navParams.get('data1'));
-    console.log(this.navParams.get('cartData')); 
+      console.log(this.navParams.get('cartData')); 
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){
@@ -67,5 +69,18 @@ export class CartPage {
 
     this.navCtrl.setRoot(OrderPage)
   }
-
+  change(itemID,subTotal,itemPrice,input){
+     for(var i=0; i<this.orderData.length; i++){
+        if(this.orderData[i].itemID == itemID)
+        {
+                this.orderData[i].subTotal = itemPrice * input._value;                       
+        }
+        if(input._value == "" || input._value==0)
+        {
+           input._value=1;
+           this.orderData[i].subTotal = itemPrice * input._value;
+        }
+      }
+      console.log(input._value);
+  }
 }

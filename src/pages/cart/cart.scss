@@ -1,4 +1,51 @@
 page-cart {
-
+    ion-thumbnail{
+        float:left;
+        height:100px;
+        width:100px;
+    }
+    img{
+        height:100px;
+        width:100px;
+    }
+    ion-icon.big {
+        font-size: 50px; //Preferred size here
+    }
+     .content{
+        background: #02359d;
+    }
+    .toolbar-title {
+        margin-top:5px;
+        color : #02359d;
+    }
+    .menu-inner .item {
+        background-color: #02359d;
+        color:white;
+        
+    }
+    .menu-inner > ion-header, 
+    .menu-inner > ion-content, 
+    .menu-inner > ion-footer {
+       
+        background-color: #02359d; 
+    }
+    .input-wrapper{
+        border-style:none;
+    } 
+    ion-input{
+        float:left;
+    }
+   ion-card {
+      
+    }
+    ion-card-header{
+       
+    }
+    ion-card-content{
+        margin-top:10px;
+    }
+    h3{
+        float:right;
+    }
 }
 
