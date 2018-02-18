@@ -16,24 +16,49 @@ export class OrderPage {
   public cartData2: any=[];
   selected:any = [];
   public item2: any=[];
+  vis:boolean=false;
   constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
     console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){
-        this.item.push({
-            itemID: this.item2[i].itemID,
-            itemName: this.item2[i].itemName,
-            itemDescription: this.item2[i].itemDescription,
-            itemPrice: this.item2[i].itemPrice,
-            itemQuantityStored: this.item2[i].itemQuantityStored,
-            picture: "http://"+this.item2[i].picture,
-            visible: false,
-        });
+          for(var j=0; j<this.shared.getCart().length; j++)
+          {
+              if(this.shared.getCart()[j].itemID == this.item2[i].itemID)
+              {
+                  this.item.push({
+                        itemID: this.item2[i].itemID,
+                        itemName: this.item2[i].itemName,
+                        itemDescription: this.item2[i].itemDescription,
+                        itemPrice: this.item2[i].itemPrice,
+                        itemQuantityStored: this.item2[i].itemQuantityStored,
+                        picture: "http://"+this.item2[i].picture,
+                        visible: true,
+                    });
+                    this.vis=true;
+                   console.log("in loop");
+              }
+          }
+          if(!this.vis)
+          {
+                  console.log("in visible");
+                  this.item.push({
+                        itemID: this.item2[i].itemID,
+                        itemName: this.item2[i].itemName,
+                        itemDescription: this.item2[i].itemDescription,
+                        itemPrice: this.item2[i].itemPrice,
+                        itemQuantityStored: this.item2[i].itemQuantityStored,
+                        picture: "http://"+this.item2[i].picture,
+                        visible: false,
+                    });
+                    this.vis=false;
+          }
+          else
+          this.vis=false;
       }
 
-      console.log(this.shared.getCart())
+      console.log(this.shared.getCart().length)
       
 
     });
