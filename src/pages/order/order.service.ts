@@ -15,7 +15,7 @@ export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
     public refresh: any=[];
-    public listData: any=[];
+    public cartData: any=[];
     public data: any=[];
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
@@ -66,26 +66,26 @@ export class OrderService{
             resolve(this.post);
             console.log(this.post);
             this.data.pop();
+            /*for(var i=0; i<this.post.length; i++){
+                this.post.push({
+                    itemID: this.post[i].itemID,
+                    itemName: this.post[i].itemName,
+                    itemDescription: this.post[i].itemDescription,
+                    itemPrice: this.post[i].itemPrice,
+                    itemQuantityStored: this.post[i].itemQuantityStored,
+                    picture: "http://"+this.post[i].picture,
+                    visible: false,
+                });
+            }
 
+            this.shared.setCartItems(this.post);*/
             });
         })
+        
+        
     };
 
-    /*setListItems(post){
-        for(var i=0; i<post.length; i++){
-            this.listData.push({
-                itemID: post[i].itemID,
-                itemName: post[i].itemName,
-                itemDescription: post[i].itemDescription,
-                itemPrice: post[i].itemPrice,
-                itemQuantityStored: post[i].itemQuantityStored,
-                picture: "http://"+post[i].picture,
-                visible: false,
-            });
-        }
-        console.log(this.listData)
-        this.shared.setListItems(this.post);
-    }*/
+
     
     makeOrder(data,orderData){
         this.shared.cleanCart();

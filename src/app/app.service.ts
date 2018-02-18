@@ -7,19 +7,14 @@ import 'rxjs/add/operator/catch';
 import { NavController, NavParams, Nav } from 'ionic-angular';
 
 
-import { OrderService } from '../pages/order/order.service';
-
 @Injectable()
 export class SharedService{
     user:any;
     cart: any = [];
     post: any = [];
-    lisItems: any = [];
-    list: any = [];
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(public ord: OrderService, public navParams: NavParams) {
-        
+    constructor() {
     }
   
     setUserName(userName) {
@@ -30,27 +25,23 @@ export class SharedService{
         return this.user;
     }
 
-    setListItems(){
-        this.ord.getCategoryItem(this.navParams.get('category')).then(res => {
-		  this.lisItems=res;
-
-        for(var i=0; i<this.lisItems.length; i++){
-            this.list.push({
-                itemID: this.lisItems[i].itemID,
-                itemName: this.lisItems[i].itemName,
-                itemDescription: this.lisItems[i].itemDescription,
-                itemPrice: this.lisItems[i].itemPrice,
-                itemQuantityStored: this.lisItems[i].itemQuantityStored,
-                picture: "http://"+this.lisItems[i].picture,
+    /*setListItems(post){
+        for(var i=0; i<post.length; i++){
+            post.push({
+                itemID: post[i].itemID,
+                itemName: post[i].itemName,
+                itemDescription: post[i].itemDescription,
+                itemPrice: post[i].itemPrice,
+                itemQuantityStored: post[i].itemQuantityStored,
+                picture: "http://"+post[i].picture,
                 visible: false,
             });
-        }
-        });
+            }
     }
 
     getListItems(){
-        return this.list;
-    }
+        return this.post;
+    }*/
 
     setCart(cartData){
         this.cart.push( {
