@@ -7,11 +7,13 @@ page-history, page-modal {
        background: #02359d;//#ffff7f //#3232ff
     }
     .toolbar-title {
+        
         color : #02359d;
     }
+    
     .input-wrapper{
         border-style:none;
-    }     
+    }  
     ion-item{
         background-color:#02359d;
     }
@@ -42,10 +44,26 @@ page-history{
         size:5px;
         color:red;
     }
+    .view{
+        position:relative;
+        top:-15px;
+        left:10px;
+    }
+
 }
 page-modal {
         ion-icon.big {
         font-size: 40px; //Preferred size here
+    }
+    ion-toolbar{
+        background:#02359d;
+    }
+    .myColor {
+        background-color: #f4f4f4;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        color: white;
     }
   
 }

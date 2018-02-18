@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button mode="ios" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Purchase History</ion-title>
@@ -11,9 +11,10 @@
          <ion-card #card *ngFor="let hist of history">
               <ion-card-content>
                   Date: {{hist.orderDate}} <b>{{hist.orderStatus}}</b><br>
-
                   Order ID: {{hist.orderID}}<br>
-                  Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<button [disabled]="clicked" (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal,card)" ion-button round small color="light">View</button><br>
+                  Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<button class="view" [disabled]="clicked" 
+                  (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal,card)" ion-button round small color="light">
+                  View</button><br>
               </ion-card-content>
         </ion-card>
 </ion-content>

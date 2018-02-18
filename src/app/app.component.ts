@@ -42,8 +42,9 @@ export class MyApp {
       { title: 'Log-out', component: LoginPage },
     ];
 
-
+    
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {

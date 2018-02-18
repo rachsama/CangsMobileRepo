@@ -5,6 +5,8 @@ import { LoginService } from '../../pages/login/login.service';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from './modal-page';
 import { CartPage } from '../../pages/cart/cart';
+import { Observable } from 'rxjs/Rx';
+import { AnonymousSubscription } from "rxjs/Subscription";
 
 import { SharedService } from '../../app/app.service';
 @Component({
@@ -17,6 +19,8 @@ export class HistoryPage {
      public customer:any=[];
      public newcart:any=[];
      public clicked:boolean =false;
+     private timerSubscription: AnonymousSubscription;
+    private postsSubscription: AnonymousSubscription;
       constructor(
         public navCtrl: NavController, 
         public navParams: NavParams, 
@@ -31,6 +35,7 @@ export class HistoryPage {
               this.history=data;
               console.log(this.history);
           });
+          this.refreshData();
       }
       getDetails(orderID,customerID,orderTotal,card)
       { 
@@ -52,6 +57,73 @@ export class HistoryPage {
            }, 1000)
       }
       
+       private refreshData(): void {
+         
+        this.postsSubscription = this.ord.getHistory().subscribe(
 
+        data  => {
+                    console.log(this.history.length);
+                    var i =0;
+                    for (let hist of data)
+                    {
+                            //data[0].picture=this.sanitizer.bypassSecurityTrustUrl(data[0].picture);
+                            //console.log(data);
+                            this.history[i]=({
+                                'orderID': hist.orderID, 
+								'orderDate': hist.orderDate, 
+                                'orderTotal': hist.orderTotal, 
+								'orderStatus': hist.orderStatus, 
+								'orderRemarks': hist.orderRemarks,
+								'location': hist.location, 
+								'orderTime': hist.orderTime, 
+								'packaging': hist.packaging,				
+								'customerID': hist.customerID,
+                                'cashTendered': hist.cashTendered 				
+                            });
+                            i=i+1;//FINISH REFRESH DATA AND ERROR TRAPPING FOR ITEM PRICE
+                            
+                            //console.log(item);
+                            //console.log(i);
+                    }
+                    if(i < this.history.length)
+                    {
+                        let dif = this.history.length - i;
+                        let test;
+                        for(dif;dif>0;dif--)
+                        {
+                                test=this.history.pop();
+                                console.log(test);
+                        }
+                    }
+                    i=0;   
+                    // console.log(this.items.data);                
+                    // console.log("latestest");      
+            //this.items.data = data;
+		    this.subscribeToData();
+            console.log(this.history);
+        },
+        function (error) {
+            console.log(error);
+        },
+        function () {
+            console.log("complete");
+        }
+        );
+        
+    }
+    private subscribeToData(): void {
+
+        this.timerSubscription = Observable.timer(3000)
+            .subscribe(() => this.refreshData());
+    }
+     public ngOnDestroy(): void {
+
+            if (this.postsSubscription) {
+            this.postsSubscription.unsubscribe();
+            }
+            if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+            }
+    }
   
 }

@@ -1,26 +1,28 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar align-title="center">
     <button ion-button clear  (click)="dismiss()">
-       <ion-icon class="big" name="arrow-back"></ion-icon> Back
+       <ion-icon class="big" name="arrow-back"></ion-icon>
     </button>
-    <ion-title>Purchase History</ion-title>
+     <ion-title>Purchase History</ion-title>
   </ion-navbar>
 </ion-header>
-
+<ion-footer class="myColor">
+      <button ion-button full outline color="back" (click)="order()">Re-Order</button>
+</ion-footer>
 <ion-content>
     <ion-grid>
         <ion-row>
-            <ion-col>Qty</ion-col>
             <ion-col>Item ID</ion-col>
             <ion-col>Description</ion-col>
             <ion-col>Price</ion-col>
             <ion-col>Amount</ion-col>
+            <ion-col>Qty</ion-col>
         </ion-row>
         <ion-row *ngFor="let detail of details">
             <ion-col>{{detail.itemID}}</ion-col>
             <ion-col>{{detail.itemName}} {{detail.itemDescription}}</ion-col> 
-            <ion-col>{{detail.ordetPrice}}</ion-col>
-            <ion-col>{{detail.ordetSubtotal}}</ion-col>                    
+            <ion-col>{{detail.ordetPrice | currency:'PHP':true:'1.2-2'}}</ion-col>
+            <ion-col>{{detail.ordetSubtotal | currency:'PHP':true:'1.2-2'}}</ion-col>                    
             <ion-col>{{detail.ordetQuantity}}</ion-col>
         </ion-row>
         <ion-row justify-content-end>
@@ -32,6 +34,6 @@
         <ion-row justify-content-start *ngFor="let customers of customer" >
             <ion-col col-5>Customer Address: {{customers.address}}</ion-col>    
         </ion-row>
-         <h5><button ion-button block color="light" (click)="order()">Re-Order</button></h5>
+        
     </ion-grid>    
 </ion-content>
