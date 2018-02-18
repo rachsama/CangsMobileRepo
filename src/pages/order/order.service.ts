@@ -8,17 +8,19 @@ import 'rxjs/add/operator/catch';
 import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage} from '../../pages/seetemp/seetemp';
 import { OrderPage } from '../../pages/order/order';
+import { SharedService } from '../../app/app.service';
 
 @Injectable()
 export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
     public refresh: any=[];
+    public listData: any=[];
     public data: any=[];
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http ){
+    constructor(private _http: Http, public shared: SharedService ){
         console.log("GetItems");
     }
      
@@ -64,14 +66,29 @@ export class OrderService{
             resolve(this.post);
             console.log(this.post);
             this.data.pop();
+
+            });
+        })
+    };
+
+    /*setListItems(post){
+        for(var i=0; i<post.length; i++){
+            this.listData.push({
+                itemID: post[i].itemID,
+                itemName: post[i].itemName,
+                itemDescription: post[i].itemDescription,
+                itemPrice: post[i].itemPrice,
+                itemQuantityStored: post[i].itemQuantityStored,
+                picture: "http://"+post[i].picture,
+                visible: false,
             });
         }
-
-    )};
-
-
+        console.log(this.listData)
+        this.shared.setListItems(this.post);
+    }*/
     
     makeOrder(data,orderData){
+        this.shared.cleanCart();
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({

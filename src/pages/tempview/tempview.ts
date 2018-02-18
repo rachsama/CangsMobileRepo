@@ -17,10 +17,6 @@ export class TempViewPage {
     this.tempv.getTemplate().then(res => {
 		  this.item=res;
       console.log(this.item);
-
-      for(var i=0; i<this.item.length; i++){
-                this.item[i] = this.item[i];
-      }
     });
     console.log(this.navParams.get('data1'));
     console.log(this.navParams.get('data2'));

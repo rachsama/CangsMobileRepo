@@ -27,11 +27,12 @@ export class TempGetPage {
     console.log(this.navParams.get('tempData')); 
     }
 
-    addTemplate(){
+    addTemplate(tempName){
     console.log(this.navParams.get('tempgetData')); 
 
         this.sendTemp.push({
-            "customerID": '10016',//LoginService.customerID,
+            "customerID": 10016,//LoginService.customerID,
+            "templateName": tempName
         });
         console.log(this.sendTemp);
         console.log(this.tempgetData);

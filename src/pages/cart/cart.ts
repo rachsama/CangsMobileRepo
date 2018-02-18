@@ -5,6 +5,7 @@ import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
 import { OrderPage } from '../../pages/order/order';
 import { CategoryPage } from '../../pages/category/category';
+import { SharedService } from '../../app/app.service';
 /**
  * Generated class for the CartPage page.
  *
@@ -28,12 +29,12 @@ export class CartPage {
   total: number=0;
   coh: number;
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public ord: OrderService, public log:LoginService) {
-      for(var i=0; i<this.navParams.get('cartData').length; i++){
-        this.orderData[i] = this.navParams.get('cartData')[i];
+  constructor( public navCtrl: NavController, public navParams: NavParams, private shared: SharedService, public ord: OrderService, public log:LoginService) {
+      for(var i=0; i<this.shared.getCart().length; i++){
+        this.orderData[i] = this.shared.getCart()[i];
       }
 
-    console.log(this.navParams.get('cartData')); 
+    console.log(this.shared.getCart()); 
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){

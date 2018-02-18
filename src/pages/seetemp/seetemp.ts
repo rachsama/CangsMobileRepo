@@ -48,9 +48,7 @@ export class SeeTempPage {
 
     gotoCart(){
 		console.log("to cart");
-		this.navCtrl.push(CartPage,{
-			cartData: this.cartData,
-		});
+		this.navCtrl.push(CartPage);
 	  }
     
 }
