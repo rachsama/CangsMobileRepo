@@ -3,12 +3,16 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Tempget\</ion-title>
+    <ion-title>Tempget</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
+    <ion-item>
+      <ion-label color="black" stacked>Template Name</ion-label>
+      <ion-input type="text" [(ngModel)]="tempName"></ion-input>
+    </ion-item>
     <ion-list *ngFor="let items of tempgetData">
         <ion-item>
             <ion-thumbnail item-left>
@@ -19,7 +23,7 @@
     </ion-list>
 
     <ion-list>
-        <button ion-button (click)="addTemplate()">Make Template</button>
+        <button ion-button (click)="addTemplate(tempName)">Make Template</button>
     </ion-list>
 
 </ion-content>

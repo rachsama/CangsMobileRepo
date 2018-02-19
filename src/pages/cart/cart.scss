@@ -35,17 +35,38 @@ page-cart {
     ion-input{
         float:left;
     }
-   ion-card {
-      
-    }
-    ion-card-header{
-       
-    }
     ion-card-content{
         margin-top:10px;
     }
     h3{
-        float:right;
+        position:relative;
+        top:0px;
+        right:0px;
+    }
+    .qty
+    {
+        position: relative;
+        top:20px;
+        left:50px;
+    }
+    .in
+    {
+        position: relative;
+        top:-10px;
+        left:100px;
+    }
+     .name
+    {
+        position: relative;
+        top:10px;
+        left:0;
+    }
+    #inp
+    { 
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 10px;
+        margin-bottom: 8px; 
     }
 }
 

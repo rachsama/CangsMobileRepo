@@ -17,10 +17,6 @@ export class TempViewPage {
     this.tempv.getTemplate().then(res => {
 		  this.item=res;
       console.log(this.item);
-
-      for(var i=0; i<this.item.length; i++){
-                this.item[i] = this.item[i];
-      }
     });
     console.log(this.navParams.get('data1'));
     console.log(this.navParams.get('data2'));
@@ -33,24 +29,6 @@ export class TempViewPage {
     })
     console.log(templateID);
   }
-  /*sendtoCart(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture){
-    this.cartData.push({
-      itemID: itemID,
-      itemName: itemName,
-      itemDescription: itemDescription,
-      itemPrice: itemPrice,
-      itemQuantityStored: itemQuantityStored,
-      picture: picture
-    }); 
-    console.log(this.cartData);
-  }
-
-  gotoCart(){
-		console.log("to cart");
-		this.navCtrl.push(CartPage,{
-			cartData: this.cartData,
-      user:this.navParams.get('data1'),
-		});
-	}*/
+  
 
 }

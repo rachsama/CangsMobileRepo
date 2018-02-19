@@ -4,13 +4,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
 import { OrderPage } from '../../pages/order/order';
+import { CategoryPage } from '../../pages/category/category';
 /**
  * Generated class for the CartPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+import { SharedService } from '../../app/app.service';
 @IonicPage()
 @Component({
   selector: 'page-cart',
@@ -28,13 +29,18 @@ export class CartPage {
   total: number=0;
   coh: number;
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, public ord: OrderService, public log:LoginService) {
-      for(var i=0; i<this.navParams.get('cartData').length; i++){
-        this.orderData[i] = this.navParams.get('cartData')[i];
+  constructor( public navCtrl: NavController, 
+               public navParams: NavParams, 
+               public ord: OrderService, 
+               private shared: SharedService,
+               public log:LoginService) {
+      for(var i=0; i<this.shared.getCart().length; i++){
+        this.orderData[i] = this.shared.getCart()[i];
       }
+
       console.log(this.orderData);
-      console.log(this.navParams.get('data1'));
-      console.log(this.navParams.get('cartData')); 
+       console.log(this.shared.getCart()); 
+     
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){
@@ -61,13 +67,13 @@ export class CartPage {
       "location": delLocation,
       "orderTime": delTime,
       "packaging": packaging,
-      "customerID": this.navParams.get('data1'),
+      "customerID": '10016'/*LoginService.customerID*/,
       "cashTendered": coh,
     });
     console.log(this.sendOrder);
     this.ord.makeOrder(this.sendOrder[0],this.orderData);
 
-    this.navCtrl.setRoot(OrderPage)
+    this.navCtrl.setRoot(CategoryPage);
   }
   change(itemID,subTotal,itemPrice,input){
      for(var i=0; i<this.orderData.length; i++){

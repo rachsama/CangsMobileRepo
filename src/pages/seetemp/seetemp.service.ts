@@ -34,7 +34,6 @@ export class SeeTempService{
     
 
     /*makeOrder(data,orderData){
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
@@ -48,7 +47,6 @@ export class SeeTempService{
             console.log(this.orderID);
             alert("The Order has been Successfully Updated!");
         });
-
         setTimeout(() => {
             console.log(orderData);
             for(var i=0; i<orderData.length; i++){

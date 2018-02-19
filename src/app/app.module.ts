@@ -18,6 +18,7 @@ import { TemplatePage } from '../pages/template/template';
 import { TempGetPage } from '../pages/tempget/tempget';
 import { TempViewPage } from '../pages/tempview/tempview';
 import { SeeTempPage } from '../pages/seetemp/seetemp';
+import { CategoryPage } from '../pages/category/category';
 
 import { LoginService } from '../pages/login/login.service';
 import { TemplateService } from '../pages/template/template.service';
@@ -42,7 +43,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SeeTempPage,
     EditInfoPage,
     ResetPage,
-    ModalPage
+    ModalPage,
+    CategoryPage
   ],
   imports: [
     HttpModule,
@@ -63,7 +65,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SeeTempPage,
     EditInfoPage,
     ResetPage,
-    ModalPage
+    ModalPage,
+    CategoryPage
   ],
   providers: [
     StatusBar,

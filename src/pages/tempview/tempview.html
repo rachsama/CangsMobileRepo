@@ -10,6 +10,7 @@
 <ion-content>
     <ion-list *ngFor="let items of item" (click)="seeTemplate(items.templateID)">
         <ion-item>
+            <h1>{{items.templateName}}</h1>
             <h2>{{items.templateID}}</h2>
             <h3>{{items.customerID}}</h3>
         </ion-item>

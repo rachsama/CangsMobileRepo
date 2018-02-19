@@ -15,6 +15,7 @@ export class OrderService{
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
+    public data: any=[];
     constructor(private _http: Http ){
         console.log("GetItems");
     }
@@ -109,4 +110,41 @@ export class OrderService{
             });
         }
     )};
+     getCategoryItem(category){
+
+          let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+            headers: headers
+        })
+
+        console.log(category);
+        if (typeof category === "string"){
+            console.log(category);
+            this.data.push({
+                "category": category
+            });
+            console.log(this.data);
+        }
+        return new Promise(resolve => {
+            this._http.post(this._apiUrl + '/item/returnCategory/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+            this.data.pop();
+            /*for(var i=0; i<this.post.length; i++){
+                this.post.push({
+                    itemID: this.post[i].itemID,
+                    itemName: this.post[i].itemName,
+                    itemDescription: this.post[i].itemDescription,
+                    itemPrice: this.post[i].itemPrice,
+                    itemQuantityStored: this.post[i].itemQuantityStored,
+                    picture: "http://"+this.post[i].picture,
+                    visible: false,
+                });
+            }
+            this.shared.setCartItems(this.post);*/
+            });
+        })
+     }
 }

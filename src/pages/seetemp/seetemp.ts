@@ -36,8 +36,7 @@ export class SeeTempPage {
                 itemDescription: data[0].itemDescription,
                 itemPrice: data[0].itemPrice,
                 itemQuantityStored: data[0].itemQuantityStored,
-                picture: data[0].picture,
-                subTotal:data[0].itemPrice,
+                picture: data[0].picture
               })
           });
         }
@@ -49,9 +48,7 @@ export class SeeTempPage {
 
     gotoCart(){
 		console.log("to cart");
-		this.navCtrl.push(CartPage,{
-			cartData: this.cartData,
-		});
+		this.navCtrl.push(CartPage);
 	  }
     
 }

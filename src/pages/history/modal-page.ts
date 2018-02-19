@@ -20,22 +20,23 @@ export class ModalPage {
       this.customer = this.navParams.get('customer');
       this.details = this.navParams.get('details');
       this.total = this.navParams.get('total');
-      console.log(this.total);
-      console.log(this.customer);
-      console.log(this.details);
+      //console.log(this.total);
+      //console.log(this.customer);
+      //console.log(this.details);
   }
 
     dismiss(data) {
             this.viewCtrl.dismiss(data);
     }
     order(){
-            console.log("to cart2");
+            
             console.log(this.details);
             for(var i=0;i<this.details.length;i++)
             {
+                console.log("to asdf");
                this.ord.get1Item(this.details[i].itemID).then(data =>{
                  console.log(data);
-                 data[0].picture = "http://" + data[0].picture;
+                    data[0].picture = "http://" + data[0].picture;
                     this.newcart.push({
                           itemID: data[0].itemID,
                           itemName: data[0].itemName,
@@ -44,15 +45,17 @@ export class ModalPage {
                           itemQuantityStored: data[0].itemQuantityStored,
                           picture: data[0].picture,
                           subTotal:data[0].itemPrice,
+                          visible: false,
                     });
-                    //this.newcart[i].
+                    this.shared.setCart(this.newcart);
+                    this.newcart.pop();
                });
             }
             console.log(this.newcart);
             
             setTimeout (() => {
                 this.navCtrl.push(CartPage,{
-                    cartData: this.newcart,
+                   // cartData: this.newcart,
                     user:this.shared.getUserName(),//this.navParams.get('data1')
                 });
             }, 1000)
