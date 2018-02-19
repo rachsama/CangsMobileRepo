@@ -4,12 +4,12 @@ page-category{
             ion-card.dry {
                 position: relative;
                 text-align: center;
-                background-color:#AAC4D1;//#7de550 #AAC4D1
+                background-color:red;//#7de550 #AAC4D1
             }
             ion-card.bev {
                 position: relative;
                 text-align: center;
-                background-color:#FEFAE1;
+                background-color:#2A5B84;
             }
             ion-card.dairy {
                 position: relative;
@@ -19,17 +19,17 @@ page-category{
             ion-card.toi {
                 position: relative;
                 text-align: center;
-                background-color:#AAC4D1;
+                background-color:#FEFAE1;
             }
             ion-card.cond {
                 position: relative;
                 text-align: center;
-                background-color:#2A5B84;
+                background-color:#EBC137;//2A5B84
             }
             ion-card.misc {
                 position: relative;
                 text-align: center;
-                background-color:#2A5B84;
+                background-color:red;
             }
 
             .card-title {
@@ -40,7 +40,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                 font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: #FEFAE1;
             }
 
             .card-title2 {
@@ -51,7 +51,7 @@ page-category{
                 width: 100%;
                // font-weight: bold;
                 font-family: "Courier New", Courier, monospace;
-                color: blue;
+                color: #FEFAE1;
             }
             .card-title3 {
                 position: relative;
@@ -61,7 +61,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: #FEFAE1;
             }
             .card-title4 {
                 position: relative;
@@ -91,7 +91,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: #FEFAE1;
             }
              
 

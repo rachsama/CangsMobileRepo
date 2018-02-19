@@ -21,13 +21,17 @@ export class CartPage {
   public item: any=[];
   public orderData: any=[];
   public sendOrder: any=[];
+  public cartData: any=[];
+  public cartData2: any=[];
   packaging: string='Plastic';
+  
   ngOnInit () {
     this.packaging = 'Plastic';
   }
   currentval:number = 1;
   total: number=0;
   coh: number;
+  totalcount:number=0;
 
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
@@ -36,6 +40,8 @@ export class CartPage {
                public log:LoginService) {
       for(var i=0; i<this.shared.getCart().length; i++){
         this.orderData[i] = this.shared.getCart()[i];
+        this.totalcount +=this.shared.getCart()[i].subTotal;
+        console.log(this.totalcount);
       }
 
       console.log(this.orderData);
@@ -79,14 +85,77 @@ export class CartPage {
      for(var i=0; i<this.orderData.length; i++){
         if(this.orderData[i].itemID == itemID)
         {
-                this.orderData[i].subTotal = itemPrice * input._value;                       
+                this.orderData[i].subTotal = itemPrice * input._value;
+                this.totalcount=0;
+                console.log(this.orderData);
+                for(var j=0; j<this.orderData.length; j++) 
+                {
+                   
+                    this.totalcount +=this.orderData[j].subTotal;
+                    console.log(this.totalcount);
+                    
+                }                      
         }
         if(input._value == "" || input._value==0)
         {
            input._value=1;
            this.orderData[i].subTotal = itemPrice * input._value;
+           this.totalcount=0;
+            for(var j=0; j<this.orderData.length; j++) 
+            {
+                this.totalcount +=this.orderData[j].subTotal;
+                console.log(this.totalcount);
+                console.log(this.orderData);
+            }  
         }
       }
-      console.log(input._value);
+      //console.log(input._value);
+  }
+  remove(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture, visible)
+  {
+        
+        for(var j=0; j<this.orderData.length; j++) 
+        {
+             console.log(itemID);
+             console.log(this.orderData);
+             if(itemID == this.orderData[j].itemID){          
+                this.orderData.splice(j, 1);
+              }
+        }
+        for(var i=0; i<this.shared.getCart().length; i++){
+          this.cartData2[i] = this.shared.getCart()[i];
+        }
+        console.log(this.cartData2)
+
+        for (var i=0; i<this.cartData2.length; i++){
+          if(itemID == this.cartData2[i].itemID){
+            this.cartData2.splice(i, 1);
+          }
+        }
+        console.log(this.cartData2)
+        console.log(itemID);
+        for(var i=0; i<this.item.length; i++){
+          if(itemID == this.item[i].itemID){
+            this.item[i].visible = false;
+            console.log(this.item[i].itemID);
+          } 
+        }
+
+        this.shared.cleanCart();
+        for (var i=0; i<this.cartData2.length; i++){
+          this.cartData.push({
+            itemID: this.cartData2[i].itemID,
+            itemName: this.cartData2[i].itemName,
+            itemDescription: this.cartData2[i].itemDescription,
+            itemPrice: this.cartData2[i].itemPrice,
+            itemQuantityStored: this.cartData2[i].itemQuantityStored,
+            picture: this.cartData2[i].picture,
+            subTotal: this.cartData2[i].itemPrice,
+            visible: true
+        }); 
+          this.shared.setCart(this.cartData);
+          this.cartData.pop();
+        }
+      
   }
 }

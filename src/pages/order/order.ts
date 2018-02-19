@@ -22,7 +22,7 @@ export class OrderPage {
                 private shared: SharedService,
                 public menu: MenuController) {
     this.menu.enable(true,"myMenu");
-    console.log(this.navParams.get('category'));
+    //console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
       
@@ -42,12 +42,12 @@ export class OrderPage {
                         visible: true,
                     });
                     this.vis=true;
-                   console.log("in loop");
+                  // console.log("in loop");
               }
           }
           if(!this.vis)
           {
-                  console.log("in visible");
+                //  console.log("in visible");
                   this.item.push({
                         itemID: this.item2[i].itemID,
                         itemName: this.item2[i].itemName,
@@ -64,13 +64,13 @@ export class OrderPage {
           this.vis=false;
       }
 
-      console.log(this.shared.getCart().length)
+     // console.log(this.shared.getCart().length)
       
 
     });
-    console.log(this.item);
-    console.log(this.navParams.get('data1'));
-    console.log(this.navParams.get('data2'));
+   // console.log(this.item);
+   // console.log(this.navParams.get('data1'));
+   // console.log(this.navParams.get('data2'));
   }
 
   addCart(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture, visible){
@@ -86,15 +86,15 @@ export class OrderPage {
         subTotal:itemPrice,
         visible: true
       });
-      console.log(this.cartData); 
-      console.log(itemID);
+    //  console.log(this.cartData); 
+   //   console.log(itemID);
       for(var i=0; i<this.item.length; i++){
         if(itemID == this.item[i].itemID){
           this.item[i].visible = true;
           console.log(this.item[i].itemID);
         } 
       }
-      console.log(this.cartData);
+   //   console.log(this.cartData);
       this.shared.setCart(this.cartData);
       this.cartData.pop(); 
     } 
@@ -105,19 +105,19 @@ export class OrderPage {
       for(var i=0; i<this.shared.getCart().length; i++){
         this.cartData2[i] = this.shared.getCart()[i];
       }
-      console.log(this.cartData2)
+ //     console.log(this.cartData2)
 
       for (var i=0; i<this.cartData2.length; i++){
         if(itemID == this.cartData2[i].itemID){
           this.cartData2.splice(i, 1);
         }
       }
-      console.log(this.cartData2)
-      console.log(itemID);
+  //    console.log(this.cartData2)
+  //    console.log(itemID);
       for(var i=0; i<this.item.length; i++){
         if(itemID == this.item[i].itemID){
           this.item[i].visible = false;
-          console.log(this.item[i].itemID);
+       //   console.log(this.item[i].itemID);
         } 
       }
 
@@ -144,5 +144,50 @@ export class OrderPage {
 		console.log("to cart");
 		this.navCtrl.push(CartPage);
 	}
+  ionViewWillEnter(){
+       this.item2=[];
+       this.item=[];
+       this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+          this.item2=res;
+          for(var i=0; i<this.item2.length; i++){
+              for(var j=0; j<this.shared.getCart().length; j++)
+              {
+                  if(this.shared.getCart()[j].itemID == this.item2[i].itemID)
+                  {
+                      this.item.push({
+                            itemID: this.item2[i].itemID,
+                            itemName: this.item2[i].itemName,
+                            itemDescription: this.item2[i].itemDescription,
+                            itemPrice: this.item2[i].itemPrice,
+                            itemQuantityStored: this.item2[i].itemQuantityStored,
+                            picture: "http://"+this.item2[i].picture,
+                            subTotal: this.item2[i].itemPrice,
+                            visible: true,
+                        });
+                        this.vis=true;
+                    //  console.log("in loop");
+                  }
+              }
+              if(!this.vis)
+              {
+                  //    console.log("in visible");
+                      this.item.push({
+                            itemID: this.item2[i].itemID,
+                            itemName: this.item2[i].itemName,
+                            itemDescription: this.item2[i].itemDescription,
+                            itemPrice: this.item2[i].itemPrice,
+                            itemQuantityStored: this.item2[i].itemQuantityStored,
+                            picture: "http://"+this.item2[i].picture,
+                            subTotal: this.item2[i].itemPrice,
+                            visible: false,
+                        });
+                        this.vis=false;
+              }
+              else
+              this.vis=false;
+          }
+       });
+       console.log(this.shared.getCart());
+  }
 
 }
