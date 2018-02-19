@@ -13,6 +13,7 @@ export class TempViewService{
     public sendOrderDetails: any=[];
     public static templateID: any;
     post: any;
+    public data: any=[];
     private _loginUrl =  'http://192.168.0.24:1025/template/all';
     private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http ){
@@ -30,4 +31,29 @@ export class TempViewService{
         });
         }
     )};
+
+    deleteTemplate(templateID){
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+        headers: headers
+        })
+
+        console.log(templateID);
+        if (typeof templateID === "number"){
+            console.log(templateID);
+            this.data.push({
+                "templateID": templateID
+            });
+            console.log(this.data);
+        }
+        return new Promise(resolve => {
+            this._http.post(this._apiUrl + '/template/deleteTemplate/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+            this.data.pop();
+            });
+        })
+    };
 }

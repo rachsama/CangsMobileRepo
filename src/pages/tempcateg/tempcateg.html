@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Template Categories</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let cat of categoryOptions" >
+        <ion-item>
+            <button ion-item (click)="gotoTemplate(cat)"></button>
+            <h2>{{cat}}</h2>
+        </ion-item>
+    </ion-list>
+</ion-content>

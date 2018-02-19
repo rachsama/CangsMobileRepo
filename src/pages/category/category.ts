@@ -13,7 +13,7 @@ export class CategoryPage {
     public item: any=[];
     selected:any = [];
 
-    categoryOptions: any = [ "Condiments", "Food", "Drinks", "Others" ];
+    categoryOptions: any = [ "Condiments", "Miscellaneous", "Dairy Products", "Non-chilled Beverages", "Toiletries", "Dry Goods" ];
 
     constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams) {
         //this.log.getItem().then(res => {

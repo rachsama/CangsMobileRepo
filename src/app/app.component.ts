@@ -8,7 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { OrderPage } from '../pages/order/order';
 import { HistoryPage } from '../pages/history/history';
-import { TemplatePage } from '../pages/template/template';
+import { TempCategPage } from '../pages/tempcateg/tempcateg';
 import { TempViewPage } from '../pages/tempview/tempview';
 import { CategoryPage } from '../pages/category/category';
 
@@ -29,7 +29,7 @@ export class MyApp {
     this.pages = [
       { title: 'List', component: ListPage },
       { title: 'Make Orders', component: CategoryPage },
-      { title: 'Set Templates', component: TemplatePage },
+      { title: 'Set Templates', component: TempCategPage },
       { title: 'View Templates', component: TempViewPage },
       { title: 'Purchase History', component: HistoryPage }
     ];

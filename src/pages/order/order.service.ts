@@ -46,10 +46,10 @@ export class OrderService{
 
     getCategoryItem(category){
 
-          let headers = new Headers();
+        let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
-            headers: headers
+        headers: headers
         })
 
         console.log(category);
@@ -66,19 +66,6 @@ export class OrderService{
             resolve(this.post);
             console.log(this.post);
             this.data.pop();
-            /*for(var i=0; i<this.post.length; i++){
-                this.post.push({
-                    itemID: this.post[i].itemID,
-                    itemName: this.post[i].itemName,
-                    itemDescription: this.post[i].itemDescription,
-                    itemPrice: this.post[i].itemPrice,
-                    itemQuantityStored: this.post[i].itemQuantityStored,
-                    picture: "http://"+this.post[i].picture,
-                    visible: false,
-                });
-            }
-
-            this.shared.setCartItems(this.post);*/
             });
         })
         

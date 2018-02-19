@@ -70,4 +70,9 @@ export class CartPage {
     this.navCtrl.setRoot(CategoryPage)
   }
 
+  refreshCart(){
+    this.shared.cleanCart();
+    this.navCtrl.setRoot(CategoryPage);
+  }
+
 }

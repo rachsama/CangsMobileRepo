@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
-
+import { SharedService } from '../../app/app.service';
 
 @Injectable()
 export class TemplateService{
@@ -15,7 +15,7 @@ export class TemplateService{
     temdeQuantity: number;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http ){
+    constructor(private _http: Http, public shared: SharedService ){
         console.log("GetItems");
         
 
@@ -32,7 +32,6 @@ export class TemplateService{
         }
      )};
     makeTemplate(data,tempgetData){
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
@@ -59,10 +58,11 @@ export class TemplateService{
             console.log(this.sendTemplateDetails[i]);
             this._http.post(this._apiUrl + "/templatedetails/addTemplateDetails",JSON.stringify(this.sendTemplateDetails[i]), reqopt).subscribe(function(res){
             this.templateID=res;
+            tempgetData.length = 0;
             alert("The TemplateDetail has been Successfully Updated!");
             });
             }
         }, 3000)
-        
+        this.sendTemplateDetails.length = 0;
     }
 }

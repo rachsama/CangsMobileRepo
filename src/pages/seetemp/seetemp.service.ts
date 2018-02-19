@@ -31,44 +31,4 @@ export class SeeTempService{
         });
         }
     )};
-    
-
-    /*makeOrder(data,orderData){
-
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let reqopt = new RequestOptions({
-            headers: headers
-        })
-        console.log(data);
-        this._http.post(this._apiUrl + "/orders/addOrder",JSON.stringify(data), reqopt).subscribe(function(res){
-            var num;
-            num=res;
-            OrderService.orderID=num._body;
-            console.log(this.orderID);
-            alert("The Order has been Successfully Updated!");
-        });
-
-        setTimeout(() => {
-            console.log(orderData);
-            for(var i=0; i<orderData.length; i++){
-                console.log(OrderService.orderID);
-                this.sendOrderDetails.push({
-                ordetQuantity: orderData[i].quantity,
-                ordetPrice: orderData[i].itemPrice,
-                ordetSubtotal: orderData[i].itemPrice * orderData[i].quantity,
-                orderID: OrderService.orderID,
-                itemID: orderData[i].itemID,
-                itemName: orderData[i].itemName,
-                itemDescription: orderData[i].itemDescription
-            });
-            console.log(this.sendOrderDetails[i]);
-            this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
-            this.orderID=res;
-            alert("The OrderDetail has been Successfully Updated!");
-            });
-            }
-        }, 3000)
-        
-    }*/
 }

@@ -11,6 +11,7 @@ import { NavController, NavParams, Nav } from 'ionic-angular';
 export class SharedService{
     user:any;
     cart: any = [];
+    temp: any = [];
     post: any = [];
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
@@ -24,24 +25,6 @@ export class SharedService{
     getUserName() {
         return this.user;
     }
-
-    /*setListItems(post){
-        for(var i=0; i<post.length; i++){
-            post.push({
-                itemID: post[i].itemID,
-                itemName: post[i].itemName,
-                itemDescription: post[i].itemDescription,
-                itemPrice: post[i].itemPrice,
-                itemQuantityStored: post[i].itemQuantityStored,
-                picture: "http://"+post[i].picture,
-                visible: false,
-            });
-            }
-    }
-
-    getListItems(){
-        return this.post;
-    }*/
 
     setCart(cartData){
         this.cart.push( {
@@ -64,7 +47,23 @@ export class SharedService{
         this.cart = [];
     }
 
-    removeCart(){
-        
+    setTemplate(tempData){
+        this.temp.push( {
+            itemID: tempData[0].itemID,
+            itemName: tempData[0].itemName,
+            itemDescription: tempData[0].itemDescription,
+            itemPrice: tempData[0].itemPrice,
+            itemQuantityStored: tempData[0].itemQuantityStored,
+            picture: tempData[0].picture,
+            visible: tempData[0].visible
+        });
+    }
+
+    getTemplate(){
+        return this.temp;
+    }
+
+    cleanTemplate(){
+        this.temp = [];
     }
 }

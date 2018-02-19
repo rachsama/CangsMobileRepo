@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { TemplateService } from '../../pages/template/template.service';
+import { TempCategPage } from '../../pages/tempcateg/tempcateg';
 import { LoginService } from '../../pages/login/login.service';
+import { SharedService } from '../../app/app.service';
 /**
  * Generated class for the CartPage page.
  *
@@ -19,16 +21,16 @@ export class TempGetPage {
     public tempgetData: any=[];
     public sendTemp: any=[];
 
-    constructor( public navCtrl: NavController, public navParams: NavParams, public tem: TemplateService, public log:LoginService) {
-        for(var i=0; i<this.navParams.get('tempData').length; i++){
-            this.tempgetData[i] = this.navParams.get('tempData')[i];
+    constructor( public navCtrl: NavController, public navParams: NavParams, public tem: TemplateService, public log:LoginService, public shared: SharedService) {
+        for(var i=0; i<this.shared.getTemplate().length; i++){
+            this.tempgetData[i] = this.shared.getTemplate()[i];
         }
 
-    console.log(this.navParams.get('tempData')); 
+    console.log(this.shared.getTemplate()); 
     }
 
     addTemplate(tempName){
-    console.log(this.navParams.get('tempgetData')); 
+    console.log(this.shared.getTemplate()); 
 
         this.sendTemp.push({
             "customerID": 10016,//LoginService.customerID,
@@ -37,6 +39,8 @@ export class TempGetPage {
         console.log(this.sendTemp);
         console.log(this.tempgetData);
         this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
+        this.shared.cleanTemplate();
+        this.navCtrl.setRoot(TempCategPage)
     }
 
 }

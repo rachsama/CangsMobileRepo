@@ -6,6 +6,7 @@ import { OrderService } from '../../pages/order/order.service';
 import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 import { LoginService } from '../../pages/login/login.service';
 import { TempViewService } from '../../pages/tempview/tempview.service';
+import { SharedService } from '../../app/app.service';
 /**
  * Generated class for the CartPage page.
  *
@@ -22,8 +23,9 @@ export class SeeTempPage {
     public item: any=[];
     public temp: any=[];
     public cartData: any=[];
+    public tempItems: any=[];
 
-    constructor( public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
+    constructor(public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
       this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
 		    this.temp=res;
         console.log(this.temp)
@@ -36,9 +38,22 @@ export class SeeTempPage {
                 itemDescription: data[0].itemDescription,
                 itemPrice: data[0].itemPrice,
                 itemQuantityStored: data[0].itemQuantityStored,
-                picture: data[0].picture
+                picture: data[0].picture,
+                visible: true
               })
+              this.shared.setCart(this.cartData);
+              this.tempItems.push({
+                itemID: this.cartData[0].itemID,
+                itemName: this.cartData[0].itemName,
+                itemDescription: this.cartData[0].itemDescription,
+                itemPrice: this.cartData[0].itemPrice,
+                itemQuantityStored: this.cartData[0].itemQuantityStored,
+                picture: this.cartData[0].picture,
+                visible: true
+              })
+              this.cartData.pop();
           });
+          
         }
         
         console.log(this.cartData)
@@ -48,7 +63,12 @@ export class SeeTempPage {
 
     gotoCart(){
 		console.log("to cart");
+    console.log(this.shared.getCart())
 		this.navCtrl.push(CartPage);
 	  }
+
+    delTemp(){
+      this.tvserv.deleteTemplate(this.navParams.get('templateID'));
+    }
     
 }

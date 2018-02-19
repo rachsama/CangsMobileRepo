@@ -7,6 +7,12 @@
   </ion-navbar>
 </ion-header>
 
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button block (click)="addOrder(delLocation, packaging, delTime, remarks, coh)">Order</button>
+    <button ion-button block (click)="refreshCart()">Refresh Cart</button>
+  </ion-toolbar>
+</ion-footer>
 
 <ion-content>
   <ion-list *ngFor="let item of orderData">
@@ -43,7 +49,6 @@
       <ion-label color="black" stacked>Cash on Hand</ion-label>
       <ion-input type="number" [(ngModel)]="coh" min="1"></ion-input>
     </ion-item>
-    <button ion-button (click)="addOrder(delLocation, packaging, delTime, remarks, coh)">Order</button>
   </ion-list>
 
 
