@@ -12,12 +12,12 @@
   </ion-toolbar>
 </ion-footer>
 <ion-content>
-    <ion-card *ngFor="let items of item">
-    <ion-item>
+    <ion-card  *ngFor="let items of item">
+    <ion-item class="items">
       <ion-thumbnail item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h2>{{items.itemName}}</h2>
-      <h3>{{items.itemDescription}}</h3>
+      <h2 style="color:white">{{items.itemName}}</h2>
+      <h3 style="color:white">{{items.itemDescription}}</h3>
       <ion-grid>
         <ion-row>
           <ion-col col-6>

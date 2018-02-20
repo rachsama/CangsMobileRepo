@@ -95,7 +95,7 @@ export class TemplatePage {
 
 //toastControllerStart
       let toast = this.toastCtrl.create({
-        message: 'Removed ' + itemName,
+        message: 'Added ' + itemName,
         duration: 1500,
         position: 'top',
       });
@@ -139,8 +139,8 @@ export class TemplatePage {
       }); 
         this.shared.setTemplate(this.tempData);
         this.tempData.pop();
-
-//toastControllerStart
+      }
+      //toastControllerStart
       let toast = this.toastCtrl.create({
         message: 'Removed ' + itemName,
         duration: 1500,
@@ -149,7 +149,6 @@ export class TemplatePage {
 
       toast.present();
 //toastControllerEnd
-      }
     }
 
     
@@ -164,7 +163,7 @@ export class TemplatePage {
     else if(this.shared.getTemplate().length == 0){
       let toast = this.toastCtrl.create({
         message: 'Please Select Items',
-        duration: 3000,
+        duration: 900,
         position: 'middle'
     });
 
