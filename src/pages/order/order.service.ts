@@ -119,13 +119,13 @@ export class OrderService{
         })
 
         console.log(category);
-        if (typeof category === "string"){
+        
             console.log(category);
             this.data.push({
                 "category": category
             });
-            console.log(this.data);
-        }
+            console.log(this.data[0]);
+        
         return new Promise(resolve => {
             this._http.post(this._apiUrl + '/item/returnCategory/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
             this.post = data;        
@@ -145,6 +145,6 @@ export class OrderService{
             }
             this.shared.setCartItems(this.post);*/
             });
-        })
+        });
      }
 }

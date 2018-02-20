@@ -38,31 +38,34 @@ page-cart {
     ion-card-content{
         //margin-top:10px;
         color:white;
-        background-color:#02359d;
+        background-color:#0d33bc;
     }
     h3{
         position:relative;
-        top:10px;
+        top:20px;
         right:30px;
         white-space: nowrap;
+        color:white;
     }
     .qty
     {
         position: relative;
         top:30px;
         left:20px;
+        color:white;
     }
     .in
     {
         position: relative;
         top:0px;
-        left:70px;
+        left:50px;
     }
      .name
     {
         position: relative;
         top:10px;
         left:10px;
+        color:#EBC137;
     }
     .total{
         color:white;
@@ -84,5 +87,29 @@ page-cart {
         top:-90px;
         left:80px;
     }
+    .iconadd{
+        font-size: 20px;
+        position:relative;
+        top:-42px;
+        left:10px;
+    }
+    .iconremove{
+        font-size: 20px;
+        position:relative;
+        top:-42px;
+        left:10px;
+    }
+     .orderbtn{
+        
+        background-color: #f1d248;
+        border: 2px solid #0d33bc;
+        color:#0d33bc;
+        padding: 25px;
+        width:100%;
+        border-radius: 13px;
+        position:relative;
+        left:0;
+    }
+    
 }
 

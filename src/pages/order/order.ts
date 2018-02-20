@@ -4,6 +4,7 @@ import { NavController, NavParams, Nav,MenuController } from 'ionic-angular';
 import { OrderService } from '../../pages/order/order.service';
 import { CartPage } from '../../pages/cart/cart';
 import { SharedService } from '../../app/app.service';
+import { ToastController } from 'ionic-angular';
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html'
@@ -15,14 +16,22 @@ export class OrderPage {
   selected:any = [];
   public item2: any=[];
   vis:boolean=false;
-
+  init:boolean=false;
+  initial:boolean=false;
+  load:boolean=false;
+  leave:boolean=false;
   constructor( private log: OrderService ,
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
+                public toastCtrl: ToastController,
                 private shared: SharedService,
                 public menu: MenuController) {
     this.menu.enable(true,"myMenu");
+    this.init=false;
     //console.log(this.navParams.get('category'));
+    console.log("in2");
+    this.load=false;
+    this.leave=false;
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
       
@@ -91,7 +100,7 @@ export class OrderPage {
       for(var i=0; i<this.item.length; i++){
         if(itemID == this.item[i].itemID){
           this.item[i].visible = true;
-          console.log(this.item[i].itemID);
+        //  console.log(this.item[i].itemID);
         } 
       }
    //   console.log(this.cartData);
@@ -145,49 +154,77 @@ export class OrderPage {
 		this.navCtrl.push(CartPage);
 	}
   ionViewWillEnter(){
-       this.item2=[];
-       this.item=[];
-       this.log.getCategoryItem(this.navParams.get('category')).then(res => {
-          this.item2=res;
-          for(var i=0; i<this.item2.length; i++){
-              for(var j=0; j<this.shared.getCart().length; j++)
-              {
-                  if(this.shared.getCart()[j].itemID == this.item2[i].itemID)
-                  {
-                      this.item.push({
-                            itemID: this.item2[i].itemID,
-                            itemName: this.item2[i].itemName,
-                            itemDescription: this.item2[i].itemDescription,
-                            itemPrice: this.item2[i].itemPrice,
-                            itemQuantityStored: this.item2[i].itemQuantityStored,
-                            picture: "http://"+this.item2[i].picture,
-                            subTotal: this.item2[i].itemPrice,
-                            visible: true,
-                        });
-                        this.vis=true;
-                    //  console.log("in loop");
-                  }
-              }
-              if(!this.vis)
-              {
-                  //    console.log("in visible");
-                      this.item.push({
-                            itemID: this.item2[i].itemID,
-                            itemName: this.item2[i].itemName,
-                            itemDescription: this.item2[i].itemDescription,
-                            itemPrice: this.item2[i].itemPrice,
-                            itemQuantityStored: this.item2[i].itemQuantityStored,
-                            picture: "http://"+this.item2[i].picture,
-                            subTotal: this.item2[i].itemPrice,
-                            visible: false,
-                        });
-                        this.vis=false;
-              }
-              else
-              this.vis=false;
-          }
-       });
-       console.log(this.shared.getCart());
+       console.log("in");
+       this.leave=false;
+       if(this.initial)
+       {
+            console.log("inside");
+            if(this.shared.getCart().length==0 && this.init)
+            {
+                  let toast = this.toastCtrl.create({
+                    message: "Please Fill up Cart",
+                    duration: 3000,
+                    position:"top",
+                    });
+                    toast.present();
+            }
+            this.init=true;
+            this.item2=[];
+            this.item=[];
+            this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+                this.item2=res;
+                for(var i=0; i<this.item2.length; i++){
+                    for(var j=0; j<this.shared.getCart().length; j++)
+                    {
+                        if(this.shared.getCart()[j].itemID == this.item2[i].itemID)
+                        {
+                            this.item.push({
+                                  itemID: this.item2[i].itemID,
+                                  itemName: this.item2[i].itemName,
+                                  itemDescription: this.item2[i].itemDescription,
+                                  itemPrice: this.item2[i].itemPrice,
+                                  itemQuantityStored: this.item2[i].itemQuantityStored,
+                                  picture: "http://"+this.item2[i].picture,
+                                  subTotal: this.item2[i].itemPrice,
+                                  visible: true,
+                              });
+                              this.vis=true;
+                          //  console.log("in loop");
+                        }
+                    }
+                    if(!this.vis)
+                    {
+                        //    console.log("in visible");
+                            this.item.push({
+                                  itemID: this.item2[i].itemID,
+                                  itemName: this.item2[i].itemName,
+                                  itemDescription: this.item2[i].itemDescription,
+                                  itemPrice: this.item2[i].itemPrice,
+                                  itemQuantityStored: this.item2[i].itemQuantityStored,
+                                  picture: "http://"+this.item2[i].picture,
+                                  subTotal: this.item2[i].itemPrice,
+                                  visible: false,
+                              });
+                              this.vis=false;
+                    }
+                    else
+                    this.vis=false;
+                }
+            });
+            console.log(this.shared.getCart());
+
+       }
+       this.initial=true;
+  }
+  ionViewDidLoad(){
+        this.leave=false;
+     console.log("testing");
+  }
+  ionViewWillLeave(){
+      if(this.leave)
+      this.initial=false;
+      console.log("leaving");
+      this.leave=true;
   }
 
 }

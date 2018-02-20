@@ -11,6 +11,7 @@ import { CategoryPage } from '../../pages/category/category';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
 import { SharedService } from '../../app/app.service';
 @IonicPage()
 @Component({
@@ -32,10 +33,13 @@ export class CartPage {
   total: number=0;
   coh: number;
   totalcount:number=0;
-
+  fee:number=20;
+  withfee:boolean=false;
+  with:string ="";
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
+               
                private shared: SharedService,
                public log:LoginService) {
       for(var i=0; i<this.shared.getCart().length; i++){
@@ -43,9 +47,17 @@ export class CartPage {
         this.totalcount +=this.shared.getCart()[i].subTotal;
         console.log(this.totalcount);
       }
-
+      if(this.totalcount < 500)
+      {
+          this.totalcount +=20;
+          this.withfee=true;
+          this.with=" with Fee";
+      }
       console.log(this.orderData);
-       console.log(this.shared.getCart()); 
+      console.log(this.shared.getCart()); 
+      if(this.shared.getCart().length==0)
+      this.navCtrl.pop();
+      console.log("test");
      
   }
 
@@ -87,16 +99,36 @@ export class CartPage {
         {
                 this.orderData[i].subTotal = itemPrice * input._value;
                 this.totalcount=0;
-                console.log(this.orderData);
+             //   console.log(this.orderData);
                 for(var j=0; j<this.orderData.length; j++) 
                 {
                    
                     this.totalcount +=this.orderData[j].subTotal;
-                    console.log(this.totalcount);
-                    
+               //     console.log(this.totalcount);
                 }                      
+                 if(this.totalcount < 520)
+                  {
+                      if(this.withfee==true)
+                      this.totalcount +=20;
+                      
+                      if(this.withfee==false)
+                      {
+                          this.withfee=true;
+                          this.with=" with Fee";
+                          this.totalcount +=20;
+                      }
+              //        console.log(this.totalcount);
+                      
+                  }
+                  if(this.totalcount >= 520 && this.withfee)
+                  {
+              //      console.log("infalse")
+                      this.withfee=false;
+                      this.with="";
+                      this.totalcount -=20;
+                  }
         }
-        if(input._value == "" || input._value==0)
+        if(input._value == "" || input._value==0 || input._value >999)
         {
            input._value=1;
            this.orderData[i].subTotal = itemPrice * input._value;
@@ -104,8 +136,8 @@ export class CartPage {
             for(var j=0; j<this.orderData.length; j++) 
             {
                 this.totalcount +=this.orderData[j].subTotal;
-                console.log(this.totalcount);
-                console.log(this.orderData);
+        //        console.log(this.totalcount);
+         //       console.log(this.orderData);
             }  
         }
       }
@@ -116,28 +148,30 @@ export class CartPage {
         
         for(var j=0; j<this.orderData.length; j++) 
         {
-             console.log(itemID);
-             console.log(this.orderData);
-             if(itemID == this.orderData[j].itemID){          
+         //    console.log(itemID);
+          //   console.log(this.orderData);
+             if(itemID == this.orderData[j].itemID){
+               
+               this.totalcount -= this.orderData[j].subTotal;          
                 this.orderData.splice(j, 1);
               }
         }
         for(var i=0; i<this.shared.getCart().length; i++){
           this.cartData2[i] = this.shared.getCart()[i];
         }
-        console.log(this.cartData2)
+       // console.log(this.cartData2)
 
         for (var i=0; i<this.cartData2.length; i++){
           if(itemID == this.cartData2[i].itemID){
             this.cartData2.splice(i, 1);
           }
         }
-        console.log(this.cartData2)
-        console.log(itemID);
+       // console.log(this.cartData2)
+        //console.log(itemID);
         for(var i=0; i<this.item.length; i++){
           if(itemID == this.item[i].itemID){
             this.item[i].visible = false;
-            console.log(this.item[i].itemID);
+            //console.log(this.item[i].itemID);
           } 
         }
 
@@ -156,6 +190,47 @@ export class CartPage {
           this.shared.setCart(this.cartData);
           this.cartData.pop();
         }
+
+        if(this.shared.getCart().length==0)
+        {
+           this.navCtrl.pop();
+        }
       
+  }
+  addQty(itemID,subTotal,itemPrice,input,quantity){
+       for(var i=0;i<this.orderData.length;i++)
+      {
+          if(this.orderData[i].itemID == itemID)
+          {
+              if(this.orderData[i].quantity ==1)
+              this.orderData[i].quantity = 2;
+              else
+              this.orderData[i].quantity += 1;
+          }
+      }
+      setTimeout (() => {
+      this.change(itemID,subTotal,itemPrice,input);
+      //console.log(this.orderData);
+      }, 200)	
+  }
+  removeQty(itemID,subTotal,itemPrice,input,quantity){
+      for(var i=0;i<this.orderData.length;i++)
+      {
+          if(this.orderData[i].itemID == itemID)
+          { 
+              if(this.orderData[i].quantity==1)
+              this.orderData[i].quantity = 1;
+              else
+              this.orderData[i].quantity -= 1;
+          }
+      }
+      setTimeout (() => {
+      this.change(itemID,subTotal,itemPrice,input);
+      //console.log(this.orderData);
+      }, 200)	
+  }
+  ionViewWillEnter(){
+      if(this.shared.getCart().length==0)
+      this.navCtrl.pop();
   }
 }
