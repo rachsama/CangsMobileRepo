@@ -7,11 +7,29 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <ion-list *ngFor="let cat of categoryOptions" >
-        <ion-item>
-            <button ion-item (click)="gotoTemplate(cat)"></button>
-            <h2>{{cat}}</h2>
-        </ion-item>
-    </ion-list>
+<ion-content class="card-background-page">
+    <ion-card class="dry" (click)="gotoTemplate('Dry Goods')">
+             <img src="assets/imgs/burger.png"/>
+            <div class="card-title"><b>Dry Goods</b></div>
+    </ion-card>
+    <ion-card class="bev" (click)="gotoTemplate('Non-chilled Beverages')">
+            <img src="assets/imgs/beverage.png"/>
+            <div class="card-title2"><b>Non-chilled Beverages</b></div>
+    </ion-card>
+    <ion-card class="cond" (click)="gotoTemplate('Condiments')">
+            <img src="assets/imgs/condiments.png"/>
+            <div class="card-title3"><b>Condiments</b></div>
+    </ion-card>
+    <ion-card class="dairy" (click)="gotoTemplate('Dairy Products')">
+            <img src="assets/imgs/dairy2.png"/>
+            <div class="card-title4"><b>Dairy Products</b></div>
+    </ion-card>
+    <ion-card class="toi" (click)="gotoTemplate('Toiletries')">
+            <img src="assets/imgs/toiletries.png"/>
+            <div class="card-title5"><b>Toiletries</b></div>
+    </ion-card>
+    <ion-card class="misc" (click)="gotoTemplate('Miscellaneous')">
+            <img src="assets/imgs/misc.png"/>
+            <div class="card-title6"><b>Miscellaneous</b></div>
+    </ion-card>
 </ion-content>

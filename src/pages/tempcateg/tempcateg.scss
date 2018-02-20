@@ -1,0 +1,103 @@
+page-tempcateg{
+        .card-background-page {
+
+            ion-card.dry {
+                position: relative;
+                text-align: center;
+                background-color:#e8d037;//#7de550 #AAC4D1 #e8d037
+            }
+            ion-card.bev {
+                position: relative;
+                text-align: center;
+                background-color:#8bea62; //#8bea62 #FEFAE1
+            }
+            ion-card.dairy {
+                position: relative;
+                text-align: center;
+                background-color:#FEFAE1;
+            }
+            ion-card.toi {
+                position: relative;
+                text-align: center;
+                background-color:#827857; //#827857 #AAC4D1
+            }
+            ion-card.cond {
+                position: relative;
+                text-align: center;
+                background-color:#e21f39; //#e23d3d #2A5B84
+            }
+            ion-card.misc {
+                position: relative;
+                text-align: center;
+                background-color:#ecb6ed; //#ecb6ed #2A5B84
+            }
+
+            .card-title {
+                position: relative;
+                top: 0;
+                left:0;//-90px
+                font-size: 1.5em;
+                width: 100%;
+                //font-weight: bold;
+                font-family: "Courier New", Courier, monospace;
+                color: black; //#EBC137
+            }
+
+            .card-title2 {
+                position: relative;
+                top: 0;
+                left:0;//-30px
+                font-size: 1.5em;
+                width: 100%;
+               // font-weight: bold;
+                font-family: "Courier New", Courier, monospace;
+                color: black;
+            }
+            .card-title3 {
+                position: relative;
+                top: 0;
+                left:0;
+                font-size: 1.5em;
+                width: 100%;
+                //font-weight: bold;
+                 font-family: "Courier New", Courier, monospace;
+                color: black;
+            }
+            .card-title4 {
+                position: relative;
+                top: 0;
+                left:0;
+                font-size: 1.5em;
+                width: 100%;
+                //font-weight: bold;
+                 font-family: "Courier New", Courier, monospace;
+                color: black;
+            }
+            .card-title5 {
+                position: relative;
+                top: 0;
+                left:0;
+                font-size: 1.5em;
+                width: 100%;
+                //font-weight: bold;
+                 font-family: "Courier New", Courier, monospace;
+                color: black;
+            }
+            .card-title6 {
+                position: relative;
+                top: 0;
+                left:0;
+                font-size: 1.5em;
+                width: 100%;
+                //font-weight: bold;
+                 font-family: "Courier New", Courier, monospace;
+                color: black;
+            }
+    }
+    img{
+        position:relative;
+        height:100%;
+        width:50%;
+        left:70px;
+    }
+}
