@@ -4,12 +4,12 @@ page-category{
             ion-card.dry {
                 position: relative;
                 text-align: center;
-                background-color:#AAC4D1;//#7de550 #AAC4D1
+                background-color:#e8d037;//#7de550 #AAC4D1 #e8d037
             }
             ion-card.bev {
                 position: relative;
                 text-align: center;
-                background-color:#FEFAE1;
+                background-color:#8bea62; //#8bea62 #FEFAE1
             }
             ion-card.dairy {
                 position: relative;
@@ -19,17 +19,17 @@ page-category{
             ion-card.toi {
                 position: relative;
                 text-align: center;
-                background-color:#AAC4D1;
+                background-color:#827857; //#827857 #AAC4D1
             }
             ion-card.cond {
                 position: relative;
                 text-align: center;
-                background-color:#2A5B84;
+                background-color:#e21f39; //#e23d3d #2A5B84
             }
             ion-card.misc {
                 position: relative;
                 text-align: center;
-                background-color:#2A5B84;
+                background-color:#ecb6ed; //#ecb6ed #2A5B84
             }
 
             .card-title {
@@ -40,7 +40,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                 font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: black; //#EBC137
             }
 
             .card-title2 {
@@ -51,7 +51,7 @@ page-category{
                 width: 100%;
                // font-weight: bold;
                 font-family: "Courier New", Courier, monospace;
-                color: blue;
+                color: black;
             }
             .card-title3 {
                 position: relative;
@@ -61,7 +61,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: black;
             }
             .card-title4 {
                 position: relative;
@@ -71,7 +71,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: blue;
+                color: black;
             }
             .card-title5 {
                 position: relative;
@@ -81,7 +81,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: blue;
+                color: black;
             }
             .card-title6 {
                 position: relative;
@@ -91,7 +91,7 @@ page-category{
                 width: 100%;
                 //font-weight: bold;
                  font-family: "Courier New", Courier, monospace;
-                color: #EBC137;
+                color: black;
             }
              
 

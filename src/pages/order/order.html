@@ -5,29 +5,27 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
-  <ion-toolbar>
-     <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
-  </ion-toolbar>
+     <button class="orderbtn" ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
 </ion-footer>
 <ion-content>
-  <ion-list *ngFor="let items of item">
-    <ion-item>
-      <ion-thumbnail item-left>
+  <ion-card  *ngFor="let items of item">
+    <ion-item style="background-color: #0d33bc" class="list">
+      <ion-thumbnail style="margin-bottom: 68px"item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h2>{{items.itemName}}</h2>
-      <h3>{{items.itemDescription}}</h3>
-      <h3>₱{{items.itemPrice}}</h3>
+      <h2 style="color: white; width: 100%; font-size: 16.2px"><b>{{items.itemName}}</b></h2>
+      <h3 style="color: white; width: 100%">{{items.itemDescription}}</h3>
+      <h2 style="color: white; width: 100%"><b>₱{{items.itemPrice}}</b></h2>
       <ion-grid>
         <ion-row>
-          <ion-col col-6>
-            <h5><button ion-button (click)="addCart(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)">
-               <ion-icon name="add" *ngIf="!items.visible"></ion-icon>
-              <ion-icon name="remove" *ngIf="items.visible"></ion-icon>
-              </button></h5>
+          <ion-col style="position: relative; left:104px; width: 100%" col-6>
+            <h5><button ion-button class="button" (click)="addCart(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)" *ngIf="!items.visible">
+               Add</button>
+              <button ion-button class="button1" color="danger" (click)="addCart(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)" *ngIf="items.visible">
+              Remove</button></h5> 
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-item>
-  </ion-list>
+  </ion-card>
   
 </ion-content>
