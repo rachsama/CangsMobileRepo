@@ -161,7 +161,7 @@ export class TemplatePage {
 		  this.navCtrl.push(TempGetPage);
     }
 
-    else if(this.shared.getCart().length == 0){
+    else if(this.shared.getTemplate().length == 0){
       let toast = this.toastCtrl.create({
         message: 'Please Select Items',
         duration: 3000,

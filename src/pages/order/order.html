@@ -4,7 +4,9 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
+  <ion-toolbar>
      <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
+  </ion-toolbar>
 </ion-footer>
 <ion-content>
   <ion-list *ngFor="let items of item">
