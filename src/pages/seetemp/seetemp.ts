@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { CartPage } from '../../pages/cart/cart';
 import { OrderService } from '../../pages/order/order.service';
 import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 import { LoginService } from '../../pages/login/login.service';
 import { TempViewService } from '../../pages/tempview/tempview.service';
+import { TempViewPage } from '../../pages/tempview/tempview';
 import { SharedService } from '../../app/app.service';
 /**
  * Generated class for the CartPage page.
@@ -25,7 +27,7 @@ export class SeeTempPage {
     public cartData: any=[];
     public tempItems: any=[];
 
-    constructor(public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
+    constructor(private toastCtrl: ToastController, public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
       this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
 		    this.temp=res;
         console.log(this.temp)
@@ -69,6 +71,17 @@ export class SeeTempPage {
 
     delTemp(){
       this.tvserv.deleteTemplate(this.navParams.get('templateID'));
+      this.navCtrl.setRoot(TempViewPage);
+
+//toastControllerStart
+      let toast = this.toastCtrl.create({
+        message: 'HypeBeast',
+        duration: 1500,
+        position: 'top',
+      });
+
+      toast.present();
+//toastControllerEnd
     }
     
 }

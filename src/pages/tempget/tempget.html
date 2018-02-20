@@ -4,6 +4,11 @@
   </ion-navbar>
 </ion-header>
 
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button (click)="addTemplate(tempName)">Make Template</button>
+    </ion-toolbar>
+</ion-footer>
 
 <ion-content>
     <ion-item>
@@ -17,10 +22,6 @@
             <h2>{{items.itemName}}</h2>
             <h3>{{items.itemDescription}}</h3>
         </ion-item>
-    </ion-list>
-
-    <ion-list>
-        <button ion-button (click)="addTemplate(tempName)">Make Template</button>
     </ion-list>
 
 </ion-content>

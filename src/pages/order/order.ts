@@ -144,7 +144,7 @@ export class OrderPage {
       let toast = this.toastCtrl.create({
         message: 'Removed ' + itemName,
         duration: 1500,
-        position: 'top'
+        position: 'top',
       });
 
       toast.present();

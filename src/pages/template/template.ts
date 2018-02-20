@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Nav } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
 import { CartPage } from '../../pages/cart/cart';
@@ -19,7 +20,7 @@ export class TemplatePage {
     public item2: any=[];
     vis:boolean=false;
 
-    constructor( private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
+    constructor(private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
     console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
@@ -91,6 +92,16 @@ export class TemplatePage {
       console.log(this.tempData);
       this.shared.setTemplate(this.tempData);
       this.tempData.pop(); 
+
+//toastControllerStart
+      let toast = this.toastCtrl.create({
+        message: 'Removed ' + itemName,
+        duration: 1500,
+        position: 'top',
+      });
+
+      toast.present();
+//toastControllerEnd
     } 
     
     
@@ -128,6 +139,16 @@ export class TemplatePage {
       }); 
         this.shared.setTemplate(this.tempData);
         this.tempData.pop();
+
+//toastControllerStart
+      let toast = this.toastCtrl.create({
+        message: 'Removed ' + itemName,
+        duration: 1500,
+        position: 'top',
+      });
+
+      toast.present();
+//toastControllerEnd
       }
     }
 
@@ -135,8 +156,20 @@ export class TemplatePage {
   }
 
   gotoTempGet(){
-		console.log("to TempGet");
-		this.navCtrl.push(TempGetPage);
+    if(this.shared.getTemplate().length !=0){
+      console.log("to TempGet");
+		  this.navCtrl.push(TempGetPage);
+    }
+
+    else if(this.shared.getCart().length == 0){
+      let toast = this.toastCtrl.create({
+        message: 'Please Select Items',
+        duration: 3000,
+        position: 'middle'
+    });
+
+      toast.present();
+    }
 	}
 
 
