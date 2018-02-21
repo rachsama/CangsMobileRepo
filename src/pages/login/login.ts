@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
+import { Network } from '@ionic-native/network';
 
 import { LoginService } from './login.service';
 import { ListPage } from '../../pages/list/list';
@@ -34,10 +35,26 @@ export class LoginPage {
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
-  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController){
+  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController, private toastCtrl: ToastController, private network: Network ){
 				this.log.getCustomer().then(res =>{
 					this.cus=res;
 				});
+				
+//Network
+				this.network.onConnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Online',
+						duration: 2500,
+					}).present();
+				});
+
+				this.network.onDisconnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Offline',
+						duration: 2500,
+					}).present();
+				});
+//Network
 	}
 
   login(event : any)

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
@@ -29,12 +30,31 @@ export class CartPage {
   total: number=0;
   coh: number;
 
-  constructor( public navCtrl: NavController, public navParams: NavParams, private shared: SharedService, public ord: OrderService, public log:LoginService) {
+  constructor(private toastCtrl: ToastController, private network: Network, public navCtrl: NavController, public navParams: NavParams, private shared: SharedService, public ord: OrderService, public log:LoginService) {
       for(var i=0; i<this.shared.getCart().length; i++){
         this.orderData[i] = this.shared.getCart()[i];
       }
 
     console.log(this.shared.getCart()); 
+
+//Network
+				this.network.onConnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Online',
+						duration: 2500,
+					}).present();
+				});
+
+				this.network.onDisconnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Offline',
+						duration: 2500,
+					}).present();
+          this.shared.clearUserName();
+          this.navCtrl.setRoot(CategoryPage);
+				});
+//Network
+
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){

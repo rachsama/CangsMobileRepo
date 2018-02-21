@@ -26,6 +26,10 @@ export class SharedService{
         return this.user;
     }
 
+    clearUserName(){
+        this.user = [];
+    }
+
     setCart(cartData){
         this.cart.push( {
             itemID: cartData[0].itemID,

@@ -29,9 +29,8 @@ export class LoginService{
         });
         }
      )};
-     getCustomerID(id){
+      getCustomerID(id){
 
             LoginService.customerID=id;
      }
-     
 }

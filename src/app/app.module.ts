@@ -17,6 +17,7 @@ import { SeeTempPage } from '../pages/seetemp/seetemp';
 import { CategoryPage } from '../pages/category/category';
 import { SharedService } from '../app/app.service';
 import { TempCategPage } from '../pages/tempcateg/tempcateg';
+import { Network } from '@ionic-native/network';
 
 import { LoginService } from '../pages/login/login.service';
 import { TemplateService } from '../pages/template/template.service';
@@ -73,7 +74,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TempViewService,
     SeeTempService,
     Md5,
-    SharedService
+    SharedService,
+    Network
   ]
 })
 export class AppModule {}

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Nav } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import { OrderService } from '../../pages/order/order.service';
 import { CartPage } from '../../pages/cart/cart';
 import { CategoryPage }from '../../pages/category/category';
 import { SharedService } from '../../app/app.service';
 import { TempGetPage } from '../../pages/tempget/tempget';
+import { LoginPage } from '../../pages/login/login';
 
 @Component({
   selector: 'page-template',
@@ -20,7 +22,7 @@ export class TemplatePage {
     public item2: any=[];
     vis:boolean=false;
 
-    constructor(private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
+    constructor(private network: Network,private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
     console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
@@ -66,8 +68,23 @@ export class TemplatePage {
 
     });
     console.log(this.item);
-    console.log(this.navParams.get('data1'));
-    console.log(this.navParams.get('data2'));
+//Network
+				this.network.onConnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Online',
+						duration: 2500,
+					}).present();
+				});
+
+				this.network.onDisconnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Offline',
+						duration: 2500,
+					}).present();
+          this.shared.clearUserName();
+          this.navCtrl.setRoot(LoginPage);
+				});
+//Network
   }
 
   sendtoTempGet(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture, visible){
