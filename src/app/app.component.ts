@@ -14,6 +14,9 @@ import { HistoryPage } from '../pages/history/history';
 import { TemplatePage } from '../pages/template/template';
 import { TempViewPage } from '../pages/tempview/tempview';
 import { CategoryPage } from '../pages/category/category';
+import { TempCategPage } from '../pages/tempcateg/tempcateg';
+
+
 @Component({
   selector: 'app-page',
   templateUrl: 'app.html'
@@ -21,7 +24,7 @@ import { CategoryPage } from '../pages/category/category';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = CategoryPage;
+  rootPage: any = TempViewPage;
 
   pages: Array<{title: string, component: any}>;
   logout: Array<{title: string, component: any}>;
@@ -32,7 +35,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Make Orders', component: CategoryPage },
-      { title: 'Create Templates', component: TemplatePage },
+      { title: 'Create Templates', component: TempCategPage },
       { title: 'View Templates', component: TempViewPage },
       { title: 'Edit Information', component: EditInfoPage },
       { title: 'Reset Password', component: ResetPage },

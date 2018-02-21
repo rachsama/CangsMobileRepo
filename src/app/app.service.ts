@@ -8,9 +8,10 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class SharedService{
-     user:any;
+    user:any;
     cart: any = [];
     post: any = [];
+    temp: any = [];
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
     constructor() {
@@ -22,6 +23,9 @@ export class SharedService{
   
     getUserName() {
         return this.user;
+    }
+    clearUserName(){
+        this.user =null;
     }
 
     /*setListItems(post){
@@ -68,4 +72,23 @@ export class SharedService{
     removeCart(){
         
     }
+    setTemplate(tempData){
+        this.temp.push( {
+            itemID: tempData[0].itemID,
+            itemName: tempData[0].itemName,
+            itemDescription: tempData[0].itemDescription,
+            itemPrice: tempData[0].itemPrice,
+            itemQuantityStored: tempData[0].itemQuantityStored,
+            picture: tempData[0].picture,
+            visible: tempData[0].visible
+        });
+    }
+    getTemplate(){
+        return this.temp;
+    }
+
+    cleanTemplate(){
+        this.temp = [];
+    }
+
 }

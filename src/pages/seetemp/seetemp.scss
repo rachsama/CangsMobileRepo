@@ -1,0 +1,29 @@
+page-seetemp{
+    .deletebtn{
+        background-color: #fcd02f;
+        color: #0d33bc;
+        border: 2px solid #0d33bc;
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .cartbtn{
+        background-color: #fcd02f;
+        color: #0d33bc;
+        border: 2px solid #0d33bc;
+        border-radius: 12px;
+        padding: 20px;
+    }
+    ion-card {
+        background-color:#02359d;
+        position: relative;
+    }
+    ion-card-content{
+        color:white;
+        background-color:#0d33bc;//#02359d
+    }
+    img{
+        height:100px;
+        width:100px;
+    }
+}

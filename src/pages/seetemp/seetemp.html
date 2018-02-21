@@ -3,26 +3,27 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Cart</ion-title>
+    <ion-title>Items</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-footer>
-  <ion-toolbar>
-     <button ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
-  </ion-toolbar>
+  
+     <button class="deletebtn" ion-button block (click)="delTemp()" sticky><ion-icon ion="ion-trash-a"   class="delIcon"></ion-icon><b>Delete Template</b></button>
+     <button  class="cartbtn"ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="cartIcon"></ion-icon><b>TO CART</b></button>
+  
 </ion-footer>
 
 <ion-content>
-  <ion-list *ngFor="let item of cartData">
-    <ion-item>
+  <ion-card *ngFor="let items of tempItems">
+    <ion-card-content>
       <ion-thumbnail item-left>
-      <img src="{{item.picture}}"></ion-thumbnail>
-      <h2>{{item.itemName}}</h2>
-      <h3>{{item.itemDescription}}</h3>
-      <h3>₱{{item.itemPrice}}</h3>
-    </ion-item>
-  </ion-list>
+      <img src="{{items.picture}}"></ion-thumbnail>
+      <h1 style="color:white"><b>{{items.itemName}}</b></h1>
+      <h3 style="color:white">{{items.itemDescription}}</h3>
+      <h3 style="color:white"><b>₱{{items.itemPrice}}</b></h3>
+    </ion-card-content>
+  </ion-card>
 
 
 </ion-content>

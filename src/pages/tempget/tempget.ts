@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 import { TemplateService } from '../../pages/template/template.service';
+import { TempCategPage } from '../../pages/tempcateg/tempcateg';
 import { LoginService } from '../../pages/login/login.service';
+import { SharedService } from '../../app/app.service';
+import { LoginPage } from '../../pages/login/login';
 /**
  * Generated class for the CartPage page.
  *
@@ -19,24 +23,53 @@ export class TempGetPage {
     public tempgetData: any=[];
     public sendTemp: any=[];
 
-    constructor( public navCtrl: NavController, public navParams: NavParams, public tem: TemplateService, public log:LoginService) {
-        for(var i=0; i<this.navParams.get('tempData').length; i++){
-            this.tempgetData[i] = this.navParams.get('tempData')[i];
+    constructor(private network: Network, private toastCtrl: ToastController ,public navCtrl: NavController, public navParams: NavParams, public tem: TemplateService, public log:LoginService, public shared: SharedService) {
+        for(var i=0; i<this.shared.getTemplate().length; i++){
+            this.tempgetData[i] = this.shared.getTemplate()[i];
         }
 
-    console.log(this.navParams.get('tempData')); 
+    console.log(this.shared.getTemplate()); 
+//Network
+				this.network.onConnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Online',
+						duration: 2500,
+					}).present();
+				});
+
+				this.network.onDisconnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Offline',
+						duration: 2500,
+					}).present();
+          this.shared.clearUserName();
+          this.navCtrl.setRoot(LoginPage);
+				});
+//Network
     }
 
     addTemplate(tempName){
-    console.log(this.navParams.get('tempgetData')); 
-
-        this.sendTemp.push({
-            "customerID": 10016,//LoginService.customerID,
-            "templateName": tempName
+        console.log(this.shared.getTemplate()); 
+        if(tempName == "undefined"){
+            let toast = this.toastCtrl.create({
+            message: 'Please Fill Template Name',
+            duration: 3000,
+            position: 'middle'
         });
-        console.log(this.sendTemp);
-        console.log(this.tempgetData);
-        this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
+
+        toast.present();
+        }
+        else if(tempName != "undefined"){
+            this.sendTemp.push({
+                "customerID": 10016,//LoginService.customerID,
+                "templateName": tempName
+            });
+            console.log(this.sendTemp);
+            console.log(this.tempgetData);
+            this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
+            this.shared.cleanTemplate();
+            this.navCtrl.setRoot(TempCategPage)
+        }
     }
 
 }

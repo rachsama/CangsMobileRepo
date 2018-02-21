@@ -9,6 +9,7 @@ page-cart {
         width:100px;
     }
     ion-icon.big {
+        position:absolute;
         font-size: 50px; //Preferred size here
     }
      .content{
@@ -44,56 +45,208 @@ page-cart {
     ion-card{
         position:relative;
     }
-    h3{
-        position:relative;
-        top:20px;
-        right:30px;
-        white-space: nowrap;
-        color:white;
-    }
-    .qty
-    {
-        position: relative;
-        top:30px;
-        left:20px;
-        color:white;
-    }
-    .in
-    {
-        position: relative;
-        top:0px;
-        left:50px;
-    }
-     .name
-    {
-        position: relative;
-        top:10px;
-        left:10px;
-        color:#EBC137;
-    }
-    .total{
-        color:white;
-        float:right;
-        position:relative;
-        top:-20px;
-        right:15px;
-    }
-    #inp
-    { 
-        -moz-border-radius: 50px;
-        -webkit-border-radius: 50px;
-        border-radius: 10px;
-        margin-bottom: 8px; 
-    }
+   
     
     @media(max-width:414px){
+        .icon{
+            font-size: 45px;
+            position:absolute;
+            top:5px;
+            right:5px;
+        }
+        .iconadd{
+            font-size: 30px;
+            position:absolute;
+            top:60px;
+            right:110px;
+    
+        }
+        .iconremove{
+            font-size: 30px;
+            position:absolute;
+            top:60px;
+            right:80px;
+        }
+         h3{
+            font-size:20px;
+            position:relative;
+            top:10px;
+            right:30px;
+            white-space: nowrap;
+            color:white;
+        }
+        .qty
+        {
+           
+            position: relative;
+            top:30px;
+            left:20px;
+            color:white;
+        }
+        .in
+        {
+            
+            position: relative;
+            top:0px;
+            left:50px;
+        }
+        .name
+        {
+            font-size:23px;
+            position: relative;
+            top:10px;
+            left:10px;
+            color:#EBC137;
+        }
+        .total{
+            color:white;
+            float:right;
+            position:relative;
+            top:-20px;
+            right:15px;
+        }
+        #inp
+        { 
+            -moz-border-radius: 50px;
+            -webkit-border-radius: 50px;
+            border-radius: 10px;
+            margin-bottom: 8px; 
+        }
+    }
+    @media(max-width:375px){
+        .icon{
+            font-size: 45px;
+            position:absolute;
+            top:5px;
+            right:5px;
+        }
+        .iconadd{
+            font-size: 30px;
+            position:absolute;
+            top:60px;
+            right:110px;
+    
+        }
+        .iconremove{
+            font-size: 30px;
+            position:absolute;
+            top:60px;
+            right:80px;
+        }
+         h3{
+            font-size: 25px;
+            position:relative;
+            top:10px;
+            right:-20px;
+            white-space: nowrap;
+            color:white;
+        }
+        .qty
+        {
+            font-size:20px;
+            position: relative;
+            top:18px;
+            left:20px;
+            color:white;
+        }
+        .in
+        {
+            font-size:20px;
+            position: relative;
+            top:-18px;
+            left:65px;
+        }
+        .name
+        {
+            position: relative;
+            top:10px;
+            left:10px;
+            color:#EBC137;
+        }
+        .total{
+            color:white;
+            float:right;
+            position:relative;
+            top:-20px;
+            right:15px;
+        }
+        #inp
+        { 
+            -moz-border-radius: 50px;
+            -webkit-border-radius: 50px;
+            border-radius: 10px;
+            margin-bottom: 8px; 
+        }
+    }
+    @media(max-width:325px){
         .icon{
             font-size: 35px;
             position:absolute;
             top:5px;
             right:5px;
         }
+        .iconadd{
+            font-size: 20px;
+            position:absolute;
+            top:60px;
+            right:60px;
+    
+        }
+        .iconremove{
+            font-size: 20px;
+            position:absolute;
+            top:60px;
+            right:40px;
+        }
+         h3{
+            position:relative;
+            top:10px;
+            right:30px;
+            white-space: nowrap;
+            color:white;
+        }
+        .qty
+        {
+            font-size:18px;
+            position: relative;
+            top:23px;
+            left:20px;
+            color:white;
+        }
+        .in
+        {
+            position: relative;
+            top:-15px;
+            left:60px;
+        }
+        .name
+        {
+            position: relative;
+            font-size:17px;
+            top:10px;
+            left:10px;
+            color:#EBC137;
+        }
+        .total{
+            color:white;
+            float:right;
+            position:relative;
+            top:-20px;
+            right:15px;
+        }
+        #inp
+        { 
+            -moz-border-radius: 50px;
+            -webkit-border-radius: 50px;
+            border-radius: 10px;
+            margin-bottom: 8px; 
+        }
+        img{
+            height:90px;
+            width:100px;
+        }
     }
+    /*
     @media(min-width:500px){
         .icon{
             font-size: 35px;
@@ -101,21 +254,20 @@ page-cart {
             top:-90px;
             left:170px;
         }
-    }
+        .iconadd{
+            font-size: 30px;
+            position:absolute;
+            top:-42px;
+            left:10px;
     
-    .iconadd{
-        font-size: 20px;
-        position:relative;
-        top:-42px;
-        left:10px;
-    
-    }
-    .iconremove{
-        font-size: 20px;
-        position:relative;
-        top:-42px;
-        left:10px;
-    }
+        }
+        .iconremove{
+            font-size: 30px;
+            position:absolute;
+            top:-42px;
+            left:10px;
+        }
+    }*/
      .orderbtn{
         
         background-color: #f1d248;
