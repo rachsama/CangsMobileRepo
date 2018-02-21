@@ -33,7 +33,7 @@ export class OrderPage {
     this.load=false;
     this.leave=false;
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
-		  this.item2=res;
+		this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){
           for(var j=0; j<this.shared.getCart().length; j++)

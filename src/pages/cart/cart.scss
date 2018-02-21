@@ -82,16 +82,21 @@ page-cart {
         margin-bottom: 8px; 
     }
     .icon{
+        position: absolute;
+        right: -100px;
+        top: -135px; 
         font-size: 35px;
+        /*
         position:relative;
         top:-90px;
-        left:80px;
+        left:80px;*/
     }
     .iconadd{
         font-size: 20px;
         position:relative;
         top:-42px;
         left:10px;
+    
     }
     .iconremove{
         font-size: 20px;
