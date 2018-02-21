@@ -8,6 +8,7 @@ import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 import { LoginService } from '../../pages/login/login.service';
 import { TempViewService } from '../../pages/tempview/tempview.service';
 import { TempViewPage } from '../../pages/tempview/tempview';
+import { TempCategPage } from '../../pages/tempcateg/tempcateg';
 import { SharedService } from '../../app/app.service';
 /**
  * Generated class for the CartPage page.
@@ -71,7 +72,7 @@ export class SeeTempPage {
 
     delTemp(){
       this.tvserv.deleteTemplate(this.navParams.get('templateID'));
-      this.navCtrl.setRoot(TempViewPage);
+      this.navCtrl.setRoot(TempCategPage);
 
 //toastControllerStart
       let toast = this.toastCtrl.create({

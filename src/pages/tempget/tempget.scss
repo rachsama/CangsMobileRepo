@@ -1,0 +1,22 @@
+$background-color: #0d33bc;
+
+page-tempget{
+    color: $background-color;
+}
+
+.item{
+     background-color:#0d33bc;
+}
+
+input[type="text"]{
+    font-size:20px;
+}
+
+.savebtn{
+    background-color: #fcd02f;
+    color: #0d33bc;
+    border: 2px solid #0d33bc;
+    border-radius: 12px;
+    padding: 20px;
+    width:100%;
+}

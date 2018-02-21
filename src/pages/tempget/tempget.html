@@ -5,23 +5,23 @@
 </ion-header>
 
 <ion-footer>
-    <ion-toolbar>
-        <button ion-button (click)="addTemplate(tempName)">Make Template</button>
-    </ion-toolbar>
+    
+        <button class="savebtn"ion-button (click)="addTemplate(tempName)"sticky><b>Save Template</b></button>
+    
 </ion-footer>
 
 <ion-content>
     <ion-item>
-      <ion-label color="black" stacked>Template Name</ion-label>
-      <ion-input type="text" [(ngModel)]="tempName"></ion-input>
+      <ion-label style="color:white" stacked><h2>Template Name</h2></ion-label>
+     <ion-input  style="color:white; "type="text" [(ngModel)]="tempName"></ion-input>
     </ion-item>
-    <ion-list *ngFor="let items of tempgetData">
+    <ion-card *ngFor="let items of tempgetData">
         <ion-item>
             <ion-thumbnail item-left>
             <img src="{{items.picture}}"></ion-thumbnail>
-            <h2>{{items.itemName}}</h2>
-            <h3>{{items.itemDescription}}</h3>
+            <h2 style="color:white; ">{{items.itemName}}</h2>
+            <h3 style="color:white; ">{{items.itemDescription}}</h3>
         </ion-item>
-    </ion-list>
+    </ion-card>
 
 </ion-content>

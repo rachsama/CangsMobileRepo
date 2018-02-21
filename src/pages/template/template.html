@@ -7,9 +7,7 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
-  <ion-toolbar>
-     <button ion-button block (click)="gotoTempGet()" sticky><ion-icon name="cart"></ion-icon>TO TempGet</button>
-  </ion-toolbar>
+     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky><b>Create Template</b></button>
 </ion-footer>
 <ion-content>
     <ion-card  *ngFor="let items of item">
@@ -21,10 +19,10 @@
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <h5><button ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)">
-              <ion-icon name="add" *ngIf="!items.visible"></ion-icon>
-              <ion-icon name="remove" *ngIf="items.visible"></ion-icon>
-            </button></h5>
+            <h5><button class="btn" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="!items.visible">
+              ADD</button></h5>
+              <h5><button class="btn1" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="items.visible">
+              REMOVE</button></h5>
           </ion-col>
         </ion-row>
       </ion-grid>
