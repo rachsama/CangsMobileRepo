@@ -40,10 +40,12 @@ page-cart {
         //margin-top:10px;
         color:white;
         background-color:#0d33bc;
+    
         
     }
     ion-card{
         position:relative;
+        background-color:#0d33bc;
     }
    
     
@@ -122,46 +124,46 @@ page-cart {
         }
         .iconadd{
             font-size: 30px;
-            position:absolute;
-            top:10px;
-            right:110px;
+            position:relative;
+            top:-18px;
+            left:30px;
     
         }
         .iconremove{
             font-size: 30px;
-            position:absolute;
-            top:10px;
-            right:80px;
+            position:relative;
+            top:-18px;
+            left:35px;
         }
          h3{
-            font-size: 25px;
-            position:absolute;
-            top:110px;
-            right:5px;
+            font-size: 30px;
+            position:relative;
+            top:0px;
+            right:-20px;
             white-space: nowrap;
             color:white;
         }
         .qty
         {
             font-size:20px;
-            position: absolute;
+            position: relative;
             top:10px;
-            left:125px;
+            left:20px;
             color:white;
         }
         .in
         {
             font-size:20px;
-            position: absolute;
-            top:0px;
-            left:170px;
+            position: relative;
+            top:-28px;
+            left:70px;
         }
         .name
         {
             font-size:25px; 
             position: relative;
-            top:20px;
-            left:10px;
+            top:-20px;
+            left:-30px;
             color:#EBC137;
         }
         .total{
@@ -227,6 +229,7 @@ page-cart {
             top:10px;
             left:10px;
             color:#EBC137;
+           
         }
         .total{
             color:white;
@@ -242,6 +245,7 @@ page-cart {
             border-radius: 10px;
             margin-bottom: 8px; 
         }
+       
         img{
             height:90px;
             width:100px;
