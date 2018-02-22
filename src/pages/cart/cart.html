@@ -18,7 +18,7 @@
       <ion-card-content>
         <ion-thumbnail item-left>
         <img src="{{item.picture}}"></ion-thumbnail>
-        <h2 class="qty">Qty</h2>&nbsp;&emsp;<ion-input class="in" #in (change)="change(item.itemID,item.subTotal,item.itemPrice,in)" style="width: 50px" type="number" value="1" [(ngModel)]="item.quantity" min="1" max="999" required></ion-input>
+        <h2 class="qty">Qty</h2>&nbsp;&emsp;<ion-input class="in" #in (change)="change(item.itemID,item.subTotal,item.itemPrice,in)" style="width: 55px" type="number" value="1" [(ngModel)]="item.quantity" min="1" max="999" required></ion-input>
         <ion-icon (click)="addQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)" class="iconadd" name="add-circle"></ion-icon>
         <ion-icon (click)="removeQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)"class="iconremove" name="remove-circle"></ion-icon>
         <h2 class="name">{{item.itemName}}</h2>

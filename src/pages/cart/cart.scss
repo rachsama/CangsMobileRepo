@@ -188,51 +188,51 @@ page-cart {
     }
     @media(max-width:325px){
         .icon{
-            font-size: 35px;
+            font-size: 25px;
             position:absolute;
             top:5px;
             right:5px;
         }
         .iconadd{
             font-size: 20px;
-            position:absolute;
-            top:60px;
-            right:60px;
+            position:relative;
+            top:-22px;
+            left:20px;
     
         }
         .iconremove{
             font-size: 20px;
-            position:absolute;
-            top:60px;
-            right:40px;
+            position:relative;
+            top:-22px;
+            left:20px;
         }
          h3{
             position:relative;
-            top:10px;
-            right:30px;
+            top:-20px;
+            float:right;
             white-space: nowrap;
             color:white;
         }
         .qty
         {
-            font-size:18px;
+            font-size:15px;
             position: relative;
-            top:23px;
+            top:0px;
             left:20px;
             color:white;
         }
         .in
         {
             position: relative;
-            top:-15px;
-            left:60px;
+            top:-38px;
+            left:55px;
         }
         .name
         {
             position: relative;
             font-size:17px;
-            top:10px;
-            left:10px;
+            top:-20px;
+            left:-35px;
             color:#EBC137;
            
         }
