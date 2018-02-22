@@ -79,7 +79,7 @@ page-cart {
         {
            
             position: absolute;
-            top:30px;
+            top:5px;
             left:20px;
             color:white;
         }
@@ -123,20 +123,20 @@ page-cart {
         .iconadd{
             font-size: 30px;
             position:absolute;
-            top:60px;
+            top:10px;
             right:110px;
     
         }
         .iconremove{
             font-size: 30px;
             position:absolute;
-            top:60px;
+            top:10px;
             right:80px;
         }
          h3{
             font-size: 25px;
-            position:relative;
-            top:10px;
+            position:absolute;
+            top:150px;
             right:-20px;
             white-space: nowrap;
             color:white;
@@ -144,22 +144,23 @@ page-cart {
         .qty
         {
             font-size:20px;
-            position: relative;
-            top:18px;
-            left:20px;
+            position: absolute;
+            top:10px;
+            left:125px;
             color:white;
         }
         .in
         {
             font-size:20px;
-            position: relative;
-            top:-18px;
-            left:65px;
+            position: absolute;
+            top:0px;
+            left:170px;
         }
         .name
         {
+            font-size:30px; 
             position: relative;
-            top:10px;
+            top:20px;
             left:10px;
             color:#EBC137;
         }
