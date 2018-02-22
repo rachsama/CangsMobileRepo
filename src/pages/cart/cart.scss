@@ -138,11 +138,14 @@ page-cart {
          h3{
             font-size: 30px;
             position:relative;
-            top:0px;
+            top:-10px;
             right:-20px;
             white-space: nowrap;
             color:white;
+            float:right;
+            
         }
+       
         .qty
         {
             font-size:20px;
@@ -165,6 +168,7 @@ page-cart {
             top:-20px;
             left:-30px;
             color:#EBC137;
+            overflow:hidden;
         }
         .total{
             color:white;
@@ -180,6 +184,7 @@ page-cart {
             border-radius: 10px;
             margin-bottom: 8px; 
         }
+       
     }
     @media(max-width:325px){
         .icon{
