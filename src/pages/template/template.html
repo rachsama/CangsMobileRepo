@@ -14,7 +14,7 @@
     <ion-item class="items">
       <ion-thumbnail item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h2 style="color:white">{{items.itemName}}</h2>
+      <h2 style="color:#EBC137">{{items.itemName}}</h2>
       <h3 style="color:white">{{items.itemDescription}}</h3>
       
             <h5><button class="btn" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="!items.visible">

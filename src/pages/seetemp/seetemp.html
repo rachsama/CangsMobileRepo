@@ -15,13 +15,14 @@
 </ion-footer>
 
 <ion-content>
+  
   <ion-card *ngFor="let items of tempItems">
     <ion-card-content>
       <ion-thumbnail item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h1 style="color:white"><b>{{items.itemName}}</b></h1>
+      <h1 style="color:#EBC137"><b>{{items.itemName}}</b></h1><br>
       <h3 style="color:white">{{items.itemDescription}}</h3>
-      <h3 style="color:white"><b>₱{{items.itemPrice}}</b></h3>
+      <h3 style="color:white"><b>{{items.itemPrice | currency:'PHP':true:'1.2-2'}}</b></h3>
     </ion-card-content>
   </ion-card>
 

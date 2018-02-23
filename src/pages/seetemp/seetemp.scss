@@ -21,9 +21,23 @@ page-seetemp{
     ion-card-content{
         color:white;
         background-color:#0d33bc;//#02359d
+        
     }
     img{
+        height:90px;
+        width:100px;
+    }
+    ion-thumbnail{
+        float:left;
         height:100px;
         width:100px;
+    }
+    h1{
+        position:relative;
+        left:10px;
+    }
+    h3{
+        position:relative;
+        left:10px;
     }
 }

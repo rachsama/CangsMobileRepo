@@ -44,6 +44,7 @@ export class SeeTempPage {
                 itemPrice: data[0].itemPrice,
                 itemQuantityStored: data[0].itemQuantityStored,
                 picture: data[0].picture,
+                subTotal:data[0].itemPrice,
                 visible: true
               })
               this.shared.setCart(this.cartData);
@@ -54,6 +55,7 @@ export class SeeTempPage {
                 itemPrice: this.cartData[0].itemPrice,
                 itemQuantityStored: this.cartData[0].itemQuantityStored,
                 picture: this.cartData[0].picture,
+                subTotal:data[0].itemPrice,
                 visible: true
               })
               this.cartData.pop();
@@ -86,6 +88,7 @@ export class SeeTempPage {
     gotoCart(){
 		console.log("to cart");
     console.log(this.shared.getCart())
+    
 		this.navCtrl.push(CartPage);
 	  }
 

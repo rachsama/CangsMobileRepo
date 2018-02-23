@@ -94,54 +94,112 @@ export class CartPage {
     this.navCtrl.setRoot(CategoryPage);
   }
   change(itemID,subTotal,itemPrice,input){
-     for(var i=0; i<this.orderData.length; i++){
-        if(this.orderData[i].itemID == itemID)
-        {
-                this.orderData[i].subTotal = itemPrice * input._value;
-                this.totalcount=0;
-             //   console.log(this.orderData);
-                for(var j=0; j<this.orderData.length; j++) 
-                {
-                   
-                    this.totalcount +=this.orderData[j].subTotal;
-               //     console.log(this.totalcount);
-                }                      
-                 if(this.totalcount < 520)
+    
+      //console.log(input);
+      console.log(input._value);
+      console.log(this.orderData);
+      for(var i=0; i<this.orderData.length; i++){
+          if(this.orderData[i].itemID == itemID)
+          {
+                  this.orderData[i].subTotal = itemPrice * input._value;
+                  this.totalcount=0;
+              //   console.log(this.orderData);
+                  for(var j=0; j<this.orderData.length; j++) 
                   {
-                      if(this.withfee==true)
-                      this.totalcount +=20;
-                      
-                      if(this.withfee==false)
-                      {
-                          this.withfee=true;
-                          this.with=" with Fee";
-                          this.totalcount +=20;
-                      }
-              //        console.log(this.totalcount);
-                      
-                  }
-                  if(this.totalcount >= 520 && this.withfee)
-                  {
-              //      console.log("infalse")
-                      this.withfee=false;
-                      this.with="";
-                      this.totalcount -=20;
-                  }
-        }
-        if(input._value == "" || input._value==0 || input._value >999)
-        {
-           input._value=1;
-           this.orderData[i].subTotal = itemPrice * input._value;
-           this.totalcount=0;
-            for(var j=0; j<this.orderData.length; j++) 
-            {
-                this.totalcount +=this.orderData[j].subTotal;
-        //        console.log(this.totalcount);
-         //       console.log(this.orderData);
-            }  
-        }
-      }
+                    
+                      this.totalcount +=this.orderData[j].subTotal;
+                //     console.log(this.totalcount);
+                  }                      
+                  if(this.totalcount < 520)
+                    {
+                        if(this.withfee==true)
+                        this.totalcount +=20;
+                        
+                        if(this.withfee==false)
+                        {
+                            this.withfee=true;
+                            this.with=" with Fee";
+                            this.totalcount +=20;
+                        }
+                //        console.log(this.totalcount);
+                        
+                    }
+                    if(this.totalcount >= 520 && this.withfee)
+                    {
+                //      console.log("infalse")
+                        this.withfee=false;
+                        this.with="";
+                        this.totalcount -=20;
+                    }
+          }
+          if(input._value == "" || input._value==0 || input._value > 999)
+          {
+            console.log(input._value);
+            console.log("inord");
+            input._value=1;
+            this.orderData[i].subTotal = itemPrice * input._value;
+            this.totalcount=0;
+              for(var j=0; j<this.orderData.length; j++) 
+              {
+                  this.totalcount +=this.orderData[j].subTotal;
+          //        console.log(this.totalcount);
+          //       console.log(this.orderData);
+              }  
+          }
+        
+     }
       //console.log(input._value);
+      
+  }
+  
+  addQty(itemID,subTotal,itemPrice,input,quantity){
+     console.log(input._value);
+       for(var i=0;i<this.orderData.length;i++)
+      {
+          if(this.orderData[i].itemID == itemID)
+          {
+              if(this.orderData[i].quantity ==1)
+              {
+                  console.log("in1");
+                  this.orderData[i].quantity = 2;
+              }
+              
+              else
+              {
+                  if(this.orderData[i].quantity > 999)
+                  {
+                    this.orderData[i].quantity =Number(1);
+                  }
+                  else
+                  this.orderData[i].quantity =Number(this.orderData[i].quantity)+ Number(1);
+              }
+      }
+      console.log(this.orderData);
+      setTimeout (() => {
+      this.change(itemID,subTotal,itemPrice,input);
+      //console.log(this.orderData);
+      }, 200)	
+    }
+  }
+  removeQty(itemID,subTotal,itemPrice,input,quantity){
+      for(var i=0;i<this.orderData.length;i++)
+      {
+          if(this.orderData[i].itemID == itemID)
+          { 
+              if(this.orderData[i].quantity==1)
+              this.orderData[i].quantity = 1;
+              else
+              this.orderData[i].quantity -= 1;
+          }
+      }
+      setTimeout (() => {
+      this.change(itemID,subTotal,itemPrice,input);
+      //console.log(this.orderData);
+      }, 200)	
+  }
+  ionViewWillEnter(){
+      if(this.shared.getCart().length==0)
+      this.navCtrl.pop();
   }
   remove(itemID, itemName, itemDescription, itemPrice, itemQuantityStored, picture, visible)
   {
@@ -196,41 +254,5 @@ export class CartPage {
            this.navCtrl.pop();
         }
       
-  }
-  addQty(itemID,subTotal,itemPrice,input,quantity){
-       for(var i=0;i<this.orderData.length;i++)
-      {
-          if(this.orderData[i].itemID == itemID)
-          {
-              if(this.orderData[i].quantity ==1)
-              this.orderData[i].quantity = 2;
-              else
-              this.orderData[i].quantity += 1;
-          }
-      }
-      setTimeout (() => {
-      this.change(itemID,subTotal,itemPrice,input);
-      //console.log(this.orderData);
-      }, 200)	
-  }
-  removeQty(itemID,subTotal,itemPrice,input,quantity){
-      for(var i=0;i<this.orderData.length;i++)
-      {
-          if(this.orderData[i].itemID == itemID)
-          { 
-              if(this.orderData[i].quantity==1)
-              this.orderData[i].quantity = 1;
-              else
-              this.orderData[i].quantity -= 1;
-          }
-      }
-      setTimeout (() => {
-      this.change(itemID,subTotal,itemPrice,input);
-      //console.log(this.orderData);
-      }, 200)	
-  }
-  ionViewWillEnter(){
-      if(this.shared.getCart().length==0)
-      this.navCtrl.pop();
   }
 }
