@@ -50,10 +50,10 @@ export class TempGetPage {
 
     addTemplate(tempName){
     console.log(this.shared.getTemplate()); 
-        if(tempName == "undefined"){
+        if(tempName == null){
 
         }
-        else if(tempName != "undefined"){
+        else if(tempName != null){
             this.sendTemp.push({
             "customerID": 10016,//LoginService.customerID,
             "templateName": tempName

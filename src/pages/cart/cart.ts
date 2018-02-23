@@ -54,7 +54,6 @@ export class CartPage {
           this.navCtrl.setRoot(CategoryPage);
 				});
 //Network
-
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){

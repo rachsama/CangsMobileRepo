@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -29,8 +29,57 @@ export class LoginService{
         });
         }
      )};
-      getCustomerID(id){
 
-            LoginService.customerID=id;
-     }
+    forgotPass(user, fpasscode, cpass){
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+            headers: headers
+        })
+
+        console.log(user)
+        console.log(fpasscode)
+        console.log(cpass)
+        this._http.post(this._apiUrl + "/template/addTemplate",JSON.stringify(user, fpasscode, cpass), reqopt).subscribe(function(res){
+            var num;
+            num=res;
+            alert("Your New Password is " + cpass);
+        });
+    };
+
+    /* makeTemplate(data,tempgetData){
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+            headers: headers
+        })
+        console.log(data);
+        this._http.post(this._apiUrl + "/template/addTemplate",JSON.stringify(data), reqopt).subscribe(function(res){
+            var num;
+            num=res;
+            TemplateService.templateID=num._body;
+            console.log(TemplateService.templateID);
+            alert("The Template has been Successfully Updated!");
+        });
+
+        setTimeout(() => {
+            console.log(tempgetData);
+            for(var i=0; i<tempgetData.length; i++){
+                console.log(TemplateService.templateID);
+                this.sendTemplateDetails.push({
+                templateID: TemplateService.templateID,
+                itemID: tempgetData[i].itemID,
+                temdeQuantity: '0'
+            });
+            console.log(this.sendTemplateDetails[i]);
+            this._http.post(this._apiUrl + "/templatedetails/addTemplateDetails",JSON.stringify(this.sendTemplateDetails[i]), reqopt).subscribe(function(res){
+            this.templateID=res;
+            tempgetData.length = 0;
+            alert("The TemplateDetail has been Successfully Updated!");
+            });
+            }
+        }, 3000)
+        this.sendTemplateDetails.length = 0;
+     }*/
+
 }

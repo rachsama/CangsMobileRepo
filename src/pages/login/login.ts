@@ -4,8 +4,10 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { Network } from '@ionic-native/network';
 
 import { LoginService } from './login.service';
+import { SharedService } from '../../app/app.service';
 import { ListPage } from '../../pages/list/list';
 import { CategoryPage } from '../../pages/category/category';
+import { ForgotPassPage } from '../../pages/forgotpass/forgotpass';
 
 
 @Component({
@@ -35,7 +37,7 @@ export class LoginPage {
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
-  constructor(private _md5: Md5, private log: LoginService, public navCtrl: NavController, private toastCtrl: ToastController, private network: Network ){
+  constructor(private shared: SharedService,private _md5: Md5, private log: LoginService, public navCtrl: NavController, private toastCtrl: ToastController, private network: Network ){
 				this.log.getCustomer().then(res =>{
 					this.cus=res;
 				});
@@ -73,7 +75,7 @@ export class LoginPage {
           console.log(data);
 					this.inputuser=data.customerID;
 					this.inputpass=data.cusPassword;
-					this.log.getCustomerID(data.customerID);
+					this.shared.setUserName(data.customerID);
 					this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
 					this.logindetails=true;
 					this.error=""
@@ -85,6 +87,10 @@ export class LoginPage {
 			}
 			console.log(data.cusPassword);
 		}
+	}
+
+	fPass(){
+		this.navCtrl.push(ForgotPassPage);
 	}
 
 }

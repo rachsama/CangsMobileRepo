@@ -29,8 +29,10 @@ export class SeeTempPage {
     public temp: any=[];
     public cartData: any=[];
     public tempItems: any=[];
+    public toCart: any=[];
 
     constructor(private network: Network,private toastCtrl: ToastController, public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
+      this.shared.cleanCart();
       this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
 		    this.temp=res;
         console.log(this.temp)
@@ -46,7 +48,6 @@ export class SeeTempPage {
                 picture: data[0].picture,
                 visible: true
               })
-              this.shared.setCart(this.cartData);
               this.tempItems.push({
                 itemID: this.cartData[0].itemID,
                 itemName: this.cartData[0].itemName,
@@ -84,7 +85,22 @@ export class SeeTempPage {
     }
 
     gotoCart(){
-		console.log("to cart");
+		console.log(this.tempItems);
+    for(var i=0; i<this.tempItems.length; i++){
+      console.log(this.tempItems[i])
+      this.cartData.push({
+        itemID: this.tempItems[i].itemID,
+        itemName: this.tempItems[i].itemName,
+        itemDescription: this.tempItems[i].itemDescription,
+        itemPrice: this.tempItems[i].itemPrice,
+        itemQuantityStored: this.tempItems[i].itemQuantityStored,
+        picture: this.tempItems[i].picture,
+        visible: true
+      })
+      this.shared.setCart(this.cartData);
+      this.cartData.pop();
+    }
+    
     console.log(this.shared.getCart())
 		this.navCtrl.push(CartPage);
 	  }

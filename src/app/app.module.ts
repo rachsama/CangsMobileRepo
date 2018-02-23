@@ -24,6 +24,7 @@ import { TemplateService } from '../pages/template/template.service';
 import { OrderService } from '../pages/order/order.service';
 import { TempViewService } from '../pages/tempview/tempview.service';
 import { SeeTempService } from '../pages/seetemp/seetemp.service';
+import { ForgotPassPage } from '../pages/forgotpass/forgotpass';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -41,7 +42,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TempViewPage,
     SeeTempPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    ForgotPassPage
   ],
   imports: [
     HttpModule,
@@ -61,7 +63,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TempViewPage,
     SeeTempPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    ForgotPassPage
   ],
   providers: [
     StatusBar,
