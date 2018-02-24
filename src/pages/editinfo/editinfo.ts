@@ -6,7 +6,9 @@ import { CartPage } from '../../pages/cart/cart';
 import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
-
+import { SharedService } from '../../app/app.service';
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
 @Component({
   selector: 'page-editinfo',
   templateUrl: 'editinfo.html'
@@ -22,9 +24,28 @@ export class EditInfoPage {
     constructor(  private log: LoginService ,
                 public toastCtrl: ToastController,
                 public navCtrl: NavController,
+                 private network: Network,
+                  private shared: SharedService,
                 public navParams: NavParams) {
+                //Network
+          this.network.onConnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Online',
+              duration: 2500,
+            }).present();
+          });
+
+          this.network.onDisconnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Offline',
+              duration: 2500,
+            }).present();
+            this.shared.clearUserName();
+            this.navCtrl.setRoot(LoginPage);
+          });
+      //Network
                     
-            this.log.get1Customer(10016).subscribe(res =>{
+            this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
 					this.cus=res;
                     console.log(this.cus[0].number);
                     this.number=this.cus[0].number;

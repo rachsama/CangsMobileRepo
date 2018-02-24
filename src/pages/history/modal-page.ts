@@ -3,6 +3,10 @@ import { ModalController, Platform , NavParams, ViewController,NavController } f
 import { CartPage } from '../../pages/cart/cart';
 import { OrderService } from '../../pages/order/order.service';
 import { SharedService } from '../../app/app.service';
+import { ToastController } from 'ionic-angular';
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
+
 @Component({
   selector: 'page-modal',
   templateUrl: 'modal.html'
@@ -16,7 +20,26 @@ export class ModalPage {
               public navCtrl: NavController,
               public ord:OrderService,
               public viewCtrl: ViewController,
+               public toastCtrl: ToastController,
+              private network: Network,
               public shared:SharedService) {
+                    //Network
+          this.network.onConnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Online',
+              duration: 2500,
+            }).present();
+          });
+
+          this.network.onDisconnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Offline',
+              duration: 2500,
+            }).present();
+            this.shared.clearUserName();
+            this.navCtrl.setRoot(LoginPage);
+          });
+      //Network
       this.customer = this.navParams.get('customer');
       this.details = this.navParams.get('details');
       this.total = this.navParams.get('total');

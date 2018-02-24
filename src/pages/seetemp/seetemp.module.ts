@@ -9,5 +9,8 @@ import { SeeTempPage } from './seetemp';
   imports: [
     IonicPageModule.forChild(SeeTempPage),
   ],
+  exports:[
+    SeeTempPage,
+  ]
 })
 export class SeeTempPageModule {}

@@ -76,9 +76,10 @@ export class OrderService{
             console.log(this.sendOrderDetails);
             this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
             this.orderID=res;
-            alert("The OrderDetail has been Successfully Updated!");
+            //alert("The OrderDetail has been Successfully Updated!");
             });
             }
+            alert("Your Order has been Sent!");
         }, 3000)
     }
     get1Customer(customer:any){

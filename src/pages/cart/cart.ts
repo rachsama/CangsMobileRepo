@@ -5,12 +5,16 @@ import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
 import { OrderPage } from '../../pages/order/order';
 import { CategoryPage } from '../../pages/category/category';
+
 /**
  * Generated class for the CartPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+import { ToastController } from 'ionic-angular';
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
 
 import { SharedService } from '../../app/app.service';
 @IonicPage()
@@ -39,9 +43,28 @@ export class CartPage {
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
-               
+               public toastCtrl: ToastController,
+               private network: Network,
                private shared: SharedService,
                public log:LoginService) {
+                 //Network
+          this.network.onConnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Online',
+              duration: 2500,
+            }).present();
+          });
+
+          this.network.onDisconnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Offline',
+              duration: 2500,
+            }).present();
+            this.shared.clearUserName();
+            this.navCtrl.setRoot(LoginPage);
+          });
+      //Network
+                 
       for(var i=0; i<this.shared.getCart().length; i++){
         this.orderData[i] = this.shared.getCart()[i];
         this.totalcount +=this.shared.getCart()[i].subTotal;
@@ -85,7 +108,7 @@ export class CartPage {
       "location": delLocation,
       "orderTime": delTime,
       "packaging": packaging,
-      "customerID": '10016'/*LoginService.customerID*/,
+      "customerID": this.shared.getUserName()/*LoginService.customerID*/,
       "cashTendered": coh,
     });
     console.log(this.sendOrder);
@@ -210,7 +233,13 @@ export class CartPage {
           //   console.log(this.orderData);
              if(itemID == this.orderData[j].itemID){
                
-               this.totalcount -= this.orderData[j].subTotal;          
+               this.totalcount -= this.orderData[j].subTotal; 
+               if(this.totalcount <500)
+               {
+                   this.withfee=true; 
+                   this.totalcount +=20;
+               }
+                      
                 this.orderData.splice(j, 1);
               }
         }

@@ -24,7 +24,7 @@ import { TempCategPage } from '../pages/tempcateg/tempcateg';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = CategoryPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
   logout: Array<{title: string, component: any}>;

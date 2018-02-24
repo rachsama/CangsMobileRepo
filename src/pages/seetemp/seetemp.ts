@@ -47,7 +47,7 @@ export class SeeTempPage {
                 subTotal:data[0].itemPrice,
                 visible: true
               })
-              this.shared.setCart(this.cartData);
+            //  this.shared.setCart(this.cartData);
               this.tempItems.push({
                 itemID: this.cartData[0].itemID,
                 itemName: this.cartData[0].itemName,
@@ -87,8 +87,23 @@ export class SeeTempPage {
 
     gotoCart(){
 		console.log("to cart");
+    this.shared.cleanCart();
     console.log(this.shared.getCart())
-    
+     for(var i=0; i<this.tempItems.length; i++){
+      console.log(this.tempItems[i])
+      this.cartData.push({
+        itemID: this.tempItems[i].itemID,
+        itemName: this.tempItems[i].itemName,
+        itemDescription: this.tempItems[i].itemDescription,
+        itemPrice: this.tempItems[i].itemPrice,
+        itemQuantityStored: this.tempItems[i].itemQuantityStored,
+        picture: this.tempItems[i].picture,
+        subTotal:this.tempItems[i].itemPrice,
+        visible: true
+      })
+      this.shared.setCart(this.cartData);
+      this.cartData.pop();
+    }
 		this.navCtrl.push(CartPage);
 	  }
 
@@ -98,8 +113,8 @@ export class SeeTempPage {
 
 //toastControllerStart
       let toast = this.toastCtrl.create({
-        message: 'Deleted Template',
-        duration: 1500,
+        message: 'The Template has been deleted',
+        duration: 1200,
         position: 'top',
       });
 

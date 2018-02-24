@@ -12,15 +12,19 @@ import { OrderPage } from '../pages/order/order';
 import { ResetPage } from '../pages/resetpass/resetpass';
 import { HistoryPage } from '../pages/history/history';
 import { EditInfoPage } from '../pages/editinfo/editinfo';
-import { CartPage } from '../pages/cart/cart';
+//import { CartPage } from '../pages/cart/cart';
+import { CartPageModule } from '../pages/cart/cart.module';
 import { ModalPage } from '../pages/history/modal-page';
 import { TemplatePage } from '../pages/template/template';
-import { TempGetPage } from '../pages/tempget/tempget';
+//import { TempGetPage } from '../pages/tempget/tempget';
+import { TempGetPageModule } from '../pages/tempget/tempget.module';
 import { TempViewPage } from '../pages/tempview/tempview';
-import { SeeTempPage } from '../pages/seetemp/seetemp';
+//import { SeeTempPage } from '../pages/seetemp/seetemp';
+import { SeeTempPageModule } from '../pages/seetemp/seetemp.module';
 import { CategoryPage } from '../pages/category/category';
 
 import { TempCategPage } from '../pages/tempcateg/tempcateg';
+import { ForgotPassPage } from '../pages/forgotpass/forgotpass';
 import { Network } from '@ionic-native/network';
 
 import { LoginService } from '../pages/login/login.service';
@@ -39,11 +43,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
-    CartPage,
+    ForgotPassPage,
+   // CartPage,
     TemplatePage,
-    TempGetPage,
+   // TempGetPage,
     TempViewPage,
-    SeeTempPage,
+  //  SeeTempPage,
     EditInfoPage,
     ResetPage,
     ModalPage,
@@ -52,7 +57,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     HttpModule,
+    CartPageModule,
     BrowserModule,
+    TempGetPageModule,
+    SeeTempPageModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -62,11 +70,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginPage,
     OrderPage,
     HistoryPage,
-    CartPage,
+   // CartPage,
     TemplatePage,
-    TempGetPage,
+    ForgotPassPage,
+   // TempGetPage,
     TempViewPage,
-    SeeTempPage,
+  //  SeeTempPage,
     EditInfoPage,
     ResetPage,
     ModalPage,
@@ -85,7 +94,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SeeTempService,
     SharedService,
     Md5,
-     Network
+    Network
   ]
 })
 export class AppModule {}

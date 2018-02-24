@@ -2,9 +2,13 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Nav,MenuController } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
+
 import { CartPage } from '../../pages/cart/cart';
 import { SharedService } from '../../app/app.service';
 import { ToastController } from 'ionic-angular';
+
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html'
@@ -25,7 +29,25 @@ export class OrderPage {
                 public navParams: NavParams, 
                 public toastCtrl: ToastController,
                 private shared: SharedService,
+                private network: Network,
                 public menu: MenuController) {
+                  //Network
+    this.network.onConnect().subscribe(() => {
+      this.toastCtrl.create({
+        message: 'Device is Online',
+        duration: 2500,
+      }).present();
+    });
+
+    this.network.onDisconnect().subscribe(() => {
+      this.toastCtrl.create({
+        message: 'Device is Offline',
+        duration: 2500,
+      }).present();
+      this.shared.clearUserName();
+      this.navCtrl.setRoot(LoginPage);
+    });
+//Network
     this.menu.enable(true,"myMenu");
     this.init=false;
     //console.log(this.navParams.get('category'));
@@ -106,6 +128,14 @@ export class OrderPage {
    //   console.log(this.cartData);
       this.shared.setCart(this.cartData);
       this.cartData.pop(); 
+        let toast = this.toastCtrl.create({
+        message: 'Added ' + itemName,
+        duration: 1200,//kini siya
+        position: 'top'
+      });
+
+      toast.present();
+
     } 
     
     
@@ -144,15 +174,33 @@ export class OrderPage {
         this.shared.setCart(this.cartData);
         this.cartData.pop();
       }
+       let toast = this.toastCtrl.create({
+            message: 'Removed ' + itemName,
+            duration: 1200,//kini siya
+            position: 'top',
+          });
+
+          toast.present();
     }
 
     
   }
 
   gotoCart(){
-		console.log("to cart");
-		this.navCtrl.push(CartPage);
-	}
+      if(this.shared.getCart().length != 0){
+        console.log("to cart");
+        this.navCtrl.push(CartPage);
+      }
+      else if(this.shared.getCart().length == 0){
+          let toast = this.toastCtrl.create({
+            message: 'Please Fill Your Cart',
+            duration: 2000,//kini siya
+            position: 'middle'
+        });
+        toast.present();
+        console.log(this.shared.getCart().length);
+	    }
+  }
   ionViewWillEnter(){
        console.log("in");
        this.leave=false;
@@ -162,7 +210,7 @@ export class OrderPage {
             if(this.shared.getCart().length==0 && this.init)
             {
                   let toast = this.toastCtrl.create({
-                    message: "Please Fill up Cart",
+                    message: "Please Fill up your Cart",
                     duration: 3000,
                     position:"top",
                     });

@@ -9,5 +9,8 @@ import { TempGetPage } from './tempget';
   imports: [
     IonicPageModule.forChild(TempGetPage),
   ],
+  exports:[
+    TempGetPage,
+  ]
 })
 export class TempGetPageModule {}

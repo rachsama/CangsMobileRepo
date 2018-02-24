@@ -52,6 +52,7 @@ export class TempViewService{
             this.post = data;        
             resolve(this.post);
             console.log(this.post);
+             alert("Template has been Successfully Deleted!")
             this.data.pop();
             });
         })

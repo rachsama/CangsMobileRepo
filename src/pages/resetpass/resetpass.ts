@@ -6,6 +6,11 @@ import { CartPage } from '../../pages/cart/cart';
 import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
+
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
+import { SharedService } from '../../app/app.service';
+
 @Component({
   selector: 'page-resetpass',
   templateUrl: 'resetpass.html'
@@ -20,12 +25,32 @@ export class ResetPage {
   public data:any=[];
   private timerSubscription: AnonymousSubscription;
   private postsSubscription: AnonymousSubscription;
+  
   error:any;
   constructor(  private log: LoginService ,
                 public toastCtrl: ToastController,
                 public navCtrl: NavController,
+                private network: Network,
+                private shared: SharedService,
                 public navParams: NavParams) {
-            this.log.get1Customer(10016).subscribe(res =>{
+                      //Network
+          this.network.onConnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Online',
+              duration: 2500,
+            }).present();
+          });
+
+          this.network.onDisconnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Offline',
+              duration: 2500,
+            }).present();
+            this.shared.clearUserName();
+            this.navCtrl.setRoot(LoginPage);
+          });
+      //Network
+            this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
 					this.cus=res;
 		    });
             //this.refreshData();

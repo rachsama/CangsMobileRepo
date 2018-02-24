@@ -1,93 +1,70 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
-import { Md5 } from 'ts-md5/dist/md5';
+import { NavController, NavParams, Nav, ToastController } from 'ionic-angular';
+import { UUID } from 'angular2-uuid';
 
-import { LoginService } from './login.service';
-import { ListPage } from '../../pages/list/list';
+import { Network } from '@ionic-native/network';
 import { OrderPage } from '../../pages/order/order';
-import { CategoryPage } from '../../pages/category/category';
-import { ForgotPassPage } from '../../pages/forgotpass/forgotpass';
+import { OrderService } from '../../pages/order/order.service';
+import { CartPage } from '../../pages/cart/cart';
 import { SharedService } from '../../app/app.service';
+import { LoginPage } from '../../pages/login/login';
+import { LoginService } from '../../pages/login/login.service';
 
 import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
 
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+    selector: 'page-forgotpass',
+    templateUrl: 'forgotpass.html'
 })
-export class LoginPage {
-
-	user: any;
-	pass: any;
-
-	MoveToOrder(){
-		//10016
-		//ed9d07d5
-		this.shared.setUserName(this.user);
-		console.log("move page");
-		this.navCtrl.setRoot(CategoryPage, {
-			data1: this.user,
-			data2: this.pass
-		});
-	}
-
-	hash:string = '';
-  public cus: any=[];
-  public error: string ="";
-  logindetails: boolean=false;
-  public inputuser: string = '';
-	public inputpass: string ='';
-	public inputusername: string ='';
-	public static customerID=0;
-	private timerSubscription: AnonymousSubscription;
+export class ForgotPassPage {
+    public cus: any=[];
+    selected:any = [];
+    cpass: string;
+    private timerSubscription: AnonymousSubscription;
     private postsSubscription: AnonymousSubscription;
-  constructor(private _md5: Md5, 
-							private log: LoginService, 
-							public navCtrl: NavController,
-							public menu :MenuController,
-							public shared:SharedService){
-				this.log.getCustomer().subscribe(res =>{
+
+    constructor(private log: LoginService, private shared: SharedService, private toastCtrl: ToastController, private network: Network, public navCtrl: NavController, public navParams: NavParams) {
+                this.log.getCustomer().subscribe(res =>{
 					this.cus=res;
 				});
-				this.refreshData();
-				this.menu.enable(false,"myMenu");
-	}
+//Network
+				this.network.onConnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Online',
+						duration: 2500,
+					}).present();
+				});
 
-  login(event : any)
-  {
-		console.log(this.user);
-		console.log(Md5.hashStr(this.pass));
-		for(let data of this.cus)
-		{
-			
-			if(this.user == data.customerID)
-      		{	
-				this.error="Incorrect Password";
-				console.log("matchuser");
-				if(Md5.hashStr(this.pass) == data.cusPassword)
-				{
-          			console.log(data);
-					this.inputuser=data.customerID;
-					this.inputpass=data.cusPassword;
-					this.log.getCustomerID(data.customerID);
-					this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
-					this.logindetails=true;
-					this.error=""
-					console.log("matchpass");
-					
-					this.MoveToOrder();
-					console.log("yeye");
-				}
-			}
-			console.log(data.cusPassword);
-		}
-	}
-	fPass(){
-		this.navCtrl.push(ForgotPassPage);
-	}
+				this.network.onDisconnect().subscribe(() => {
+					this.toastCtrl.create({
+						message: 'Device is Offline',
+						duration: 2500,
+					}).present();
+                this.shared.clearUserName();
+                this.navCtrl.setRoot(LoginPage);
+				});
+//Network
+    }
 
-	 private refreshData(): void {
+	randPass(user, fpasscode){
+        console.log(user);
+        console.log(fpasscode);
+        for (var i=0; i<this.cus.length; i++){
+            if(user == this.cus[i].customerID){
+                if((fpasscode == this.cus[i].number) || (fpasscode == this.cus[i].verificationCode)){
+                    let uuid = UUID.UUID();
+                    this.cpass=uuid.slice(0,-28);
+
+                    this.log.forgotPass(user, fpasscode, this.cpass)
+                    this.navCtrl.setRoot(LoginPage);
+                }
+                //else
+            }
+        }
+    }
+
+    private refreshData(): void {
          
         this.postsSubscription = this.log.getCustomer().subscribe(
 
@@ -153,5 +130,6 @@ export class LoginPage {
             this.timerSubscription.unsubscribe();
             }
     }
-
+        
+    
 }

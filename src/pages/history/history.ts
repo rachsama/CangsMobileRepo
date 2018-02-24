@@ -9,6 +9,9 @@ import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
 
 import { SharedService } from '../../app/app.service';
+import { ToastController } from 'ionic-angular';
+import { LoginPage } from '../../pages/login/login';
+import { Network } from '@ionic-native/network';
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html'
@@ -26,8 +29,27 @@ export class HistoryPage {
         public navParams: NavParams, 
         public ord:OrderService,
         public modalCtrl: ModalController,
+        public toastCtrl: ToastController,
+        private network: Network,
         public log:LoginService,
         public shared:SharedService) {
+                  //Network
+          this.network.onConnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Online',
+              duration: 2500,
+            }).present();
+          });
+
+          this.network.onDisconnect().subscribe(() => {
+            this.toastCtrl.create({
+              message: 'Device is Offline',
+              duration: 2500,
+            }).present();
+            this.shared.clearUserName();
+            this.navCtrl.setRoot(LoginPage);
+          });
+      //Network
           console.log(this.navParams.get('data1'));
           console.log(this.navParams.get('data2'));
           console.log(this.shared.getUserName());

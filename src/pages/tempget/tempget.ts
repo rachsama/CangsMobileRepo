@@ -49,6 +49,7 @@ export class TempGetPage {
     }
 
     addTemplate(tempName){
+
         console.log(this.shared.getTemplate()); 
         if(tempName == "undefined"){
             let toast = this.toastCtrl.create({
@@ -61,7 +62,7 @@ export class TempGetPage {
         }
         else if(tempName != "undefined"){
             this.sendTemp.push({
-                "customerID": 10016,//LoginService.customerID,
+                "customerID": this.shared.getUserName(),//LoginService.customerID,
                 "templateName": tempName
             });
             console.log(this.sendTemp);
@@ -69,6 +70,13 @@ export class TempGetPage {
             this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
             this.shared.cleanTemplate();
             this.navCtrl.setRoot(TempCategPage)
+
+             let toast = this.toastCtrl.create({
+                    message: 'The Template has been Successfully Created!',
+                    duration: 2000,//kini siya
+                    position: 'middle'
+            });
+            toast.present();
         }
     }
 
