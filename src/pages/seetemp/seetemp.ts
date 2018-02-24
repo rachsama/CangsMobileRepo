@@ -86,6 +86,7 @@ export class SeeTempPage {
 
     gotoCart(){
 		console.log(this.tempItems);
+    //e add ning for statement ug kuhaa ang
     for(var i=0; i<this.tempItems.length; i++){
       console.log(this.tempItems[i])
       this.cartData.push({

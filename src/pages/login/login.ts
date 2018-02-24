@@ -90,7 +90,7 @@ export class LoginPage {
 	}
 
 	fPass(){
-		this.navCtrl.push(ForgotPassPage);
+		this.navCtrl.setRoot(ForgotPassPage);
 	}
 
 }

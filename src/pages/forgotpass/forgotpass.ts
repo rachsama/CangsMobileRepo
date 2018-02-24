@@ -52,7 +52,9 @@ export class ForgotPassPage {
                     this.cpass=uuid.slice(0,-28);
 
                     this.log.forgotPass(user, fpasscode, this.cpass)
+                    this.navCtrl.setRoot(LoginPage);
                 }
+                //else
             }
         }
     }

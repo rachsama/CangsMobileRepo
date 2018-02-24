@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Md5 } from 'ts-md5/dist/md5';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -10,10 +12,13 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class LoginService{
     post: any;
+    data: any=[];
+    newPass: any;
     public static customerID;
+    customer:any=[];
     private _loginUrl =  'http://192.168.0.24:1025/customer/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http ){
+    constructor(private _http: Http, private _md5: Md5 ){
         console.log("LOGIN");
         
 
@@ -35,51 +40,94 @@ export class LoginService{
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let reqopt = new RequestOptions({
             headers: headers
-        })
-
-        console.log(user)
-        console.log(fpasscode)
-        console.log(cpass)
-        this._http.post(this._apiUrl + "/template/addTemplate",JSON.stringify(user, fpasscode, cpass), reqopt).subscribe(function(res){
-            var num;
-            num=res;
-            alert("Your New Password is " + cpass);
         });
-    };
+        
+        this.newPass = Md5.hashStr(cpass);
+        console.log(user);
+        console.log(fpasscode);
+        console.log(cpass);
+        /*
+        if(fpasscode.length == 11){
+            this.data.push({
+                "customerID": user,
+                "number": fpasscode,
+                "cusPassword": cpass
+            });
+                console.log(user);
+                console.log(this.newPass);
 
-    /* makeTemplate(data,tempgetData){
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let reqopt = new RequestOptions({
-            headers: headers
-        })
-        console.log(data);
-        this._http.post(this._apiUrl + "/template/addTemplate",JSON.stringify(data), reqopt).subscribe(function(res){
-            var num;
-            num=res;
-            TemplateService.templateID=num._body;
-            console.log(TemplateService.templateID);
-            alert("The Template has been Successfully Updated!");
+        }
+        else {
+        this.data.push({
+            "customerID": user,
+            "verificationCode": fpasscode,
+            "cusPassword": this.newPass
         });
+        
+    }*/
 
-        setTimeout(() => {
-            console.log(tempgetData);
-            for(var i=0; i<tempgetData.length; i++){
-                console.log(TemplateService.templateID);
-                this.sendTemplateDetails.push({
-                templateID: TemplateService.templateID,
-                itemID: tempgetData[i].itemID,
-                temdeQuantity: '0'
-            });
-            console.log(this.sendTemplateDetails[i]);
-            this._http.post(this._apiUrl + "/templatedetails/addTemplateDetails",JSON.stringify(this.sendTemplateDetails[i]), reqopt).subscribe(function(res){
-            this.templateID=res;
-            tempgetData.length = 0;
-            alert("The TemplateDetail has been Successfully Updated!");
-            });
+//09276405170
+        this._http.post(this._apiUrl + "/customer/returnCusID/"+user, reqopt).map(res => res.json()).subscribe(data =>{
+            /*var num;
+            num=res;
+            console.log(this.data[0]);
+            if(num._body = true){   
+                alert("Your New Password is " + cpass);
             }
+            else if(num._body = false){
+                alert("There has been an error. Try Again");
+            }*/
+           
+            console.log(data);
+            this.customer=data;
+            console.log(this.customer[0]);
+        });
+        setTimeout(() => {
+                console.log(this.customer);//4c54133f-d317
+                if(this.customer[0].verificationCode == fpasscode)
+                {
+                    this.customer[0].cusPassword=Md5.hashStr(cpass);
+                    console.log(this.customer[0]);
+                    let code =Md5.hashStr(cpass);
+                    this.customer[0].cusPassword=code;
+                    this.data.push({
+                        customerID:this.customer[0].customerID,
+                        cusPassword:this.customer[0].cusPassword,
+                        number:this.customer[0].number,
+                        address:this.customer[0].address,
+                        cusLastName:this.customer[0].cusLastName,
+                        cusFirstName:this.customer[0].cusFirstName,
+                        cusMiddleName:this.customer[0].cusMiddleName,
+                        verificationCode:this.customer[0].verificationCode
+                    });
+                    this._http.post(this._apiUrl + "/customer/forgotPassword",JSON.stringify(this.data[0]), reqopt).subscribe(function(res){
+                        alert("Your New Password is " + cpass);
+                    });
+                }
+                else if(this.customer[0].number == fpasscode)
+                {
+                    let code =Md5.hashStr(cpass);
+                    this.customer[0].cusPassword=code;
+                    this.data.push({
+                        customerID:this.customer[0].customerID,
+                        cusPassword:this.customer[0].cusPassword,
+                        number:this.customer[0].number,
+                        address:this.customer[0].address,
+                        cusLastName:this.customer[0].cusLastName,
+                        cusFirstName:this.customer[0].cusFirstName,
+                        cusMiddleName:this.customer[0].cusMiddleName,
+                        verificationCode:this.customer[0].verificationCode
+                    });
+                    console.log(this.data[0]);
+                    console.log(this.customer[0]);
+                    this._http.post(this._apiUrl + "/customer/forgotPassword",JSON.stringify(this.data[0]), reqopt).subscribe(function(res){
+                        alert("Your New Password is " + cpass);
+                    });
+                }
+                this.customer.pop();
+               this.data.pop();
+               this.newPass = null;
         }, 3000)
-        this.sendTemplateDetails.length = 0;
-     }*/
+    };
 
 }
