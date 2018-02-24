@@ -55,7 +55,7 @@ export class TempGetPage {
         }
         else if(tempName != null){
             this.sendTemp.push({
-            "customerID": 10016,//LoginService.customerID,
+            "customerID": this.shared.getUserName(), //kini siya
             "templateName": tempName
         });
         
@@ -66,8 +66,8 @@ export class TempGetPage {
         this.navCtrl.setRoot(TempCategPage)
 
         let toast = this.toastCtrl.create({
-            message: 'Please Fill Your Cart',
-            duration: 3000,
+            message: 'Please Select Items',
+            duration: 2000,//kini siya
             position: 'middle'
         });
 

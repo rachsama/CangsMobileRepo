@@ -80,7 +80,7 @@ export class CartPage {
       "location": delLocation,
       "orderTime": delTime,
       "packaging": packaging,
-      "customerID": '10016'/*LoginService.customerID*/,
+      "customerID": this.shared.getUserName(), //kini siya
       "cashTendered": coh,
     });
     console.log(this.sendOrder);

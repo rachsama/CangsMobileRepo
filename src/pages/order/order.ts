@@ -108,7 +108,7 @@ export class OrderPage {
 //toastControllerStart
       let toast = this.toastCtrl.create({
         message: 'Added ' + itemName,
-        duration: 1500,
+        duration: 1200,//kini siya
         position: 'top'
       });
 
@@ -160,7 +160,7 @@ export class OrderPage {
 //toastControllerStart
       let toast = this.toastCtrl.create({
         message: 'Removed ' + itemName,
-        duration: 1500,
+        duration: 1200,//kini siya
         position: 'top',
       });
 
@@ -181,7 +181,7 @@ export class OrderPage {
     else if(this.shared.getCart().length == 0){
       let toast = this.toastCtrl.create({
         message: 'Please Fill Your Cart',
-        duration: 3000,
+        duration: 2000,//kini siya
         position: 'middle'
     });
 

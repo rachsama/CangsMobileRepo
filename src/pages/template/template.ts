@@ -113,7 +113,7 @@ export class TemplatePage {
 //toastControllerStart
       let toast = this.toastCtrl.create({
         message: 'Added ' + itemName,
-        duration: 1500,
+        duration: 1200,//kini siya
         position: 'top',
       });
 
@@ -160,7 +160,7 @@ export class TemplatePage {
       //toastControllerStart
       let toast = this.toastCtrl.create({
         message: 'Removed ' + itemName,
-        duration: 1500,
+        duration: 1200, //kini siya
         position: 'top',
       });
 

@@ -66,23 +66,25 @@ export class LoginPage {
 		for(let data of this.cus)
 		{
 			
-			if(this.user == data.customerID)
-      {	
-				this.error="Incorrect Password";
-				console.log("matchuser");
-				if(Md5.hashStr(this.pass) == data.cusPassword)
-				{
-          console.log(data);
-					this.inputuser=data.customerID;
-					this.inputpass=data.cusPassword;
-					this.shared.setUserName(data.customerID);
-					this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
-					this.logindetails=true;
-					this.error=""
-					console.log("matchpass");
+		if(this.user == data.customerID)
+      	{	
+			this.error="Incorrect Password";
+			console.log("matchuser");
+			if(Md5.hashStr(this.pass) == data.cusPassword)
+			{
+          		console.log(data);
+				this.inputuser=data.customerID;
+				this.inputpass=data.cusPassword;
+				this.shared.setUserName(data.customerID);
+				this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
+				this.logindetails=true;
+				this.error=""
 					
-					this.MoveToOrder();
-					console.log("yeye");
+				this.MoveToOrder();
+				this.toastCtrl.create({
+					message: 'Welcome ' + this.inputusername,
+					duration: 2500,
+				}).present();
 				}
 			}
 			console.log(data.cusPassword);

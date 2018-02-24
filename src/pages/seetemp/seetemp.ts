@@ -112,8 +112,8 @@ export class SeeTempPage {
 
 //toastControllerStart
       let toast = this.toastCtrl.create({
-        message: 'HypeBeast',
-        duration: 1500,
+        message: 'Template has been deleted',
+        duration: 1200,//kini siya
         position: 'top',
       });
 
