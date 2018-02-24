@@ -49,9 +49,10 @@ export class TempViewService{
         }
         return new Promise(resolve => {
             this._http.post(this._apiUrl + '/template/deleteTemplate/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
-            this.post = data;        
+            this.post = data;
             resolve(this.post);
             console.log(this.post);
+            alert("Template has been Successfully Deleted!")// kaning line
             this.data.pop();
             });
         })

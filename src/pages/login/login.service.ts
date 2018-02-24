@@ -124,6 +124,9 @@ export class LoginService{
                         alert("Your New Password is " + cpass);
                     });
                 }
+                else{
+                    alert("There has been an Error. Please Try Again.");
+                }
                 this.customer.pop();
                this.data.pop();
                this.newPass = null;

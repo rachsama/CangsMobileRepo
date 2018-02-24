@@ -12,6 +12,7 @@ export class TemplateService{
     public sendTemplateDetails: any=[];
     public static templateID: any;
     post: any;
+    success: boolean=false;
     temdeQuantity: number;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
@@ -43,7 +44,7 @@ export class TemplateService{
             num=res;
             TemplateService.templateID=num._body;
             console.log(TemplateService.templateID);
-            alert("The Template has been Successfully Updated!");
+            
         });
 
         setTimeout(() => {
@@ -59,10 +60,15 @@ export class TemplateService{
             this._http.post(this._apiUrl + "/templatedetails/addTemplateDetails",JSON.stringify(this.sendTemplateDetails[i]), reqopt).subscribe(function(res){
             this.templateID=res;
             tempgetData.length = 0;
-            alert("The TemplateDetail has been Successfully Updated!");
+            this.success = true;
             });
             }
         }, 3000)
         this.sendTemplateDetails.length = 0;
+        //mao ni ang start
+        if(this.success == true){
+            alert("Your Template has been Successfully Set!");
+        }
+        //end
     }
 }

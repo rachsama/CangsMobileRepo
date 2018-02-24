@@ -17,6 +17,7 @@ export class OrderService{
     public refresh: any=[];
     public cartData: any=[];
     public data: any=[];
+    success: boolean=false;
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
@@ -87,7 +88,7 @@ export class OrderService{
             num=res;
             OrderService.orderID=num._body;
             console.log(OrderService.orderID);
-            alert("The Order has been Successfully Updated!");
+            
         });
 
         setTimeout(() => {
@@ -107,13 +108,17 @@ export class OrderService{
             console.log(this.sendOrderDetails);
             this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
             this.orderID=res;
-            alert("The OrderDetail has been Successfully Updated!");
             orderData.length = 0;
             console.log(orderData);
+            this.success = true;
             });
             }
         }, 3000)
         this.sendOrderDetails.length = 0;
-
+        //mao ni ang start
+        if(this.success == true){
+            alert("Your Order has been Sent!");
+        }
+        //end
     }
 }
