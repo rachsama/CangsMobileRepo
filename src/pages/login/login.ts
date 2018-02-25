@@ -9,6 +9,7 @@ import { CategoryPage } from '../../pages/category/category';
 import { ForgotPassPage } from '../../pages/forgotpass/forgotpass';
 import { SharedService } from '../../app/app.service';
 
+import { ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
 
@@ -46,6 +47,7 @@ export class LoginPage {
 							private log: LoginService, 
 							public navCtrl: NavController,
 							public menu :MenuController,
+							public toastCtrl: ToastController,
 							public shared:SharedService){
 				this.log.getCustomer().subscribe(res =>{
 					this.cus=res;
@@ -77,8 +79,18 @@ export class LoginPage {
 					console.log("matchpass");
 					
 					this.MoveToOrder();
+					this.toastCtrl.create({
+						message: 'Welcome ' + this.inputusername,
+						duration: 2500,
+					}).present();
 					console.log("yeye");
 				}
+			}
+			else{
+				this.toastCtrl.create({
+					message: 'There has been an error with your credentials. Please try again',
+					duration: 2500,
+				}).present();
 			}
 			console.log(data.cusPassword);
 		}

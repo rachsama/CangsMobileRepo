@@ -7,7 +7,9 @@ import { CartPage } from '../../pages/cart/cart';
 
 import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
+import { SharedService } from '../../app/app.service';
 import { Network } from '@ionic-native/network';
+
 @Component({
     selector: 'page-category',
     templateUrl: 'category.html'
@@ -23,6 +25,7 @@ export class CategoryPage {
                 public menu :MenuController,
                 public toastCtrl: ToastController,
                private network: Network,
+               public shared:SharedService,
                  public navParams: NavParams) {
                       //Network
         this.network.onConnect().subscribe(() => {

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 import { LoginService } from '../../pages/login/login.service';
-
+import { SharedService } from '../../app/app.service';
 
 @Injectable()
 export class TempViewService{
@@ -16,7 +16,7 @@ export class TempViewService{
     public data: any=[];
     private _loginUrl =  'http://192.168.0.24:1025/template/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http ){
+    constructor(private _http: Http, public shared:SharedService ){
         console.log("getTemplate");
         
 
@@ -24,7 +24,7 @@ export class TempViewService{
      
     getTemplate(){
         return new Promise(resolve => {
-            this._http.get(this._apiUrl + '/template/returnCustomerID/'+ 10016 /*LoginService.customerID*/ ).map(res => res.json()).subscribe(data => {
+            this._http.get(this._apiUrl + '/template/returnCustomerID/'+ this.shared.getUserName() ).map(res => res.json()).subscribe(data => {
             this.post = data;        
             resolve(this.post);
             console.log(this.post);

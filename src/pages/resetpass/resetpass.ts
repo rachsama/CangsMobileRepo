@@ -59,90 +59,107 @@ export class ResetPage {
   reset(){
       if(this.newpass != null && this.newpass2 != null && this.verificationCode !=null && this.oldpass !=null )
       {
+        if(this.newpass != "" && this.newpass2 != "" && this.verificationCode !="" && this.oldpass !="")
+        {
 
-        console.log(Md5.hashStr(this.oldpass));
-        console.log("test");
-        console.log(this.oldpass);
-        console.log(this.newpass);
-        console.log(this.newpass2);
-        console.log(this.verificationCode);
-        for(let data of this.cus)
-            {
-                if(10016 == data.customerID)//change to nav params
-                {	
-                        console.log(data.cusPassword);
-                        console.log(Md5.hashStr(this.oldpass));
-                        if(Md5.hashStr(this.oldpass) == data.cusPassword)
-                        {
-                            
-                            if(this.newpass == this.newpass2 && this.newpass != null && this.newpass2 != null)
+            console.log(Md5.hashStr(this.oldpass));
+            console.log("test");
+            console.log(this.oldpass);
+            console.log(this.newpass);
+            console.log(this.newpass2);
+            console.log(this.verificationCode);//b3ae83c0 f5445d66-7209
+            for(let data of this.cus)
+                {
+                    if(this.shared.getUserName() == data.customerID)//change to nav params
+                    {	
+                            console.log(data.cusPassword);
+                            console.log(Md5.hashStr(this.oldpass));
+                            if(Md5.hashStr(this.oldpass) == data.cusPassword)
                             {
-                                if(this.verificationCode == data.verificationCode)
+                                
+                                if(this.newpass == this.newpass2 && this.newpass != null && this.newpass2 != null)
                                 {
-                                        console.log("foundpass");
-                                        this.log.get1Customer(10016).subscribe(result => {
-                                            this.onecus=result;
-                                            console.log(this.onecus); 
-                                        });
-                                        setTimeout (() => {
-                                                this.data.push({
-                                                'customerID': data.customerID, 
-                                                'cusPassword': Md5.hashStr(this.newpass), 
-                                                'number': data.number, 
-                                                'address': data.address,
-                                                'cusLastName': data.cusLastName, 
-                                                'cusMiddleName': data.cusMiddleName, 
-                                                'cusFirstName': data.cusFirstName,				
-                                                'verificationCode': data.verificationCode 			
-                                                });
-                                                this.log.editCustomer(this.data[0]);
-                                                this.oldpass='';
-                                                this.newpass='';
-                                                this.newpass2='';
-                                                this.verificationCode='';
-                                                this.error="Password Successfully Changed";
+                                    if(this.newpass.length >8 || this.newpass2.length >8)
+                                    {
+
+                                            if(this.verificationCode == data.verificationCode)
+                                            {
+                                                    console.log("foundpass");
+                                                    this.log.get1Customer(this.shared.getUserName()).subscribe(result => {
+                                                        this.onecus=result;
+                                                        console.log(this.onecus); 
+                                                    });
+                                                    setTimeout (() => {
+                                                            this.data.push({
+                                                            'customerID': data.customerID, 
+                                                            'cusPassword': Md5.hashStr(this.newpass), 
+                                                            'number': data.number, 
+                                                            'address': data.address,
+                                                            'cusLastName': data.cusLastName, 
+                                                            'cusMiddleName': data.cusMiddleName, 
+                                                            'cusFirstName': data.cusFirstName,				
+                                                            'verificationCode': data.verificationCode 			
+                                                            });
+                                                            this.log.editCustomer(this.data[0]);
+                                                            this.oldpass='';
+                                                            this.newpass='';
+                                                            this.newpass2='';
+                                                            this.verificationCode='';
+                                                            this.error="Password Successfully Changed";
+                                                            this.presentToast();
+                                                    }, 1000)
+                                            }
+                                            else
+                                            {
+                                                
+                                                this.error="Incorrect Verification Code";
                                                 this.presentToast();
-                                        }, 1000)
+                                            }
+                                    }
+                                    else
+                                    {
+                                        this.error="Password must be atleast 8 characters";
+                                        this.presentToast();
+                                    }
+                                        
                                 }
                                 else
                                 {
-                                     
-                                    this.error="Incorrect Verification Code";
-                                    this.presentToast();
-                                }
+                                    if(this.newpass == null)
+                                    {
+                                        console.log("test2")
+                                        this.error="Please Enter New Password";
+                                        this.presentToast();
+                                    }
+                                    else if(this.newpass2 == null)
+                                    {
+                                        console.log("test2")
+                                        this.error="Please Re-Enter New Password";
+                                        this.presentToast();
+                                    }
+                                    else
+                                    {
+                                        console.log("test2")
+                                        this.error="New Password does not Match";
+                                        this.presentToast();
+                                    }
                                     
+                                }
+                                            
                             }
                             else
                             {
-                                if(this.newpass == null)
-                                {
-                                    console.log("test2")
-                                    this.error="Please Enter New Password";
-                                    this.presentToast();
-                                }
-                                else if(this.newpass2 == null)
-                                {
-                                    console.log("test2")
-                                    this.error="Please Re-Enter New Password";
-                                    this.presentToast();
-                                }
-                                else
-                                {
-                                    console.log("test2")
-                                    this.error="New Password does not Match";
-                                    this.presentToast();
-                                }
-                                
-                            }
-                                        
-                        }
-                        else
-                        {
-                            console.log("notfoundpass")
-                            this.error="Incorrect Old Password"; 
-                            this.presentToast();
-                        } 
+                                console.log("notfoundpass")
+                                this.error="Incorrect Old Password"; 
+                                this.presentToast();
+                            } 
+                    }
                 }
+            }
+             else
+            {
+                    this.error="Please fill up the form"; 
+                    this.presentToast();
             }
       }
       else
@@ -159,10 +176,10 @@ export class ResetPage {
         });
         toast.present();
     }
-    /*
+    
      private refreshData(): void {
          
-        this.postsSubscription = this.log.get1Customer(10016).subscribe(
+        this.postsSubscription = this.log.get1Customer(this.shared.getUserName()).subscribe(
 
         data  => {
                     console.log(this.cus.length);
@@ -226,5 +243,5 @@ export class ResetPage {
             this.timerSubscription.unsubscribe();
             }
     }
-    */
+    
 }

@@ -7,7 +7,8 @@ import 'rxjs/add/operator/catch';
 
 import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage} from '../../pages/seetemp/seetemp';
-
+import { HistoryPage} from '../../pages/history/history';
+import { SharedService} from '../../app/app.service';
 @Injectable()
 export class OrderService{
     public sendOrderDetails: any=[];
@@ -16,7 +17,7 @@ export class OrderService{
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
     public data: any=[];
-    constructor(private _http: Http ){
+    constructor(private _http: Http, public shared:SharedService ){
         console.log("GetItems");
     }
      
@@ -30,7 +31,7 @@ export class OrderService{
         }
      )};
      getHistory(){
-        return this._http.get(this._apiUrl + "/orders/getHistory/" +10016).map((res:Response) => res.json());
+        return this._http.get(this._apiUrl + "/orders/getHistory/" +this.shared.getUserName()).map((res:Response) => res.json());
      }
 
     getTempItem(itemID){
@@ -81,6 +82,9 @@ export class OrderService{
             }
             alert("Your Order has been Sent!");
         }, 3000)
+        setTimeout(() => {
+            this.shared.cleanCart();
+        }, 2000)
     }
     get1Customer(customer:any){
          return new Promise(resolve => {      

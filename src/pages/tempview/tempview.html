@@ -3,16 +3,16 @@
         <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Template View</ion-title>
+        <ion-title>Template</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-card *ngFor="let items of item" (click)="seeTemplate(items.templateID)">
         <ion-card-content>
-            <h1>{{items.templateName}}</h1>
-            <h2>{{items.templateID}}</h2>
-            <h3>{{items.customerID}}</h3>
+            <h1>Name:{{items.templateName}}</h1>
+            <h2>Template ID:{{items.templateID}}</h2>
+            <h3>Customer ID:{{items.customerID}}</h3>
         </ion-card-content>
     </ion-card>
 

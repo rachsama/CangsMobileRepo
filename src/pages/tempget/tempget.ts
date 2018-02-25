@@ -71,12 +71,12 @@ export class TempGetPage {
             this.shared.cleanTemplate();
             this.navCtrl.setRoot(TempCategPage)
 
-             let toast = this.toastCtrl.create({
+            /* let toast = this.toastCtrl.create({
                     message: 'The Template has been Successfully Created!',
                     duration: 2000,//kini siya
                     position: 'middle'
             });
-            toast.present();
+            toast.present();*/
         }
     }
 
