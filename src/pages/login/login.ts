@@ -21,6 +21,7 @@ export class LoginPage {
 
 	user: any;
 	pass: any;
+	//error:any;
 
 	MoveToOrder(){
 		//10016
@@ -41,6 +42,7 @@ export class LoginPage {
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
+	match:boolean=false;
 	private timerSubscription: AnonymousSubscription;
     private postsSubscription: AnonymousSubscription;
   constructor(private _md5: Md5, 
@@ -52,59 +54,106 @@ export class LoginPage {
 				this.log.getCustomer().subscribe(res =>{
 					this.cus=res;
 				});
-				this.refreshData();
+				//this.refreshData();
 				this.menu.enable(false,"myMenu");
 	}
 
   login(event : any)
   {
 		console.log(this.user);
-		console.log(Md5.hashStr(this.pass));
-		for(let data of this.cus)
+		this.match=false;
+		//console.log(Md5.hashStr(this.pass));
+		if(this.pass != "" && this.pass != null && this.user != "" && this.user != null)
 		{
-			
-			if(this.user == data.customerID)
-      		{	
-				this.error="Incorrect Password";
-				console.log("matchuser");
-				if(Md5.hashStr(this.pass) == data.cusPassword)
+		
+			for(let data of this.cus)
+			{
+				
+				if(this.user == data.customerID)
+				{	
+					this.error="Incorrect Password";
+					console.log("matchuser");
+					this.match=true;
+					if(Md5.hashStr(this.pass) == data.cusPassword)
+					{
+						
+						console.log(data);
+						this.inputuser=data.customerID;
+						this.inputpass=data.cusPassword;
+						this.log.getCustomerID(data.customerID);
+						this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
+						this.logindetails=true;
+						this.error=""
+						console.log("matchpass");
+						this.error="";
+						this.MoveToOrder();
+						/*
+						this.toastCtrl.create({
+							message: 'Welcome ' + this.inputusername,
+							duration: 2500,
+						}).present();*/
+						console.log("yeye");
+					}
+					else
+					{
+
+					}
+					//if(this.error=="Incorrect Password")
+					//this.presentToast();
+				}
+				else
 				{
-          			console.log(data);
-					this.inputuser=data.customerID;
-					this.inputpass=data.cusPassword;
-					this.log.getCustomerID(data.customerID);
-					this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
-					this.logindetails=true;
-					this.error=""
-					console.log("matchpass");
-					
-					this.MoveToOrder();
-					this.toastCtrl.create({
-						message: 'Welcome ' + this.inputusername,
-						duration: 2500,
-					}).present();
-					console.log("yeye");
+					if(!this.match)
+					this.error="Invalid Username";		
+				}
+				
+				console.log(data.cusPassword);
+			}
+			this.presentToast();
+		}
+		else
+		{
+			console.log("true");
+			if(this.pass == "" && this.pass == null && this.user == "" && this.user == null)
+			{
+				if(this.user == null || this.user == "")
+				{
+					this.error="Please Enter Username";
+					this.presentToast();
+				}
+				if(this.pass == null || this.pass == "")
+				{
+					this.error="Please Enter Password";
+					this.presentToast();
 				}
 			}
-			else{
-				this.toastCtrl.create({
-					message: 'There has been an error with your credentials. Please try again',
-					duration: 2500,
-				}).present();
+			else
+			{
+				this.error="Please Fill Up Login Details";
+				this.presentToast();
+
 			}
-			console.log(data.cusPassword);
+			
 		}
 	}
+	presentToast() {
+        console.log("test2");
+        let toast = this.toastCtrl.create({
+        message: this.error,
+        duration: 1500
+        });
+        toast.present();
+    }
 	fPass(){
 		this.navCtrl.push(ForgotPassPage);
 	}
-
+	/*
 	 private refreshData(): void {
          
         this.postsSubscription = this.log.getCustomer().subscribe(
 
         data  => {
-                    console.log(this.cus.length);
+                   // console.log(this.cus.length);
                     var i =0;
                     for (let cust of data)
                     {
@@ -165,5 +214,5 @@ export class LoginPage {
             this.timerSubscription.unsubscribe();
             }
     }
-
+*/
 }
