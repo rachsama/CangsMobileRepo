@@ -58,7 +58,7 @@ export class OrderService{
             num=res;
             OrderService.orderID=num._body;
             console.log(OrderService.orderID);
-            alert("The Order has been Successfully Updated!");
+        //    alert("The Order has been Successfully Updated!");
         });
 
         setTimeout(() => {
@@ -77,11 +77,13 @@ export class OrderService{
             console.log(this.sendOrderDetails);
             this._http.post(this._apiUrl + "/orderdetails/addOrderDetails",JSON.stringify(this.sendOrderDetails[i]), reqopt).subscribe(function(res){
             this.orderID=res;
+            orderData.length = 0;
             //alert("The OrderDetail has been Successfully Updated!");
             });
             }
             alert("Your Order has been Sent!");
         }, 3000)
+        this.sendOrderDetails.length = 0;
         setTimeout(() => {
             this.shared.cleanCart();
         }, 2000)

@@ -57,7 +57,7 @@ export class HistoryPage {
               this.history=data;
               console.log(this.history);
           });
-         // this.refreshData();
+          this.refreshData();
       }
       getDetails(orderID,customerID,orderTotal,card)
       { 
@@ -78,7 +78,7 @@ export class HistoryPage {
               this.clicked=false;
            }, 1000)
       }
-      /*
+      
        private refreshData(): void {
          
         this.postsSubscription = this.ord.getHistory().subscribe(
@@ -147,5 +147,5 @@ export class HistoryPage {
             this.timerSubscription.unsubscribe();
             }
     }
-  */
+  
 }
