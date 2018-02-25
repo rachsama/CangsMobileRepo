@@ -30,17 +30,17 @@ export class LoginPage {
 	}
 
 	hash:string = '';
-  public cus: any=[];
-  public error: string ="";
-  logindetails: boolean=false;
-  public inputuser: string = '';
+  	public cus: any=[];
+  	public error: string ="";
+  	logindetails: boolean=false;
+  	public inputuser: string = '';
 	public inputpass: string ='';
 	public inputusername: string ='';
 	public static customerID=0;
-  constructor(private shared: SharedService,private _md5: Md5, private log: LoginService, public navCtrl: NavController, private toastCtrl: ToastController, private network: Network ){
-				this.log.getCustomer().then(res =>{
-					this.cus=res;
-				});
+  	constructor(private shared: SharedService,private _md5: Md5, private log: LoginService, public navCtrl: NavController, private toastCtrl: ToastController, private network: Network ){
+		this.log.getCustomer().then(res =>{
+			this.cus=res;
+		});
 				
 //Network
 				this.network.onConnect().subscribe(() => {
@@ -59,8 +59,8 @@ export class LoginPage {
 //Network
 	}
 
-  login(event : any)
-  {
+  	login(event : any)
+  	{
 		console.log(this.user);
 		console.log(Md5.hashStr(this.pass));
 		for(let data of this.cus)
@@ -87,6 +87,14 @@ export class LoginPage {
 				}).present();
 				}
 			}
+			//here po
+			else{
+				this.toastCtrl.create({
+					message: 'There has been an error with your credentials. Please try again',
+					duration: 2500,
+				}).present();
+			}
+			//until here
 			console.log(data.cusPassword);
 		}
 	}
