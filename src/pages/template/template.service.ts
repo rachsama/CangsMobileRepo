@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { LoadingController } from 'ionic-angular';/*loader*/
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -16,7 +17,7 @@ export class TemplateService{
     temdeQuantity: number;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http, public shared: SharedService ){
+    constructor(private _http: Http, public shared: SharedService, public loadingCtrl: LoadingController/*loader*/ ){
         console.log("GetItems");
         
 
@@ -47,6 +48,15 @@ export class TemplateService{
             
         });
 
+        //create loader
+        let loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            cssClass: "loader"
+        });
+
+        loading.present();
+        //
+
         setTimeout(() => {
             console.log(tempgetData);
             for(var i=0; i<tempgetData.length; i++){
@@ -62,7 +72,8 @@ export class TemplateService{
             tempgetData.length = 0;
             this.success = true;
             });
-            }
+        }
+        loading.dismiss(); // loader dismiss
         }, 3000)
         this.sendTemplateDetails.length = 0;
         //mao ni ang start

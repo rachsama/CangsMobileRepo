@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoadingController } from 'ionic-angular';/*loader*/
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -21,7 +22,7 @@ export class OrderService{
     post: any;
     private _loginUrl =  'http://192.168.0.24:1025/item/all';
     private _apiUrl =  'http://192.168.0.24:1025';
-    constructor(private _http: Http, public shared: SharedService ){
+    constructor(private _http: Http, public shared: SharedService, public loadingCtrl: LoadingController/*loader*/ ){
         console.log("GetItems");
     }
      
@@ -91,6 +92,16 @@ export class OrderService{
             
         });
 
+        //create loader
+        let loading = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: 'Please wait...',
+            cssClass: "loader"
+        });
+
+        loading.present();
+        //
+
         setTimeout(() => {
             console.log(orderData);
             for(var i=0; i<orderData.length; i++){
@@ -111,8 +122,10 @@ export class OrderService{
             orderData.length = 0;
             console.log(orderData);
             this.success = true;
-            });
+        });
+        
             }
+            loading.dismiss(); // loader dismiss
         }, 3000)
         this.sendOrderDetails.length = 0;
         //mao ni ang start
