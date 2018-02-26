@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
 import { SharedService } from '../../app/app.service';
-
+import { LoadingController } from 'ionic-angular';/*loader*/
 @Injectable()
 export class TemplateService{
     public sendTemplateDetails: any=[];
@@ -15,7 +15,9 @@ export class TemplateService{
     temdeQuantity: number;
     private _loginUrl =  'http://192.168.1.219:1025/item/all';
     private _apiUrl =  'http://192.168.1.219:1025';
-    constructor(private _http: Http, public shared: SharedService ){
+    constructor(private _http: Http, public shared: SharedService,
+                public loadingCtrl: LoadingController,
+                 ){
         console.log("GetItems");
         
 
@@ -45,7 +47,14 @@ export class TemplateService{
             console.log(TemplateService.templateID);
        //     alert("The Template has been Successfully Updated!");
         });
+        //create loader
+        let loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            cssClass: "loader"
+        });
 
+        loading.present();
+        //
         setTimeout(() => {
             console.log(tempgetData);
             for(var i=0; i<tempgetData.length; i++){
@@ -62,6 +71,7 @@ export class TemplateService{
            // alert("The TemplateDetail has been Successfully Updated!");
             });
         }
+        loading.dismiss(); // loader dismiss
         alert("Your Template has been Successfully Created!");
         }, 3000)
         this.sendTemplateDetails.length = 0;

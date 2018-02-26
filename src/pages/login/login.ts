@@ -54,7 +54,12 @@ export class LoginPage {
 							public shared:SharedService){
 				this.log.getCustomer().subscribe(res =>{
 					this.cus=res;
-				});
+				//	alert("DATA RETRIEVED LOGIN");
+				}, function (error) {
+				//	alert("DATA NOT RETRIEVED LOGIN");
+					alert(error);
+				},);
+				
 				this.refreshData();
 				this.menu.enable(false,"myMenu");
 	}
@@ -198,6 +203,8 @@ export class LoginPage {
             console.log(this.cus);
         },
         function (error) {
+			//alert(error);
+			console.log(error);
 			//console.log(this.counter);
 			//this.counter++;
            // this.notconnected(this.counter);

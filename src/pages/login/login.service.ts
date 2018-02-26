@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Md5 } from 'ts-md5/dist/md5';
-
+import { LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class LoginService{
@@ -17,7 +17,9 @@ export class LoginService{
     customer:any=[];
     private _loginUrl =  'http://192.168.1.219:1025/customer/all';
     private _apiUrl =  'http://192.168.1.219:1025';
-    constructor(private _http: Http ){
+    constructor(private _http: Http,
+                public loadingCtrl: LoadingController
+     ){
         console.log("LOGIN");
         
 
@@ -94,6 +96,13 @@ export class LoginService{
             this.customer=data;
             console.log(this.customer[0]);
         });
+        //create loader
+        let loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+
+        loading.present();
+        //
         setTimeout(() => {
                 console.log(this.customer);//4c54133f-d317
                 if(this.customer[0].verificationCode == fpasscode)
@@ -142,6 +151,7 @@ export class LoginService{
                this.customer.pop();
                this.data.pop();
                this.newPass = null;
+               loading.dismiss(); // loader dismiss
         }, 3000)
 
     };

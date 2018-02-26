@@ -9,6 +9,7 @@ import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage} from '../../pages/seetemp/seetemp';
 import { HistoryPage} from '../../pages/history/history';
 import { SharedService} from '../../app/app.service';
+import { LoadingController } from 'ionic-angular';
 @Injectable()
 export class OrderService{
     public sendOrderDetails: any=[];
@@ -20,12 +21,11 @@ export class OrderService{
     constructor(private _http: Http, 
                 public shared:SharedService,
                  public menu :MenuController,
+                 public loadingCtrl: LoadingController,
                  ){
         console.log("GetItems");
     }
-     ionViewWillLeave(){
-      this.menu.enable(false,"myMenu");
-  }
+    
     getItem(){
         return new Promise(resolve => {
             this._http.get(this._apiUrl + '/item/all').map(res => res.json()).subscribe(data => {
@@ -65,7 +65,15 @@ export class OrderService{
             console.log(OrderService.orderID);
         //    alert("The Order has been Successfully Updated!");
         });
+        //create loader
+        let loading = this.loadingCtrl.create({
+            spinner: 'circles',
+            content: 'Please wait...',
+            cssClass: "loader"
+        });
 
+        loading.present();
+        //
         setTimeout(() => {
             console.log(orderData);
             for(var i=0; i<orderData.length; i++){
@@ -87,6 +95,7 @@ export class OrderService{
             });
             }
             alert("Your Order has been Sent!");
+            loading.dismiss(); // loader dismiss
         }, 3000)
         this.sendOrderDetails.length = 0;
         setTimeout(() => {
