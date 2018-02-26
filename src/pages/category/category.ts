@@ -28,6 +28,7 @@ export class CategoryPage {
                public shared:SharedService,
                  public navParams: NavParams) {
                       //Network
+                      console.log("CONSTRUCTED");
         this.network.onConnect().subscribe(() => {
         this.toastCtrl.create({
             message: 'Device is Online',
@@ -60,5 +61,9 @@ export class CategoryPage {
 			category: cat,
 		});
 	}
+     ionViewWillEnter(){
+        console.log("ENTERD");
+        this.menu.enable(true,"myMenu");
+    }
 
 }

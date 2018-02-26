@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,ViewController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
 import { TemplateService } from '../../pages/template/template.service';
@@ -23,7 +23,14 @@ export class TempGetPage {
     public tempgetData: any=[];
     public sendTemp: any=[];
 
-    constructor(private network: Network, private toastCtrl: ToastController ,public navCtrl: NavController, public navParams: NavParams, public tem: TemplateService, public log:LoginService, public shared: SharedService) {
+    constructor(private network: Network, 
+                private toastCtrl: ToastController ,
+                public navCtrl: NavController, 
+                public navParams: NavParams, 
+                public tem: TemplateService,
+                public viewCtrl:ViewController, 
+                public log:LoginService, 
+                public shared: SharedService) {
         for(var i=0; i<this.shared.getTemplate().length; i++){
             this.tempgetData[i] = this.shared.getTemplate()[i];
         }
@@ -69,8 +76,12 @@ export class TempGetPage {
             console.log(this.tempgetData);
             this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
             this.shared.cleanTemplate();
+            this.viewCtrl.showBackButton(false);
+            setTimeout (() => {
+            this.viewCtrl.showBackButton(true);
+             //this.menu.enable(true,"myMenu");
             this.navCtrl.setRoot(TempCategPage)
-
+            }, 3000)	
             /* let toast = this.toastCtrl.create({
                     message: 'The Template has been Successfully Created!',
                     duration: 2000,//kini siya

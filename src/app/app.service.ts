@@ -12,8 +12,8 @@ export class SharedService{
     cart: any = [];
     post: any = [];
     temp: any = [];
-    private _loginUrl =  'http://192.168.0.24:1025/item/all';
-    private _apiUrl =  'http://192.168.0.24:1025';
+    private _loginUrl =  'http://192.168.1.219:1025/item/all';
+    private _apiUrl =  'http://192.168.1.219:1025';
     constructor() {
     }
   

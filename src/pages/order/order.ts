@@ -28,9 +28,11 @@ export class OrderPage {
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public toastCtrl: ToastController,
+                
                 private shared: SharedService,
                 private network: Network,
                 public menu: MenuController) {
+                  console.log("CONSTRUCT ORDER");
                   //Network
     this.network.onConnect().subscribe(() => {
       this.toastCtrl.create({

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ViewController } from 'ionic-angular';
 
 import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
@@ -45,6 +45,8 @@ export class CartPage {
                public ord: OrderService, 
                public toastCtrl: ToastController,
                private network: Network,
+               public menu:MenuController,
+               public viewCtrl:ViewController,
                private shared: SharedService,
                public log:LoginService) {
                  //Network
@@ -80,7 +82,7 @@ export class CartPage {
       console.log(this.shared.getCart()); 
       if(this.shared.getCart().length==0)
       this.navCtrl.pop();
-      console.log("test");
+      console.log("CONSTRUCT CART");
      
   }
 
@@ -115,9 +117,14 @@ export class CartPage {
           "cashTendered": coh,
         });
         console.log(this.sendOrder);
+        this.viewCtrl.showBackButton(false);
         this.ord.makeOrder(this.sendOrder[0],this.orderData);
-
-        this.navCtrl.setRoot(CategoryPage);
+        
+         setTimeout (() => {
+          this.viewCtrl.showBackButton(true);
+          this.menu.enable(true,"myMenu");
+          this.navCtrl.setRoot(CategoryPage);
+          }, 3000)	
       }
       else{
            this.toastCtrl.create({

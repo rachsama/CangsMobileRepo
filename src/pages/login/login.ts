@@ -44,7 +44,8 @@ export class LoginPage {
 	public static customerID=0;
 	match:boolean=false;
 	private timerSubscription: AnonymousSubscription;
-    private postsSubscription: AnonymousSubscription;
+	private postsSubscription: AnonymousSubscription;
+  counter=0;
   constructor(private _md5: Md5, 
 							private log: LoginService, 
 							public navCtrl: NavController,
@@ -54,7 +55,7 @@ export class LoginPage {
 				this.log.getCustomer().subscribe(res =>{
 					this.cus=res;
 				});
-				//this.refreshData();
+				this.refreshData();
 				this.menu.enable(false,"myMenu");
 	}
 
@@ -65,51 +66,55 @@ export class LoginPage {
 		//console.log(Md5.hashStr(this.pass));
 		if(this.pass != "" && this.pass != null && this.user != "" && this.user != null)
 		{
-		
-			for(let data of this.cus)
+			if(this.cus.length !=0)
 			{
-				
-				if(this.user == data.customerID)
-				{	
-					this.error="Incorrect Password";
-					console.log("matchuser");
-					this.match=true;
-					if(Md5.hashStr(this.pass) == data.cusPassword)
-					{
-						
-						console.log(data);
-						this.inputuser=data.customerID;
-						this.inputpass=data.cusPassword;
-						this.log.getCustomerID(data.customerID);
-						this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
-						this.logindetails=true;
-						this.error=""
-						console.log("matchpass");
-						this.error="";
-						this.MoveToOrder();
-						/*
-						this.toastCtrl.create({
-							message: 'Welcome ' + this.inputusername,
-							duration: 2500,
-						}).present();*/
-						console.log("yeye");
+				for(let data of this.cus)
+				{
+					
+					if(this.user == data.customerID)
+					{	
+						this.error="Incorrect Password";
+						console.log("matchuser");
+						this.match=true;
+						if(Md5.hashStr(this.pass) == data.cusPassword)
+						{
+							
+							console.log(data);
+							this.inputuser=data.customerID;
+							this.inputpass=data.cusPassword;
+							this.log.getCustomerID(data.customerID);
+							this.inputusername= data.cusFirstName + " " + data.cusMiddleName + ". " + data.cusLastName;
+							this.logindetails=true;
+							this.error=""
+							console.log("matchpass");
+							this.error="";
+							this.MoveToOrder();
+							/*
+							this.toastCtrl.create({
+								message: 'Welcome ' + this.inputusername,
+								duration: 2500,
+							}).present();*/
+							console.log("yeye");
+						}
+						else
+						{
+
+						}
+						//if(this.error=="Incorrect Password")
+						//this.presentToast();
 					}
 					else
 					{
-
+						if(!this.match)
+						this.error="Invalid Username";		
 					}
-					//if(this.error=="Incorrect Password")
-					//this.presentToast();
+					
+					console.log(data.cusPassword);
 				}
-				else
-				{
-					if(!this.match)
-					this.error="Invalid Username";		
-				}
-				
-				console.log(data.cusPassword);
+				this.presentToast();
 			}
-			this.presentToast();
+			else
+			alert("You are not connected to the Internet!")
 		}
 		else
 		{
@@ -147,7 +152,8 @@ export class LoginPage {
 	fPass(){
 		this.navCtrl.push(ForgotPassPage);
 	}
-	/*
+	
+	
 	 private refreshData(): void {
          
         this.postsSubscription = this.log.getCustomer().subscribe(
@@ -192,7 +198,9 @@ export class LoginPage {
             console.log(this.cus);
         },
         function (error) {
-            console.log(error);
+			//console.log(this.counter);
+			//this.counter++;
+           // this.notconnected(this.counter);
         },
         function () {
             console.log("complete");
@@ -214,5 +222,5 @@ export class LoginPage {
             this.timerSubscription.unsubscribe();
             }
     }
-*/
+
 }

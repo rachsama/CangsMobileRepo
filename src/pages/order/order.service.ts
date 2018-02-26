@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/catch';import { MenuController } from 'ionic-angular';
 
 import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage} from '../../pages/seetemp/seetemp';
@@ -14,13 +14,18 @@ export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
     post: any;
-    private _loginUrl =  'http://192.168.0.24:1025/item/all';
-    private _apiUrl =  'http://192.168.0.24:1025';
+    private _loginUrl =  'http://192.168.1.219:1025/item/all';
+    private _apiUrl =  'http://192.168.1.219:1025';
     public data: any=[];
-    constructor(private _http: Http, public shared:SharedService ){
+    constructor(private _http: Http, 
+                public shared:SharedService,
+                 public menu :MenuController,
+                 ){
         console.log("GetItems");
     }
-     
+     ionViewWillLeave(){
+      this.menu.enable(false,"myMenu");
+  }
     getItem(){
         return new Promise(resolve => {
             this._http.get(this._apiUrl + '/item/all').map(res => res.json()).subscribe(data => {

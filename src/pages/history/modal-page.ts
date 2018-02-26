@@ -3,7 +3,7 @@ import { ModalController, Platform , NavParams, ViewController,NavController } f
 import { CartPage } from '../../pages/cart/cart';
 import { OrderService } from '../../pages/order/order.service';
 import { SharedService } from '../../app/app.service';
-import { ToastController } from 'ionic-angular';
+import { ToastController, App } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
 
@@ -22,6 +22,7 @@ export class ModalPage {
               public viewCtrl: ViewController,
                public toastCtrl: ToastController,
               private network: Network,
+              public app:App,
               public shared:SharedService) {
                     //Network
           this.network.onConnect().subscribe(() => {
@@ -77,10 +78,16 @@ export class ModalPage {
             console.log(this.newcart);
             
             setTimeout (() => {
-                this.navCtrl.push(CartPage,{
+                this.viewCtrl.dismiss();
+                this.app.getRootNav().push(CartPage,{
                    // cartData: this.newcart,
                     user:this.shared.getUserName(),//this.navParams.get('data1')
                 });
             }, 1000)
 	  }
+    
+      ionViewWillEnter(){
+       // if(this.shared.getCart().length==0)
+        this.shared.cleanCart();
+    }
 }

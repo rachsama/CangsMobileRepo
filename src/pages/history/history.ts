@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
 
 import { SharedService } from '../../app/app.service';
-import { ToastController } from 'ionic-angular';
+import { ToastController,MenuController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
 @Component({
@@ -28,6 +28,7 @@ export class HistoryPage {
         public navCtrl: NavController, 
         public navParams: NavParams, 
         public ord:OrderService,
+        public menu :MenuController,
         public modalCtrl: ModalController,
         public toastCtrl: ToastController,
         private network: Network,
@@ -147,5 +148,7 @@ export class HistoryPage {
             this.timerSubscription.unsubscribe();
             }
     }
-  
+     ionViewWillLeave(){
+      this.menu.enable(false,"myMenu");
+  }
 }
