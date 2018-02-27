@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController,ViewController } f
 import { Network } from '@ionic-native/network';
 
 import { TemplateService } from '../../pages/template/template.service';
-import { TempCategPage } from '../../pages/tempcateg/tempcateg';
+import { TempViewPage } from '../../pages/tempview/tempview';
 import { LoginService } from '../../pages/login/login.service';
 import { SharedService } from '../../app/app.service';
 import { LoginPage } from '../../pages/login/login';
@@ -58,7 +58,7 @@ export class TempGetPage {
     addTemplate(tempName){
 
         console.log(this.shared.getTemplate()); 
-        if((tempName == null) || (tempName == "")){
+        if(tempName == null || tempName == ""){
             let toast = this.toastCtrl.create({
             message: 'Please Fill Template Name',
             duration: 3000,
@@ -67,7 +67,7 @@ export class TempGetPage {
 
         toast.present();
         }
-        else if(tempName != "undefined"){
+        else if(tempName != null || tempName != ""){
             this.sendTemp.push({
                 "customerID": this.shared.getUserName(),//LoginService.customerID,
                 "templateName": tempName
@@ -80,7 +80,7 @@ export class TempGetPage {
             setTimeout (() => {
             this.viewCtrl.showBackButton(true);
              //this.menu.enable(true,"myMenu");
-            this.navCtrl.setRoot(TempCategPage)
+            this.navCtrl.setRoot(TempViewPage)
             }, 3000)	
             /* let toast = this.toastCtrl.create({
                     message: 'The Template has been Successfully Created!',

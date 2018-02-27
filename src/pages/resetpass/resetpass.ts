@@ -83,7 +83,7 @@ export class ResetPage {
                                     
                                     if(this.newpass == this.newpass2 && this.newpass != null && this.newpass2 != null)
                                     {
-                                        if(this.newpass.length >8 || this.newpass2.length >8)
+                                        if(this.newpass.length >7 || this.newpass2.length >7)
                                         {
 
                                                 if(this.verificationCode == data.verificationCode)
