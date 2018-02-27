@@ -21,6 +21,7 @@ export class ForgotPassPage {
     public cus: any=[];
     selected:any = [];
     cpass: string;
+    success: boolean=false;
     private timerSubscription: AnonymousSubscription;
     private postsSubscription: AnonymousSubscription;
 
@@ -52,6 +53,7 @@ export class ForgotPassPage {
         console.log(fpasscode);
         for (var i=0; i<this.cus.length; i++){
             if(user == this.cus[i].customerID){
+                this.success = true;
                 if((fpasscode == this.cus[i].number) || (fpasscode == this.cus[i].verificationCode)){
                     let uuid = UUID.UUID();
                     this.cpass=uuid.slice(0,-28);
@@ -59,8 +61,19 @@ export class ForgotPassPage {
                     this.log.forgotPass(user, fpasscode, this.cpass)
                     this.navCtrl.setRoot(LoginPage);
                 }
-                //else
+                else if((fpasscode != this.cus[i].number) || (fpasscode != this.cus[i].verificationCode)){
+                    this.toastCtrl.create({
+						message: 'Your Number or Verification Code is Incorrect. Please Try Again.',
+						duration: 2500,
+					}).present();
+                }
             }
+        }
+        if (this.success == false){
+            this.toastCtrl.create({
+				message: 'Username does not exist. Please Try Again.',
+				duration: 2500,
+			}).present();
         }
     }
 

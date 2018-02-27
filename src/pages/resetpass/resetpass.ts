@@ -10,6 +10,7 @@ import { AnonymousSubscription } from "rxjs/Subscription";
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
 import { SharedService } from '../../app/app.service';
+import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-resetpass',
@@ -31,6 +32,7 @@ export class ResetPage {
                 public toastCtrl: ToastController,
                 public navCtrl: NavController,
                 private network: Network,
+                public loadingCtrl: LoadingController,
                 private shared: SharedService,
                 public navParams: NavParams) {
                       //Network
@@ -91,6 +93,14 @@ export class ResetPage {
                                                             this.onecus=result;
                                                             console.log(this.onecus); 
                                                         });
+
+                                                        let loading = this.loadingCtrl.create({
+                                                            spinner: 'circles',
+                                                            content: 'Please wait...',
+                                                            cssClass: "loader"
+                                                        });
+
+                                                        loading.present();
                                                         setTimeout (() => {
                                                                 this.data.push({
                                                                 'customerID': data.customerID, 
@@ -109,6 +119,7 @@ export class ResetPage {
                                                                 this.verificationCode='';
                                                                 this.error="Password Successfully Changed";
                                                                 this.presentToast();
+                                                                loading.dismiss();
                                                         }, 1000)
                                                 }
                                                 else
