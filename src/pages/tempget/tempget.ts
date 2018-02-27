@@ -58,7 +58,7 @@ export class TempGetPage {
     addTemplate(tempName){
 
         console.log(this.shared.getTemplate()); 
-        if(tempName == "undefined"){
+        if((tempName == null) || (tempName == "")){
             let toast = this.toastCtrl.create({
             message: 'Please Fill Template Name',
             duration: 3000,
