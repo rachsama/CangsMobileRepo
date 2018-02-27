@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Nav } from 'ionic-angular';
+import { NavController, NavParams, Nav, MenuController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { LoginService } from '../../pages/login/login.service';
 import { CartPage } from '../../pages/cart/cart';
@@ -32,8 +32,10 @@ export class ResetPage {
                 public navCtrl: NavController,
                 private network: Network,
                 private shared: SharedService,
+                public menu:MenuController,
                 public navParams: NavParams) {
                       //Network
+                      this.menu.enable(true,"myMenu");
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
               message: 'Device is Online',

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import { Md5 } from 'ts-md5/dist/md5';
 import { LoadingController } from 'ionic-angular';
 
+import { DomSanitizer } from '@angular/platform-browser';
 @Injectable()
 export class LoginService{
     post: any;
@@ -15,10 +16,11 @@ export class LoginService{
     data: any=[];
     newPass: any;
     customer:any=[];
-    private _loginUrl =  'http://192.168.1.219:1025/customer/all';
-    private _apiUrl =  'http://192.168.1.219:1025';
+    private _loginUrl =  'http://192.168.0.24:1025/customer/all';
+    private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http,
-                public loadingCtrl: LoadingController
+                public loadingCtrl: LoadingController,
+                private sanitizer:DomSanitizer,
      ){
         console.log("LOGIN");
         
