@@ -4,11 +4,10 @@ page-history, page-modal {
         font-size: 50px; //Preferred size here
     }
     .content{
-       background: #02359d;//#ffff7f //#3232ff
+       background: white;//#ffff7f //#3232ff
     }
     .toolbar-title {
-        
-        color : #02359d;
+        color : white;
     }
     
     .input-wrapper{
@@ -26,16 +25,16 @@ page-history, page-modal {
         background-color:#ffff4c;
     }
     ion-card-content{
-        color:white;
-        background-color:#02359d;//#02359d
+        color:black;
+        background-color:#E8E8E8;//#02359d
     }
     ion-col{
-        color:white;
+        color:#000034;
     }
     b{
         float:right;
         font-size:18px;
-        color:yellow;
+        color:#02359d;
     }  
 }
 page-history{
@@ -52,8 +51,15 @@ page-history{
 
 }
 page-modal {
+    .toolbar-background{
+         background-color:#02359d;
+    }
         ion-icon.big {
         font-size: 40px; //Preferred size here
+        color:white;
+    }
+     .content{
+       background: #E8E8E8;//#ffff7f //#3232ff
     }
     ion-toolbar{
         background:#02359d;
@@ -67,9 +73,9 @@ page-modal {
     }
      .orderbtn{
         
-        background-color: #f1d248;
-        border: 2px solid #0d33bc;
-        color:#0d33bc;
+        background-color: #0d33bc;
+        border: 2px solid white;
+        color:white;
         padding: 25px;
         width:100%;
         border-radius: 13px;

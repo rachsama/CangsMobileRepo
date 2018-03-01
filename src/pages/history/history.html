@@ -13,7 +13,7 @@
                   Date: {{hist.orderDate}} <b>{{hist.orderStatus}}</b><br>
                   Order ID: {{hist.orderID}}<br>
                   Total: {{hist.orderTotal | currency:'PHP':true:'1.2-2'}}<button class="view" [disabled]="clicked" 
-                  (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal,card)" ion-button round small color="light">
+                  (click)="getDetails(hist.orderID,hist.customerID,hist.orderTotal,card)" ion-button round small color="back">
                   View</button><br>
               </ion-card-content>
         </ion-card>

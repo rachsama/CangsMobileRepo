@@ -1,16 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle hideBackButton="true">
-      <ion-icon class="big" name="menu"></ion-icon>
-    </button>
     <ion-title>Cart</ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-footer>
-  
-     <button ion-button block class="orderbtn" (click)="addOrder(delLocation, packaging, delTime, remarks, coh)" sticky><h2>Order</h2></button>
-   
-  
+     <button ion-button block class="orderbtn" (click)="addOrder(delLocation, packaging, delTime, remarks, coh)" sticky><h2>Order</h2></button> 
 </ion-footer>
 
 <ion-content>
@@ -22,7 +17,7 @@
         <ion-icon (click)="addQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)" class="iconadd" name="add-circle"></ion-icon>
         <ion-icon (click)="removeQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)"class="iconremove" name="remove-circle"></ion-icon>
         <h2 class="name">{{item.itemName}}</h2>
-         <h3 style="color: white;">Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&nbsp;</h3>
+         <h3 style="color: #0847ad;">Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&nbsp;</h3>
         <ion-icon (click)="remove(item.itemID, item.itemName, item.itemDescription, item.itemPrice, item.itemQuantityStored, item.picture, item.visible)" class="icon" name="close-circle"></ion-icon>
        </ion-card-content>
   </ion-card>
@@ -31,8 +26,8 @@
   <h2 class="total">Total{{with}}:{{totalcount | currency:'PHP':true:'1.2-2'}}</h2>
   <br><br>
   
-  <ion-list>
-    <ion-item id="inp">
+  <ion-list >
+    <ion-item id="inparea">
       <ion-label color="black" stacked>Location of Delivery</ion-label>
       <ion-textarea class="inp"type="text" [(ngModel)]="delLocation"></ion-textarea>
     </ion-item>
@@ -47,7 +42,7 @@
       <ion-label color="black" stacked>Preferred Delivery Time</ion-label>
       <ion-input type="text" [(ngModel)]="delTime"></ion-input>
     </ion-item>
-    <ion-item id="inp">
+    <ion-item id="inparea">
       <ion-label color="black" stacked>Remarks</ion-label>
       <ion-textarea type="text" [(ngModel)]="remarks"></ion-textarea>
     </ion-item>
