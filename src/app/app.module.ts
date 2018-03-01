@@ -35,6 +35,8 @@ import { SeeTempService } from '../pages/seetemp/seetemp.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 @NgModule({
   declarations: [

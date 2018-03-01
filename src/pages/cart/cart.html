@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle hideBackButton="true">
-      <ion-icon class="big" name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Cart</ion-title>
   </ion-navbar>
@@ -19,11 +19,11 @@
         <ion-thumbnail item-left>
         <img src="{{item.picture}}"></ion-thumbnail>
         <h2 class="qty">Qty</h2>&nbsp;&emsp;<ion-input class="in" #in (change)="change(item.itemID,item.subTotal,item.itemPrice,in)" style="width: 55px" type="text" value="1" [(ngModel)]="item.quantity" required></ion-input><!--min="1" max="999"-->
-        <ion-icon (click)="addQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)" class="iconadd" name="add-circle"></ion-icon>
-        <ion-icon (click)="removeQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)"class="iconremove" name="remove-circle"></ion-icon>
+        <ion-icon (tap)="addQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)" class="iconadd" name="add-circle"></ion-icon>
+        <ion-icon (tap)="removeQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)"class="iconremove" name="remove-circle"></ion-icon>
         <h2 class="name">{{item.itemName}}</h2>
-         <h3>Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&nbsp;</h3>
-        <ion-icon (click)="remove(item.itemID, item.itemName, item.itemDescription, item.itemPrice, item.itemQuantityStored, item.picture, item.visible)" class="icon" name="close-circle"></ion-icon>
+         <h3 style="color: white;">Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&nbsp;</h3>
+        <ion-icon (tap)="remove(item.itemID, item.itemName, item.itemDescription, item.itemPrice, item.itemQuantityStored, item.picture, item.visible)" class="icon" name="close-circle"></ion-icon>
        </ion-card-content>
   </ion-card>
   <br>

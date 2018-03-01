@@ -88,13 +88,14 @@ export class CartPage {
 
   addOrder(delLocation, packaging, delTime, remarks, coh){
     console.log(this.totalcount);
-      if(coh > 1 && coh > this.totalcount)
+      if(coh > 1 && coh >= this.totalcount)
       {
           for(var i=0; i<this.orderData.length; i++){
             console.log(this.orderData[i].quantity)
             this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
           }    console.log(this.total);
-          
+          if(this.total < 500)
+          this.total +=20;
           let time = new Date();
             console.log(time);
             let mm =time.getMonth();

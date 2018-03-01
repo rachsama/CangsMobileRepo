@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
-     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky><b>Create Template</b></button>
+     <button class ="templatebtn"ion-button block (tap)="gotoTempGet()" sticky><b>Create Template</b></button>
 </ion-footer>
 <ion-content>
     <ion-card  *ngFor="let items of item">
@@ -17,9 +17,9 @@
       <h2 style="color:#EBC137">{{items.itemName}}</h2>
       <h3 style="color:white">{{items.itemDescription}}</h3>
       
-            <h5><button class="btn" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="!items.visible">
+            <h5><button class="btn" ion-button icon-only (tap)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="!items.visible">
               Add</button></h5>
-              <h5><button class="btn1" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="items.visible">
+              <h5><button class="btn1" ion-button icon-only (tap)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="items.visible">
               Remove</button></h5>
     </ion-item>
   </ion-card>

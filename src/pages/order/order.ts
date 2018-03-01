@@ -9,6 +9,8 @@ import { ToastController } from 'ionic-angular';
 
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
+
+
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html'
@@ -189,11 +191,14 @@ export class OrderPage {
   }
 
   gotoCart(){
+   //   alert("Inside Function GotoCart");
       if(this.shared.getCart().length != 0){
         console.log("to cart");
+       // alert("Cart Length != 0");
         this.navCtrl.push(CartPage);
       }
       else if(this.shared.getCart().length == 0){
+       //   alert("Cart Length == 0");
           let toast = this.toastCtrl.create({
             message: 'Please Fill Your Cart',
             duration: 2000,//kini siya
@@ -202,6 +207,7 @@ export class OrderPage {
         toast.present();
         console.log(this.shared.getCart().length);
 	    }
+      // alert("WENT OUT WITHOUT WORKING");
   }
   ionViewWillEnter(){
        console.log("in");

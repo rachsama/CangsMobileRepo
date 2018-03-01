@@ -15,8 +15,8 @@ export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
     post: any;
-    private _loginUrl =  'http://192.168.0.24:1025/item/all';
-    private _apiUrl =  'http://192.168.0.24:1025';
+    private _loginUrl =  'http://10.8.86.90:1025/item/all';
+    private _apiUrl =  'http://10.8.86.90:1025';
     public data: any=[];
     constructor(private _http: Http, 
                 public shared:SharedService,

@@ -10,7 +10,7 @@ import { AnonymousSubscription } from "rxjs/Subscription";
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
 import { SharedService } from '../../app/app.service';
-
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-resetpass',
   templateUrl: 'resetpass.html'
@@ -31,6 +31,7 @@ export class ResetPage {
                 public toastCtrl: ToastController,
                 public navCtrl: NavController,
                 private network: Network,
+                public loadingCtrl: LoadingController,
                 private shared: SharedService,
                 public menu:MenuController,
                 public navParams: NavParams) {
@@ -55,7 +56,7 @@ export class ResetPage {
             this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
 					this.cus=res;
 		    });
-            //this.refreshData();
+            this.refreshData();
   }
 
   reset(){
@@ -70,7 +71,7 @@ export class ResetPage {
             console.log(this.newpass);
             console.log(this.newpass2);
             console.log(this.verificationCode);//b3ae83c0 f5445d66-7209
-            if(this.cus.length !=0)
+            if(this.cus.length !=0)//f5445d66-7209
 			{
                 for(let data of this.cus)
                     {
@@ -83,16 +84,21 @@ export class ResetPage {
                                     
                                     if(this.newpass == this.newpass2 && this.newpass != null && this.newpass2 != null)
                                     {
-                                        if(this.newpass.length >8 || this.newpass2.length >8)
+                                        if(this.newpass.length >7 || this.newpass2.length >7)
                                         {
 
                                                 if(this.verificationCode == data.verificationCode)
                                                 {
+                                                          let loading = this.loadingCtrl.create({
+                                                            content: 'Please wait...'
+                                                        });
+                                                        loading.present();
                                                         console.log("foundpass");
                                                         this.log.get1Customer(this.shared.getUserName()).subscribe(result => {
                                                             this.onecus=result;
                                                             console.log(this.onecus); 
                                                         });
+
                                                         setTimeout (() => {
                                                                 this.data.push({
                                                                 'customerID': data.customerID, 
@@ -110,7 +116,9 @@ export class ResetPage {
                                                                 this.newpass2='';
                                                                 this.verificationCode='';
                                                                 this.error="Password Successfully Changed";
+                                                                loading.dismiss();
                                                                 this.presentToast();
+
                                                         }, 1000)
                                                 }
                                                 else

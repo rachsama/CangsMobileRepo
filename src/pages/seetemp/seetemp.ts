@@ -110,16 +110,6 @@ export class SeeTempPage {
     delTemp(){
       this.tvserv.deleteTemplate(this.navParams.get('templateID'));
       this.navCtrl.setRoot(TempCategPage);
-
-//toastControllerStart
-      let toast = this.toastCtrl.create({
-        message: 'The Template has been deleted',
-        duration: 1200,
-        position: 'top',
-      });
-
-      toast.present();
-//toastControllerEnd
     }
     
 }

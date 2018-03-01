@@ -57,7 +57,7 @@ export class LoginPage {
 				//	alert("DATA RETRIEVED LOGIN");
 				}, function (error) {
 				//	alert("DATA NOT RETRIEVED LOGIN");
-					alert(error);
+				//	alert(error);
 				},);
 				
 				this.refreshData();

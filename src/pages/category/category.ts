@@ -9,7 +9,8 @@ import { ToastController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 import { SharedService } from '../../app/app.service';
 import { Network } from '@ionic-native/network';
-
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 @Component({
     selector: 'page-category',
     templateUrl: 'category.html'

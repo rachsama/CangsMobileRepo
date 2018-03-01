@@ -148,7 +148,5 @@ export class HistoryPage {
             this.timerSubscription.unsubscribe();
             }
     }
-     ionViewWillLeave(){
-      this.menu.enable(false,"myMenu");
-  }
+     
 }
