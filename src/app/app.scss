@@ -17,10 +17,14 @@
 
 app-page {
     .content{
-        background: #02359d;
+        background: white;
+    }
+    .toolbar-background{
+         background-color:#02359d;
     }
     .toolbar-title {
-        color : #02359d;
+        background-color:#02359d;
+        color : white;
     }
     .menu-inner .item {
         background-color: #02359d;
@@ -30,14 +34,13 @@ app-page {
     .menu-inner > ion-header, 
     .menu-inner > ion-content, 
     .menu-inner > ion-footer {
-       
         background-color: #02359d; 
     }
     .input-wrapper{
         border-style:none;
     }    
     .cangstitle{
-        color:red;
+        color:white;
     }
     
 }
