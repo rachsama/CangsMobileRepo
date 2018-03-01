@@ -17,7 +17,8 @@
         <ion-icon (click)="addQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)" class="iconadd" name="add-circle"></ion-icon>
         <ion-icon (click)="removeQty(item.itemID,item.subTotal,item.itemPrice,in,item.quantity)"class="iconremove" name="remove-circle"></ion-icon>
         <h2 class="name">{{item.itemName}}</h2>
-         <h3 style="color: #0847ad;">Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&nbsp;</h3>
+        <h2 class="price">{{item.itemPrice | currency:'PHP':true:'1.2-2'}}</h2>
+         <h3 style="color: #0847ad;">Subtotal:{{item.subTotal | currency:'PHP':true:'1.2-2'}}&emsp;</h3>
         <ion-icon (click)="remove(item.itemID, item.itemName, item.itemDescription, item.itemPrice, item.itemQuantityStored, item.picture, item.visible)" class="icon" name="close-circle"></ion-icon>
        </ion-card-content>
   </ion-card>

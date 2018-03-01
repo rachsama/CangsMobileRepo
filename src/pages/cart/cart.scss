@@ -23,7 +23,7 @@ page-cart {
     ion-card-content{
         //margin-top:10px;
         color:#0847ad;
-        background-color:white;
+        background-color:#fffff0;
     
         
     }
@@ -35,7 +35,7 @@ page-cart {
     
     @media(max-width:414px){
         .icon{
-            font-size: 45px;
+            font-size: 40px;
             position:absolute;
             top:5px;
             right:5px;
@@ -63,7 +63,7 @@ page-cart {
         }
         .qty
         {
-           
+           font-size:16px;
             position: absolute;
             top:5px;
             left:20px;
@@ -78,11 +78,18 @@ page-cart {
         }
         .name
         {
-            font-size:23px;
+            font-size:18px;
             position: relative;
             top:10px;
             left:10px;
             color:#0847ad;
+        }
+        .price
+        {
+            font-size:16px;
+            position: relative;
+            color:#0847ad;
+           
         }
         .total{
             color:#0847ad;
@@ -116,7 +123,7 @@ page-cart {
     
     @media(max-width:375px){
         .icon{
-            font-size: 45px;
+            font-size: 40px;
             position:absolute;
             top:5px;
             right:5px;
@@ -147,7 +154,7 @@ page-cart {
        
         .qty
         {
-            font-size:20px;
+            font-size:18px;
             position: relative;
             top:10px;
             left:20px;
@@ -162,12 +169,21 @@ page-cart {
         }
         .name
         {
-            font-size:25px; 
+            font-size:20px; 
             position: relative;
             top:-20px;
             left:-30px;
-            color:#EBC137;
+            color:#0847ad;
             overflow:hidden;
+        }
+         .price
+        {
+            font-size:18px;
+            position: relative;
+            top:-20px;
+            left:25px;
+            color:#0847ad;
+           
         }
         .total{
             color:#0847ad;
@@ -201,7 +217,7 @@ page-cart {
     }
     @media(max-width:360){
         .icon{
-            font-size: 45px;
+            font-size: 40px;
             position:absolute;
             top:5px;
             right:5px;
@@ -229,7 +245,7 @@ page-cart {
         }
         .qty
         {
-           
+            font-size:15px;
             position: absolute;
             top:5px;
             left:20px;
@@ -244,11 +260,20 @@ page-cart {
         }
         .name
         {
-            font-size:23px;
+            font-size:18px;
             position: relative;
             top:10px;
             left:10px;
             color:#0847ad;
+        }
+         .price
+        {
+            font-size:16px;
+            position: relative;
+            top:10px;
+            left:10px;
+            color:#0847ad;
+           
         }
         .total{
             color:#0847ad;
@@ -281,7 +306,7 @@ page-cart {
     }
     @media(max-width:325px){
         .icon{
-            font-size: 25px;
+            font-size: 20px;
             position:absolute;
             top:5px;
             right:5px;
@@ -308,7 +333,7 @@ page-cart {
         }
         .qty
         {
-            font-size:15px;
+            font-size:12px;
             position: relative;
             top:0px;
             left:20px;
@@ -323,7 +348,16 @@ page-cart {
         .name
         {
             position: relative;
-            font-size:25px;
+            font-size:15px;
+            top:-20px;
+            left:-35px;
+            color:#0847ad;
+           
+        }
+        .price
+        {
+            position: relative;
+            font-size:13px;
             top:-20px;
             left:-35px;
             color:#0847ad;
