@@ -9,6 +9,8 @@ import { ToastController } from 'ionic-angular';
 
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
+import { Observable } from 'rxjs/Rx';
+import { AnonymousSubscription } from "rxjs/Subscription";
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html'
@@ -22,6 +24,8 @@ export class OrderPage {
   vis:boolean=false;
   init:boolean=false;
   initial:boolean=false;
+  private timerSubscription: AnonymousSubscription;
+  private postsSubscription: AnonymousSubscription;
   load:boolean=false;
   leave:boolean=false;
   constructor( private log: OrderService ,
@@ -56,7 +60,7 @@ export class OrderPage {
     console.log("in2");
     this.load=false;
     this.leave=false;
-    this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+    this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
 		this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){
@@ -101,6 +105,7 @@ export class OrderPage {
       
 
     });
+    this.refreshData();
    // console.log(this.item);
    // console.log(this.navParams.get('data1'));
    // console.log(this.navParams.get('data2'));
@@ -221,7 +226,7 @@ export class OrderPage {
             this.init=true;
             this.item2=[];
             this.item=[];
-            this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+            this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
                 this.item2=res;
                 for(var i=0; i<this.item2.length; i++){
                     for(var j=0; j<this.shared.getCart().length; j++)
@@ -271,10 +276,117 @@ export class OrderPage {
      console.log("testing");
   }
   ionViewWillLeave(){
+      var gone=false;
       if(this.leave)
       this.initial=false;
       console.log("leaving");
       this.leave=true;
   }
+  
+   private refreshData(): void {
+         
+        this.postsSubscription = this.log.getCategoryItem(this.navParams.get('category')).subscribe(
+
+        data  => {
+                    console.log(this.item2.length);
+                    var k =0;
+                    this.item=[];
+                        for(var i=0; i<data.length; i++){
+                              if(this.shared.getCart() != 0)
+                              {
+                                      for(var j=0; j<this.shared.getCart().length; j++)
+                                      {
+                                            if(this.shared.getCart()[j].itemID == data[i].itemID)
+                                            {
+                                                this.item.push({
+                                                      itemID: this.item2[i].itemID,
+                                                      itemName: this.item2[i].itemName,
+                                                      itemDescription: this.item2[i].itemDescription,
+                                                      itemPrice: this.item2[i].itemPrice,
+                                                      itemQuantityStored: this.item2[i].itemQuantityStored,
+                                                      picture: "http://"+this.item2[i].picture,
+                                                      subTotal: this.item2[i].subTotal,
+                                                      visible: true,
+                                                  });
+                                                  this.vis=true;
+                                                  k++;
+                                            }
+                                      }
+                                      if(!this.vis)
+                                      {
+                                            //  console.log("in visible");
+                                              this.item.push({
+                                                    itemID: data[i].itemID,
+                                                    itemName: data[i].itemName,
+                                                    itemDescription: data[i].itemDescription,
+                                                    itemPrice: data[i].itemPrice,
+                                                    itemQuantityStored: data[i].itemQuantityStored,
+                                                    picture: "http://"+data[i].picture,
+                                                    subTotal: data[i].subTotal,
+                                                    visible: false,
+                                                });
+                                                this.vis=false;
+                                                k++;
+                                      }
+                                      else
+                                      this.vis=false;
+                            }    
+                            else
+                            {
+                                    this.item.push({
+                                        itemID: data[i].itemID,
+                                        itemName: data[i].itemName,
+                                        itemDescription: data[i].itemDescription,
+                                        itemPrice: data[i].itemPrice,
+                                        itemQuantityStored: data[i].itemQuantityStored,
+                                        picture: "http://"+data[i].picture,
+                                        subTotal:data[i].subTotal,
+                                        visible: false,
+                                    });
+                                    this.vis=false;
+                                    k++;
+                            }     
+                    }          
+                                  
+                    if(k < this.item.length)
+                    {
+                        let dif = this.item.length - k;
+                        let test;
+                        for(dif;dif>0;dif--)
+                        {
+                                test=this.item.pop();
+                                console.log(test);
+                        }
+                    }
+                    i=0;   
+                    // console.log(this.items.data);                
+                    // console.log("latestest");      
+            //this.items.data = data;
+		    this.subscribeToData();
+            console.log(this.item);
+        },
+        function (error) {
+            console.log(error);
+        },
+        function () {
+            console.log("complete");
+        }
+        );
+        
+    }
+    private subscribeToData(): void {
+
+        this.timerSubscription = Observable.timer(3000)
+            .subscribe(() => this.refreshData());
+    }
+     public ngOnDestroy(): void {
+
+            if (this.postsSubscription) {
+            this.postsSubscription.unsubscribe();
+            }
+            if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+            }
+    }
 
 }
