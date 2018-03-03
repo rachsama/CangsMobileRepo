@@ -24,7 +24,7 @@ export class TemplatePage {
 
     constructor(private network: Network,private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
     console.log(this.navParams.get('category'));
-    this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+    this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
 		  this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){

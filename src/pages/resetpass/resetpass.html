@@ -11,7 +11,7 @@
 <ion-content padding style= "background-color: #E8E8E8"> 
 <ion-list style="padding-top: 50px">
 <div>
- <h4 text-center style="color: #0847ad">Change Password</h4> <br>
+ <h4 text-center style="color: #2d42e5">Change Password</h4> <br>
 </div>
   <ion-item id="user">
     <ion-input  placeholder="Old Password" type="password" name="oldpass" [(ngModel)]="oldpass"></ion-input>
@@ -22,12 +22,10 @@
   <ion-item id="pw">
     <ion-input  placeholder="Re-enter New Password" type="password" name="newpass2" [(ngModel)]="newpass2"></ion-input>
   </ion-item>
-  <ion-item id="pw">
-    <ion-input  placeholder="Enter Verification Code" type="text" name="verificationCode" [(ngModel)]="verificationCode"></ion-input>
-  </ion-item>
+ 
 </ion-list>
 <div text-center> 
-    <button ion-button outline round style="color: white; background-color:#0847ad" (click)="reset($event)">Confirm</button>
+    <button ion-button outline round style="color: white; background-color:#2d42e5" (click)="reset($event)">Confirm</button>
 </div>
 
 

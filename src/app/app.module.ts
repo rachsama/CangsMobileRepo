@@ -37,6 +37,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
+import { OrderFilterPipe } from '../pages/order/order-pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import 'intl/locale-data/jsonp/en';
     ResetPage,
     ModalPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    OrderFilterPipe,
   ],
   imports: [
     HttpModule,
@@ -96,7 +98,8 @@ import 'intl/locale-data/jsonp/en';
     SeeTempService,
     SharedService,
     Md5,
-    Network
+    Network,
+    OrderFilterPipe
   ]
 })
 export class AppModule {}

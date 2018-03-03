@@ -56,10 +56,9 @@ export class EditInfoPage {
     changeInfo(){
         console.log(this.number);
         console.log(this.address);
-        if(this.number != null && this.address != null && this.verificationCode != null && this.number != "" && this.address != "" && this.verificationCode != "")
+        if(this.number != null && this.address != null && this.number != "" && this.address != "")
         {
-            if(this.cus[0].verificationCode == this.verificationCode)
-            {
+           
                 this.cus[0].number=this.number;
                 this.cus[0].address=this.address;
                 console.log(this.cus);
@@ -69,14 +68,6 @@ export class EditInfoPage {
                     this.presentToast();
                     this.verificationCode="";
                 }, 1000)
-                
-            }
-            else
-            {
-                this.msg="Incorrect Verification Code";
-                this.presentToast();
-                this.msg="";
-            }
             
         }
         else

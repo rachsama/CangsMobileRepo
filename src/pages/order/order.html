@@ -9,6 +9,7 @@
      <button class="orderbtn" ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="orderIcon"></ion-icon>TO CART</button>
 </ion-footer>
 <ion-content>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-card  *ngFor="let items of item">
     <ion-item style="background-color: #E8E8E8" class="list"><!--#0d33bc-->
       <ion-thumbnail item-left>

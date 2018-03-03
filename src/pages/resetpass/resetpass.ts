@@ -59,9 +59,9 @@ export class ResetPage {
   }
 
   reset(){
-      if(this.newpass != null && this.newpass2 != null && this.verificationCode !=null && this.oldpass !=null )
+      if(this.newpass != null && this.newpass2 != null && this.oldpass !=null )
       {
-        if(this.newpass != "" && this.newpass2 != "" && this.verificationCode !="" && this.oldpass !="")
+        if(this.newpass != "" && this.newpass2 != "" && this.oldpass !="")
         {
 
             console.log(Md5.hashStr(this.oldpass));
@@ -69,7 +69,7 @@ export class ResetPage {
             console.log(this.oldpass);
             console.log(this.newpass);
             console.log(this.newpass2);
-            console.log(this.verificationCode);//b3ae83c0 f5445d66-7209
+           //b3ae83c0 f5445d66-7209
             if(this.cus.length !=0)
 			{
                 for(let data of this.cus)
@@ -86,8 +86,7 @@ export class ResetPage {
                                         if(this.newpass.length >7 || this.newpass2.length >7)
                                         {
 
-                                                if(this.verificationCode == data.verificationCode)
-                                                {
+                                                
                                                         console.log("foundpass");
                                                         this.log.get1Customer(this.shared.getUserName()).subscribe(result => {
                                                             this.onecus=result;
@@ -121,13 +120,8 @@ export class ResetPage {
                                                                 this.presentToast();
                                                                 loading.dismiss();
                                                         }, 1000)
-                                                }
-                                                else
-                                                {
-                                                    
-                                                    this.error="Incorrect Verification Code";
-                                                    this.presentToast();
-                                                }
+                                                
+                                               
                                         }
                                         else
                                         {
