@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Template</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-footer>
+    
+        <button class="savebtn"ion-button (click)="saveEditTemplate(tempName)"sticky><b>Save Template</b></button>
+    
+</ion-footer>
+
+<ion-content>
+    <ion-item>
+      <ion-label style="color:black" stacked><h2>Template Name</h2></ion-label>
+     <ion-input  style="color:black" type="text" value="{{templateName}}" [(ngModel)]="tempName"></ion-input>
+    </ion-item>
+    <ion-card *ngFor="let items of tempgetData">
+        <ion-item>
+            <ion-thumbnail item-left>
+            <img src="{{items.picture}}"></ion-thumbnail>
+            <h2 style="color:#EBC137 ">{{items.itemName}}</h2>
+            <h3 style="color:black; ">{{items.itemDescription}}</h3>
+        </ion-item>
+    </ion-card>
+
+</ion-content>

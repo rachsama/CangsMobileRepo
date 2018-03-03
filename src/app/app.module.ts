@@ -22,6 +22,7 @@ import { TempViewPage } from '../pages/tempview/tempview';
 //import { SeeTempPage } from '../pages/seetemp/seetemp';
 import { SeeTempPageModule } from '../pages/seetemp/seetemp.module';
 import { CategoryPage } from '../pages/category/category';
+import { TempEditPage } from '../pages/tempedit/tempedit';
 
 import { TempCategPage } from '../pages/tempcateg/tempcateg';
 import { ForgotPassPage } from '../pages/forgotpass/forgotpass';
@@ -53,7 +54,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ResetPage,
     ModalPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    TempEditPage
   ],
   imports: [
     HttpModule,
@@ -80,7 +82,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ResetPage,
     ModalPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    TempEditPage
   ],
   providers: [
     StatusBar,

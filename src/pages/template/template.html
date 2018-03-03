@@ -7,7 +7,8 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
-     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky><b>Create Template</b></button>
+     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky *ngIf="!check"><b>Create Template</b></button>
+     <button class ="templatebtn"ion-button block (click)="gotoTempEdit()" sticky *ngIf="check"><b>Edit Template</b></button>
 </ion-footer>
 <ion-content>
     <ion-card  *ngFor="let items of item">

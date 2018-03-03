@@ -11,14 +11,17 @@ import { LoginPage } from '../../pages/login/login';
     templateUrl: 'tempcateg.html'
 })
 export class TempCategPage {
-    public item: any=[];
+    public item: any = [];
     selected:any = [];
 
     categoryOptions: any = [ "Condiments", "Miscellaneous", "Dairy Products", "Non-chilled Beverages", "Toiletries", "Dry Goods" ];
 
     constructor(private network: Network, private shared: SharedService, public toastCtrl: ToastController,public navCtrl: NavController, public navParams: NavParams) {
-        this.categoryOptions;
-        console.log(this.categoryOptions);
+        console.log(this.navParams.get('check'))//delete
+		console.log(this.navParams.get('templateID'));
+		console.log(this.navParams.get('templateName'));
+		this.categoryOptions;
+        console.log(this.categoryOptions);//delete
 
 //Network
 				this.network.onConnect().subscribe(() => {
@@ -42,9 +45,21 @@ export class TempCategPage {
     gotoTemplate(cat){
 		console.log("to order");
         console.log(cat)
-		this.navCtrl.push(TemplatePage,{
-			category: cat,
-		});
+		if(this.navParams.get('check')==true){
+			this.navCtrl.push(TemplatePage,{
+				category: cat,
+				check: true,
+				templateID: this.navParams.get('templateID'),
+				templateName: this.navParams.get('templateName')
+			});
+		}
+	
+		else{
+			this.navCtrl.push(TemplatePage,{
+				category: cat,
+			});
+		}
 	}
+		
 
 }

@@ -27,10 +27,14 @@ import { TempCategPage } from '../../pages/tempcateg/tempcateg';
 export class SeeTempPage {
     public item: any=[];
     public temp: any=[];
+    public editData: any=[];
     public cartData: any=[];
     public tempItems: any=[];
+    check: boolean=false; //new
 
     constructor(private network: Network,private toastCtrl: ToastController, public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
+      this.check = false; //new
+      console.log(this.navParams.get('templateName'));
       this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
 		    this.temp=res;
         console.log(this.temp)
@@ -106,10 +110,39 @@ export class SeeTempPage {
     }
 		this.navCtrl.push(CartPage);
 	  }
-
-    delTemp(){
-      this.tvserv.deleteTemplate(this.navParams.get('templateID'));
-      this.navCtrl.setRoot(TempCategPage);
-    }
     
+    edit(){
+    this.check = true;
+    this.shared.cleanTemplate();
+    console.log(this.navParams.get('templateID'))
+    this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
+		    this.temp=res;
+        console.log(this.temp)
+        for(var i=0; i<this.temp.length; i++){
+          this.ord.getTempItem(this.temp[i].itemID).then(data => {
+            data[0].picture = "http://" + data[0].picture;
+              this.editData.push({
+                itemID: data[0].itemID,
+                itemName: data[0].itemName,
+                itemDescription: data[0].itemDescription,
+                itemPrice: data[0].itemPrice,
+                itemQuantityStored: data[0].itemQuantityStored,
+                picture: data[0].picture,
+                subTotal:data[0].itemPrice,
+                visible: true
+              });
+
+              this.shared.setTemplate(this.editData);
+              this.editData.pop();
+          })
+        }
+    })
+    console.log(this.shared.getTemplate()); //delete later
+    this.navCtrl.push(TempCategPage,{
+      check: this.check,
+      templateID: this.navParams.get('templateID'),
+      templateName: this.navParams.get('templateName')
+    });
+    console.log(this.navParams.get('templateName'));// delete
+  }
 }

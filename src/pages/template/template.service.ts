@@ -45,8 +45,8 @@ export class TemplateService{
             num=res;
             TemplateService.templateID=num._body;
             console.log(TemplateService.templateID);
-       //     alert("The Template has been Successfully Updated!");
         });
+
         //create loader
         let loading = this.loadingCtrl.create({
             content: 'Please wait...',
@@ -68,12 +68,12 @@ export class TemplateService{
             this._http.post(this._apiUrl + "/templatedetails/addTemplateDetails",JSON.stringify(this.sendTemplateDetails[i]), reqopt).subscribe(function(res){
             this.templateID=res;
             tempgetData.length = 0;
-           // alert("The TemplateDetail has been Successfully Updated!");
+            //alert("The TemplateDetail has been Successfully Updated!");
             });
         }
         loading.dismiss(); // loader dismiss
         alert("Your Template has been Successfully Created!");
-        }, 3000)
+        }, 5000)
         this.sendTemplateDetails.length = 0;
     }
 }

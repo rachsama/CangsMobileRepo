@@ -9,20 +9,30 @@ import { CategoryPage }from '../../pages/category/category';
 import { SharedService } from '../../app/app.service';
 import { TempGetPage } from '../../pages/tempget/tempget';
 import { LoginPage } from '../../pages/login/login';
+import { TempEditPage } from '../../pages/tempedit/tempedit';
 
 @Component({
   selector: 'page-template',
   templateUrl: 'template.html'
 })
 export class TemplatePage {
-    public item: any=[];
-    public tempData: any=[];
-    public tempData2: any=[];
+    public item: any = [];
+    public tempData: any = [];
+    public tempData2: any = [];
     selected:any = [];
-    public item2: any=[];
-    vis:boolean=false;
+    public item2: any = [];
+    vis:boolean = false;
+    check: boolean = false;
 
     constructor(private network: Network,private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
+    console.log(this.navParams.get('check'));
+    console.log(this.navParams.get('templateID'));
+    if(this.navParams.get('check') == true){
+      this.check = true;
+    }
+    else{
+      this.check = false;
+    }
     console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).then(res => {
 		  this.item2=res;
@@ -175,6 +185,28 @@ export class TemplatePage {
     if(this.shared.getTemplate().length !=0){
       console.log("to TempGet");
 		  this.navCtrl.push(TempGetPage);
+    }
+
+    else if(this.shared.getTemplate().length == 0){
+      let toast = this.toastCtrl.create({
+        message: 'Please Select Items',
+        duration: 900,
+        position: 'middle'
+    });
+
+      toast.present();
+    }
+	}
+
+  gotoTempEdit(){
+    if(this.shared.getTemplate().length !=0){
+      console.log("to TempGet");
+		  this.navCtrl.push(TempEditPage, {
+        templateID: this.navParams.get('templateID'),
+        templateName: this.navParams.get('templateName')
+      });
+      console.log(this.navParams.get('templateID'));
+      console.log(this.navParams.get('templateName'));
     }
 
     else if(this.shared.getTemplate().length == 0){

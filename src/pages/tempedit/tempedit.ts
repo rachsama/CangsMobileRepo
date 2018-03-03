@@ -4,9 +4,11 @@ import { Network } from '@ionic-native/network';
 
 import { TemplateService } from '../../pages/template/template.service';
 import { TempViewPage } from '../../pages/tempview/tempview';
+import { TempViewService } from '../../pages/tempview/tempview.service';
 import { LoginService } from '../../pages/login/login.service';
 import { SharedService } from '../../app/app.service';
 import { LoginPage } from '../../pages/login/login';
+import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 /**
  * Generated class for the CartPage page.
  *
@@ -16,23 +18,27 @@ import { LoginPage } from '../../pages/login/login';
 
 @IonicPage()
 @Component({
-  selector: 'page-tempget',
-  templateUrl: 'tempget.html',
+  selector: 'page-tempedit',
+  templateUrl: 'tempedit.html',
 })
-export class TempGetPage {
+export class TempEditPage {
     public tempgetData: any=[];
-    public sendTemp: any=[];
-    public tempData2: any=[];
-    public tempData1: any=[];
+    public sendEdits: any=[];
+    public item: any=[];
+    public templateName: string;
 
     constructor(private network: Network, 
                 private toastCtrl: ToastController ,
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public tem: TemplateService,
-                public viewCtrl:ViewController, 
-                public log:LoginService, 
+                public viewCtrl: ViewController, 
+                public tvserv: TempViewService,
+                public log: LoginService,
+                public seet: SeeTempService,
                 public shared: SharedService) {
+        console.log(this.navParams.get('templateName'));
+        this.templateName = this.navParams.get('templateName');
         for(var i=0; i<this.shared.getTemplate().length; i++){
             this.tempgetData[i] = this.shared.getTemplate()[i];
         }
@@ -57,7 +63,7 @@ export class TempGetPage {
 //Network
     }
 
-    addTemplate(tempName){
+    saveEditTemplate(tempName){
 
         console.log(this.shared.getTemplate()); 
         if(tempName == null || tempName == ""){
@@ -70,26 +76,29 @@ export class TempGetPage {
         toast.present();
         }
         else if(tempName != null || tempName != ""){
-            this.sendTemp.push({
-                "customerID": this.shared.getUserName(),//LoginService.customerID,
-                "templateName": tempName
+            this.sendEdits.push({
+                "templateID": this.navParams.get('templateID'),//LoginService.customerID,
+                "templateName": tempName,
+                "customerID": this.shared.getUserName()
             });
-            console.log(this.sendTemp);
+
+            for(var i=0 ; i<this.tempgetData.length ; i++){
+                
+            }
+            console.log(this.sendEdits);
             console.log(this.tempgetData);
-            this.tem.makeTemplate(this.sendTemp[0],this.tempgetData);
-            this.shared.cleanTemplate();
-            this.viewCtrl.showBackButton(false);
-            setTimeout (() => {
-            this.viewCtrl.showBackButton(true);
-             //this.menu.enable(true,"myMenu");
-            this.navCtrl.setRoot(TempViewPage)
-            }, 3000)	
-            /* let toast = this.toastCtrl.create({
-                    message: 'The Template has been Successfully Created!',
-                    duration: 2000,//kini siya
-                    position: 'middle'
+            //this.tvserv.editTemp(this.sendEdits[0]);
+            this.tvserv.editTemp(this.sendEdits);
+
+            this.tvserv.giveTempID(this.navParams.get('templateID')).then(res => {
+		        this.item=res;
+                for(var i=0; i<this.item.length; i++){
+                    this.tvserv.delTempDe(this.item[i]);
+                }
             });
-            toast.present();*/
+            this.tvserv.addEditedTemDe(this.tempgetData, this.navParams.get('templateID'));
+            this.navCtrl.setRoot(TempViewPage);
+        
         }
     }
 

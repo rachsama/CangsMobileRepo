@@ -40,7 +40,7 @@
     </ion-item>
     <ion-item id="inp">
       <ion-label color="black" stacked>Preferred Delivery Time</ion-label>
-      <ion-input type="text" [(ngModel)]="delTime"></ion-input>
+      <ion-datetime displayFormat="hh:mm A" pickerFormat="hh mm A" [(ngModel)]="delTime"></ion-datetime>
     </ion-item>
     <ion-item id="inparea">
       <ion-label color="black" stacked>Remarks</ion-label>

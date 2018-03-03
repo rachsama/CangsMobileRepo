@@ -35,8 +35,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Make Orders', component: CategoryPage },
-      { title: 'Create Templates', component: TempCategPage },
-      { title: 'View Templates', component: TempViewPage },
+      { title: 'Templates', component: TempViewPage },
       { title: 'Edit Information', component: EditInfoPage },
       { title: 'Reset Password', component: ResetPage },
       { title: 'Purchase History', component: HistoryPage }
