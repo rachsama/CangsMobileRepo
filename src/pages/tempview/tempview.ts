@@ -7,7 +7,9 @@ import { TempViewService } from '../../pages/tempview/tempview.service';
 import { SeeTempPage } from '../../pages/seetemp/seetemp';
 import { LoginPage } from '../../pages/login/login';
 import { SharedService } from '../../app/app.service';
-
+import { TempCategPage } from '../../pages/tempcateg/tempcateg';
+import { SeeTempService } from '../../pages/seetemp/seetemp.service';
+import { OrderService } from '../../pages/order/order.service';
 @Component({
   selector: 'page-tempview',
   templateUrl: 'tempview.html'
@@ -15,8 +17,9 @@ import { SharedService } from '../../app/app.service';
 export class TempViewPage {
   public item: any=[];
   selected:any = [];
-
-  constructor(private shared: SharedService, private network: Network, public toastCtrl:ToastController ,private tempv: TempViewService ,public navCtrl: NavController, public navParams: NavParams) {
+  public temp: any=[];
+  public cartData: any=[];
+  constructor(public tvserv: TempViewService, public ord: OrderService, public seet: SeeTempService,private shared: SharedService, private network: Network, public toastCtrl:ToastController ,private tempv: TempViewService ,public navCtrl: NavController, public navParams: NavParams) {
     this.tempv.getTemplate().then(res => {
 		  this.item=res;
       console.log(this.item);
@@ -41,12 +44,49 @@ export class TempViewPage {
 //Network
   }
 
-  seeTemplate(templateID){
+ seeTemplate(templateID, templateName){
     this.navCtrl.push(SeeTempPage, {
-      templateID: templateID
+       templateID: templateID,
+      templateName: templateName
     })
     console.log(templateID);
+     console.log(templateName);
   }
-  
+  gotoTempCateg(){
+     this.shared.cleanTemplate();
+     this.navCtrl.push(TempCategPage)
+   }
+ 
+   /*edit(templateID){
+     this.shared.cleanTemplate();
+     console.log(templateID)
+     this.seet.getTemplateDetails(templateID).then(res => {
+ 		    this.temp=res;
+         console.log(this.temp)
+         for(var i=0; i<this.temp.length; i++){
+           this.ord.getTempItem(this.temp[i].itemID).then(data => {
+             data[0].picture = "http://" + data[0].picture;
+               this.cartData.push({
+                 itemID: data[0].itemID,
+                 itemName: data[0].itemName,
+                 itemDescription: data[0].itemDescription,
+                 itemPrice: data[0].itemPrice,
+                 itemQuantityStored: data[0].itemQuantityStored,
+                 picture: data[0].picture,
+                 subTotal:data[0].itemPrice,
+                 visible: true
+               });
+ 
+               this.shared.setTemplate(this.cartData);
+               this.cartData.pop();
+           })
+         }
+     })
+ 
+     this.navCtrl.push(TempCategPage);
+   }*/
+ 
+   
+ 
 
 }

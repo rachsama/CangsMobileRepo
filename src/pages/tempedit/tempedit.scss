@@ -1,0 +1,22 @@
+ $background-color: #0d33bc;
+ 
+ page-tempedit{
+     color: $background-color;
+             .item{
+             background-color:#E8E8E8;
+         }
+ 
+         input[type="text"]{
+             font-size:20px;
+         }
+ 
+         .savebtn{
+             background-color: #2d42e5;//#f1d248
+            border: 2px solid #E8E8E8;
+            color:#E8E8E8;
+             border-radius: 12px;
+             padding: 20px;
+             width:100%;
+         }
+ }
+ 

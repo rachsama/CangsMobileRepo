@@ -42,19 +42,20 @@ app-page {
     .cangstitle{
         color:white;
     }
+    .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+    color: map-get($colors, light) !important;
+    }
+
+    .bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
+    color: map-get($colors, light) !important;
+    }
+
+    .bar-button-default-wp, .bar-button-default.bar-button-wp-default, .bar-button-clear-wp-default {
+    color: map-get($colors, light) !important;
+    }
     
 }
-.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
-color: map-get($colors, light) !important;
-}
 
-.bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
-color: map-get($colors, light) !important;
-}
-
-.bar-button-default-wp, .bar-button-default.bar-button-wp-default, .bar-button-clear-wp-default {
-color: map-get($colors, light) !important;
-}
 /*
 ion-menu{
     background:#02359d;

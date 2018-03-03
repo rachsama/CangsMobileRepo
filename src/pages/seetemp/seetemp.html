@@ -9,8 +9,8 @@
 
 <ion-footer>
   
-     <button class="deletebtn" ion-button block (click)="delTemp()" sticky><ion-icon ion="ion-trash-a"   class="delIcon"></ion-icon><b>Delete Template</b></button>
-     <button  class="cartbtn"ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="cartIcon"></ion-icon><b>TO CART</b></button>
+    <button class="deletebtn" ion-button block (click)="edit()" sticky><ion-icon ion="ion-trash-a"   class="delIcon"></ion-icon><b>Edit Template</b></button>
+    <button  class="cartbtn"ion-button block (click)="gotoCart()" sticky><ion-icon name="cart" class="cartIcon"></ion-icon><b>TO CART</b></button>
   
 </ion-footer>
 
@@ -20,9 +20,9 @@
     <ion-card-content>
       <ion-thumbnail item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h1 style="color:#EBC137"><b>{{items.itemName}}</b></h1><br>
-      <h3 style="color:white">{{items.itemDescription}}</h3>
-      <h3 style="color:white"><b>{{items.itemPrice | currency:'PHP':true:'1.2-2'}}</b></h3>
+      <h1 style="color:#02359d"><b>{{items.itemName}}</b></h1><br>
+      <h3 style="color:#02359d">{{items.itemDescription}}</h3>
+      <h3 style="color:#02359d"><b>{{items.itemPrice | currency:'PHP':true:'1.2-2'}}</b></h3>
     </ion-card-content>
   </ion-card>
 

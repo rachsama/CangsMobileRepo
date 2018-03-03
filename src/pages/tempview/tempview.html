@@ -8,12 +8,19 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let items of item" (click)="seeTemplate(items.templateID)">
-        <ion-card-content>
-            <h1 style="color: #02359d">Name:{{items.templateName}}</h1>
-            <h2 style="color: #02359d">Template ID:{{items.templateID}}</h2>
-            <h3 style="color: #02359d">Customer ID:{{items.customerID}}</h3>
-        </ion-card-content>
-    </ion-card>
-
+     <ion-list>
+         <ion-item-sliding *ngFor="let items of item">
+         <ion-item (click)="seeTemplate(items.templateID, items.templateName)">
+             <h1 style="color: #2d42e5;">Name:{{items.templateName}}</h1>
+             <h2 style="color: black;">Template ID:{{items.templateID}}</h2>
+             <h3 style="color: black;">Customer ID:{{items.customerID}}</h3>
+         </ion-item>
+         <ion-item-options side="right">
+             <button danger ion-button (click)="delTemp(items.templateID)"><ion-icon name="trash-can"></ion-icon>delete</button>
+         </ion-item-options>
+         </ion-item-sliding>
+     </ion-list>
 </ion-content>
+<ion-footer>
+    <button class ="templatebtn" ion-button block (click)="gotoTempCateg()" sticky><b>Create New Templates</b></button>
+</ion-footer>

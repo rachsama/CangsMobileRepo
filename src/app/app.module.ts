@@ -22,6 +22,7 @@ import { TempViewPage } from '../pages/tempview/tempview';
 //import { SeeTempPage } from '../pages/seetemp/seetemp';
 import { SeeTempPageModule } from '../pages/seetemp/seetemp.module';
 import { CategoryPage } from '../pages/category/category';
+import { TempEditPage } from '../pages/tempedit/tempedit';
 
 import { TempCategPage } from '../pages/tempcateg/tempcateg';
 import { ForgotPassPage } from '../pages/forgotpass/forgotpass';
@@ -58,6 +59,7 @@ import { OrderFilterPipe } from '../pages/order/order-pipe';
     CategoryPage,
     TempCategPage,
     OrderFilterPipe,
+    TempEditPage
   ],
   imports: [
     HttpModule,
@@ -65,7 +67,16 @@ import { OrderFilterPipe } from '../pages/order/order-pipe';
     BrowserModule,
     TempGetPageModule,
     SeeTempPageModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      platforms: {
+				ios: {
+					backButtonText: ''
+				},
+        android:{
+            
+        }
+			}
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -84,7 +95,8 @@ import { OrderFilterPipe } from '../pages/order/order-pipe';
     ResetPage,
     ModalPage,
     CategoryPage,
-    TempCategPage
+    TempCategPage,
+    TempEditPage
   ],
   providers: [
     StatusBar,

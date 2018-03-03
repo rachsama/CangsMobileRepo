@@ -1,5 +1,10 @@
 page-cart {
     
+    .bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default {
+        position:fixed;
+        left:30px;
+        font-size:50px;
+    }
     ion-thumbnail{
         float:left;
         height:100px;
@@ -23,7 +28,7 @@ page-cart {
     ion-card-content{
         //margin-top:10px;
         color:#0847ad;
-        background-color:#fffff0;//#d3d3d3
+        background-color:#E8E8E8;//#d3d3d3 #fffff0
     
         
     }

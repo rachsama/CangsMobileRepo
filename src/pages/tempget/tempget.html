@@ -21,6 +21,7 @@
             <img src="{{items.picture}}"></ion-thumbnail>
             <h2 style="color:#EBC137 ">{{items.itemName}}</h2>
             <h3 style="color:white; ">{{items.itemDescription}}</h3>
+             <ion-icon (click)="remove(item.itemID)" class="icon" name="close-circle"></ion-icon>
         </ion-item>
     </ion-card>
 

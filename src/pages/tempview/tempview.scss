@@ -7,4 +7,17 @@ page-tempview{
             color:#02359d;
             background-color:#E8E8E8;//#02359d
         }
+         .templatebtn{
+                background-color: #2d42e5;//#f1d248
+                border: 2px solid #E8E8E8;
+                color:#E8E8E8;
+                padding: 25px;
+                 border-radius: 13px;
+                width:100%;
+                position:relative;
+                left:0;
+        }
+        ion-item.item.item-block{
+            background-color:#E8E8E8;
+        }
 }

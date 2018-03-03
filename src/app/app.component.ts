@@ -19,7 +19,8 @@ import { TempCategPage } from '../pages/tempcateg/tempcateg';
 
 @Component({
   selector: 'app-page',
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -35,8 +36,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Make Orders', component: CategoryPage },
-      { title: 'Create Templates', component: TempCategPage },
-      { title: 'View Templates', component: TempViewPage },
+      { title: 'Templates', component: TempViewPage },
       { title: 'Edit Information', component: EditInfoPage },
       { title: 'Reset Password', component: ResetPage },
       { title: 'Purchase History', component: HistoryPage }

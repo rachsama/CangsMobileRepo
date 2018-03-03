@@ -22,7 +22,8 @@ import { LoginPage } from '../../pages/login/login';
 export class TempGetPage {
     public tempgetData: any=[];
     public sendTemp: any=[];
-
+     public tempData2: any=[];
+    public tempData1: any=[];
     constructor(private network: Network, 
                 private toastCtrl: ToastController ,
                 public navCtrl: NavController, 

@@ -9,7 +9,9 @@ import { CategoryPage }from '../../pages/category/category';
 import { SharedService } from '../../app/app.service';
 import { TempGetPage } from '../../pages/tempget/tempget';
 import { LoginPage } from '../../pages/login/login';
-
+import { TempEditPage } from '../../pages/tempedit/tempedit';
+import { Observable } from 'rxjs/Rx';
+import { AnonymousSubscription } from "rxjs/Subscription";
 @Component({
   selector: 'page-template',
   templateUrl: 'template.html'
@@ -21,8 +23,19 @@ export class TemplatePage {
     selected:any = [];
     public item2: any=[];
     vis:boolean=false;
-
+    check: boolean = false;
+    stop:boolean=false;
+     private timerSubscription: AnonymousSubscription;
+    private postsSubscription: AnonymousSubscription;
     constructor(private network: Network,private toastCtrl: ToastController, private log: OrderService ,public navCtrl: NavController, public navParams: NavParams, private shared: SharedService) {
+     console.log(this.navParams.get('check'));
+    console.log(this.navParams.get('templateID'));
+    if(this.navParams.get('check') == true){
+      this.check = true;
+    }
+    else{
+      this.check = false;
+    }
     console.log(this.navParams.get('category'));
     this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
 		  this.item2=res;
@@ -67,6 +80,7 @@ export class TemplatePage {
       
 
     });
+    this.refreshData();
     console.log(this.item);
 //Network
 				this.network.onConnect().subscribe(() => {
@@ -187,6 +201,178 @@ export class TemplatePage {
       toast.present();
     }
 	}
+  getItems(ev: any) {
+      let val = ev.target.value;
+      if (val && val.trim() != '') {
+          this.stop=true;
+          console.log(this.stop);
+      }
+      else
+      {
+          this.stop=false;
+          this.refreshData();
+          console.log(this.stop);
+      }
+      // if the value is an empty string don't filter the items
+      if (val && val.trim() != '') {
+        this.item = this.item.filter((items) => {
+          return (items.itemName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        });
+      }
+  }
+   gotoTempEdit(){
+    if(this.shared.getTemplate().length !=0){
+       console.log("to TempGet");
+ 		  this.navCtrl.push(TempEditPage, {
+         templateID: this.navParams.get('templateID'),
+         templateName: this.navParams.get('templateName')
+       });
+       console.log(this.navParams.get('templateID'));
+       console.log(this.navParams.get('templateName'));
+     }
+ 
+     else if(this.shared.getTemplate().length == 0){
+       let toast = this.toastCtrl.create({
+         message: 'Please Select Items',
+         duration: 900,
+         position: 'middle'
+     });
+ 
+       toast.present();
+     }
+ 	}
 
+    private refreshData(): void {
+         
+        this.postsSubscription = this.log.getCategoryItem(this.navParams.get('category')).subscribe(
 
+        data  => {
+                    console.log(this.stop);
+                    if(!this.stop)
+                    {
+                          console.log(this.item2.length);
+                          var k =0;
+                          this.item=[];
+                          if(this.item2.length !=0)
+                          {
+                              for(var i=0; i<data.length; i++){
+                                    if(this.shared.getTemplate() != 0)
+                                    {
+                                            for(var j=0; j<this.shared.getTemplate().length; j++)
+                                            {
+                                                  if(this.shared.getTemplate()[j].itemID == data[i].itemID)
+                                                  {
+                                                      this.item.push({
+                                                            itemID: this.item2[i].itemID,
+                                                            itemName: this.item2[i].itemName,
+                                                            itemDescription: this.item2[i].itemDescription,
+                                                            itemPrice: this.item2[i].itemPrice,
+                                                            itemQuantityStored: this.item2[i].itemQuantityStored,
+                                                            picture: "http://"+this.item2[i].picture,
+                                                            subTotal: this.item2[i].subTotal,
+                                                            visible: true,
+                                                        });
+                                                        this.vis=true;
+                                                        k++;
+                                                  }
+                                            }
+                                            if(!this.vis)
+                                            {
+                                                  //  console.log("in visible");
+                                                    this.item.push({
+                                                          itemID: data[i].itemID,
+                                                          itemName: data[i].itemName,
+                                                          itemDescription: data[i].itemDescription,
+                                                          itemPrice: data[i].itemPrice,
+                                                          itemQuantityStored: data[i].itemQuantityStored,
+                                                          picture: "http://"+data[i].picture,
+                                                          subTotal: data[i].subTotal,
+                                                          visible: false,
+                                                      });
+                                                      this.vis=false;
+                                                      k++;
+                                            }
+                                            else
+                                            this.vis=false;
+                                  }
+                                  else
+                                  {
+                                       // console.log("Test");
+                                        this.item.push({
+                                            itemID: data[i].itemID,
+                                            itemName: data[i].itemName,
+                                            itemDescription: data[i].itemDescription,
+                                            itemPrice: data[i].itemPrice,
+                                            itemQuantityStored: data[i].itemQuantityStored,
+                                            picture: "http://"+data[i].picture,
+                                            subTotal:data[i].subTotal,
+                                            visible: false,
+                                        });
+                                        k++;
+                                  }    
+                                  
+                            }     
+                          }
+                          else
+                          {
+                                if(this.shared.getTemplate() == 0)
+                                {
+                                    
+                                    this.item.push({
+                                              itemID: data[k].itemID,
+                                              itemName: data[k].itemName,
+                                              itemDescription: data[k].itemDescription,
+                                              itemPrice: data[k].itemPrice,
+                                              itemQuantityStored: data[k].itemQuantityStored,
+                                              picture: "http://"+data[k].picture,
+                                              subTotal:data[k].subTotal,
+                                              visible: false,
+                                          });
+                                          this.vis=false;
+                                          k++;
+                                        
+                                }
+                          }     
+                                        
+                          if(k < this.item.length)
+                          {
+                              let dif = this.item.length - k;
+                              let test;
+                              for(dif;dif>0;dif--)
+                              {
+                                      test=this.item.pop();
+                                  //   console.log(test);
+                              }
+                          }
+                          i=0;   
+                          // console.log(this.items.data);                
+                          // console.log("latestest");      
+                  //this.items.data = data;
+              this.subscribeToData();
+                  console.log(this.item);
+            }
+        },
+        function (error) {
+            console.log(error);
+        },
+        function () {
+           // console.log("complete");
+        }
+        );
+        
+    }
+    private subscribeToData(): void {
+
+        this.timerSubscription = Observable.timer(3000)
+            .subscribe(() => this.refreshData());
+    }
+     public ngOnDestroy(): void {
+
+            if (this.postsSubscription) {
+            this.postsSubscription.unsubscribe();
+            }
+            if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+            }
+    }
 }

@@ -7,15 +7,17 @@
   </ion-navbar>
 </ion-header>
 <ion-footer>
-     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky><b>Create Template</b></button>
+     <button class ="templatebtn"ion-button block (click)="gotoTempGet()" sticky *ngIf="!check"><b>Create Template</b></button>
+     <button class ="templatebtn"ion-button block (click)="gotoTempEdit()" sticky *ngIf="check"><b>Save</b></button>
 </ion-footer>
 <ion-content>
+   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     <ion-card  *ngFor="let items of item">
     <ion-item class="items">
       <ion-thumbnail item-left>
       <img src="{{items.picture}}"></ion-thumbnail>
-      <h2 style="color:#EBC137">{{items.itemName}}</h2>
-      <h3 style="color:white">{{items.itemDescription}}</h3>
+      <h2 style="color:#2d42e5">{{items.itemName}}</h2>
+      <h3 style="color:#2d42e5">{{items.itemDescription}}</h3>
       
             <h5><button class="btn" ion-button icon-only (click)="sendtoTempGet(items.itemID, items.itemName, items.itemDescription, items.itemPrice, items.itemQuantityStored, items.picture, items.visible)"*ngIf="!items.visible">
               Add</button></h5>
