@@ -62,6 +62,7 @@ export class OrderPage {
     console.log("in2");
     this.load=false;
     this.leave=false;
+    
     this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
 		this.item2=res;
       
@@ -102,7 +103,7 @@ export class OrderPage {
           else
           this.vis=false;
       }
-
+      
      // console.log(this.shared.getCart().length)
       
 
