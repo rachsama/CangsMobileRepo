@@ -12,16 +12,16 @@
 
 <ion-content>
     <ion-item>
-      <ion-label style="color:white" stacked><h2>Template Name</h2></ion-label>
-     <ion-input  style="color:white; "type="text" [(ngModel)]="tempName"></ion-input>
+      <ion-label style="color:#2d42e5" stacked><h2>Template Name</h2></ion-label>
+     <ion-input  style="color:black; "type="text" [(ngModel)]="tempName"></ion-input>
     </ion-item>
     <ion-card *ngFor="let items of tempgetData">
         <ion-item>
             <ion-thumbnail item-left>
             <img src="{{items.picture}}"></ion-thumbnail>
-            <h2 style="color:#EBC137 ">{{items.itemName}}</h2>
-            <h3 style="color:white; ">{{items.itemDescription}}</h3>
-             <ion-icon (click)="remove(item.itemID)" class="icon" name="close-circle"></ion-icon>
+            <h2 style="color:#2d42e5; ">{{items.itemName}}</h2>
+            <h3 style="color:#2d42e5; ">{{items.itemDescription}}</h3>
+             
         </ion-item>
     </ion-card>
 

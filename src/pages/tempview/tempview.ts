@@ -10,6 +10,7 @@ import { SharedService } from '../../app/app.service';
 import { TempCategPage } from '../../pages/tempcateg/tempcateg';
 import { SeeTempService } from '../../pages/seetemp/seetemp.service';
 import { OrderService } from '../../pages/order/order.service';
+import { LoadingController } from 'ionic-angular';
 @Component({
   selector: 'page-tempview',
   templateUrl: 'tempview.html'
@@ -19,7 +20,11 @@ export class TempViewPage {
   selected:any = [];
   public temp: any=[];
   public cartData: any=[];
-  constructor(public tvserv: TempViewService, public ord: OrderService, public seet: SeeTempService,private shared: SharedService, private network: Network, public toastCtrl:ToastController ,private tempv: TempViewService ,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public tvserv: TempViewService, public ord: OrderService, 
+  public seet: SeeTempService,private shared: SharedService, private network: Network, 
+  public toastCtrl:ToastController ,private tempv: TempViewService ,public navCtrl: NavController,
+  public loadingCtrl: LoadingController, 
+  public navParams: NavParams) {
     this.tempv.getTemplate().subscribe(res => {
 		  this.item=res;
       console.log(this.item);
@@ -88,12 +93,55 @@ export class TempViewPage {
     delTemp(templateID){
         this.tvserv.deleteTemplate(templateID);
         //this.navCtrl.setRoot(TempCategPage);
+         let loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            cssClass: "loader"
+        });
+         loading.present();
+        setTimeout(() => {
         this.tempv.getTemplate().subscribe(data => {
            
             var i=0;
+                console.log(data);
                for (let temp of data)
                 {
-                        
+                        console.log("insidedel");
+                                //data[0].picture=this.sanitizer.bypassSecurityTrustUrl(data[0].picture);
+                                //console.log(data);
+                                this.item[i]=({
+                                    'templateID': temp.templateID, 
+                                    'customerID': temp.customerID, 
+                                    'templateName': temp.templateName, 
+                        			
+                                });
+                                i=i+1;//FINISH REFRESH DATA AND ERROR TRAPPING FOR ITEM PRICE
+                                
+                                //console.log(item);
+                                //console.log(i);
+                        }
+                        if(i < this.item.length)
+                        {
+                            let dif = this.item.length - i;
+                            let test;
+                            for(dif;dif>0;dif--)
+                            {
+                                    test=this.item.pop();
+                                    console.log(test);
+                            }
+                }
+                        i=0;   
+        });
+        loading.dismiss();
+        }, 3000)
+    }
+    ionViewWillEnter(){
+           this.tempv.getTemplate().subscribe(data => {
+           
+            var i=0;
+                console.log(data);
+               for (let temp of data)
+                {
+                        console.log("insidedel");
                                 //data[0].picture=this.sanitizer.bypassSecurityTrustUrl(data[0].picture);
                                 //console.log(data);
                                 this.item[i]=({
@@ -120,6 +168,5 @@ export class TempViewPage {
                         i=0;   
         });
         
-      }
-
+    } 
 }
