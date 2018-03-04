@@ -44,6 +44,32 @@ export class CartPage {
   fee:number=20;
   withfee:boolean=false;
   with:string ="";
+  
+
+  year: any;
+  day: any;
+  month: any;
+  hour: any;
+  minutes: any;
+  date: any;
+
+  intyear: number;
+  intday: number;
+  intmonth: number;
+  inthour: number;
+  intminutes: number;
+  intdate: number;
+
+  trapyear: any;
+  trapday: any;
+  trapmonth: any;
+  traphour: any;
+  trapminutes: any;
+  trapdate: any;
+  
+  delDate: String = new Date(new Date().getTime()+(31500000)).toISOString();
+  timetrap: String = new Date(new Date().getTime()+(31500000)).toISOString();
+  orderTime: String = new Date(new Date().getTime()+(28800000)).toISOString();
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
@@ -54,6 +80,37 @@ export class CartPage {
                private shared: SharedService,
                public log:LoginService) {
                  //Network
+           this.trapyear = this.timetrap.substring(0,4);
+          console.log(this.trapyear);
+
+          this.trapday = this.timetrap.substring(8,10);
+          console.log(this.trapday);
+
+          this.trapmonth = this.timetrap.substring(5,7);
+          console.log(this.trapmonth);
+
+          this.traphour = this.timetrap.substring(11,13);
+          console.log(this.traphour);
+
+          this.trapminutes = this.timetrap.substring(14,16);
+          console.log(this.trapminutes);
+
+
+          //trap to int
+          this.trapyear = parseInt(this.trapyear);
+          console.log(this.trapyear)
+
+          this.trapday = parseInt(this.trapday);
+          console.log(this.trapday)
+    
+          this.trapmonth = parseInt(this.trapmonth);
+          console.log(this.trapmonth)
+
+          this.traphour = parseInt(this.traphour);
+          console.log(this.traphour)
+
+          this.trapminutes = parseInt(this.trapminutes);
+          console.log(this.trapminutes)
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
               message: 'Device is online',
@@ -93,20 +150,56 @@ export class CartPage {
       this.refreshData();
   }
 
-  addOrder(delLocation, packaging, delTime, remarks, coh){
+  addOrder(delLocation, packaging, delDate, remarks, coh){
+        console.log(delDate);
+        console.log(this.orderTime);
+        this.year = delDate.substring(0,4);
+        console.log(this.year);
+
+        this.day = delDate.substring(8,10);
+        console.log(this.day + "day");
+
+        this.month = delDate.substring(5,7);
+        console.log(this.month + "month");
+
+        this.hour = delDate.substring(11,13);
+        console.log(this.hour);
+
+        this.minutes = delDate.substring(14,16);
+        console.log(this.minutes);
+
+        
+    //to int
+        this.intyear = parseInt(this.year);
+        console.log(this.intyear)
+
+        this.intday = parseInt(this.day);
+        console.log(this.intday + "day")
+        
+        this.intmonth = parseInt(this.month);
+        console.log(this.intmonth + "month")
+
+        this.inthour = parseInt(this.hour);
+        console.log(this.inthour)
+
+        this.intminutes = parseInt(this.minutes);
+        console.log(this.intminutes)
+    //
+        console.log(this.totalcount);
+
         for(var t=0;t<this.orderData.length;t++)
         {
                for(var a=0;a<this.stored.length;a++)
                {
-                    console.log("inside 2ndloop");
+                   
                     if(this.stored[a].itemID == this.orderData[t].itemID)
                     {
-                        console.log("inside 1sttrue");
+                        
                         if(this.stored[a].itemQuantityStored >= this.orderData[t].quantity)
                         { 
                               console.log(this.stored[a].itemQuantityStored);
                               console.log(this.orderData[t].quantity);
-                              console.log("inside true");
+                              
                         }
                         else
                         {
@@ -121,9 +214,84 @@ export class CartPage {
         }
         if(this.error.length ==0)
         {
-        
-            if(coh > 1 && coh > this.totalcount)
+              if((this.intmonth<this.trapmonth) || (this.intmonth==this.trapmonth && this.intday<this.trapday)){
+              this.toastCtrl.create({
+                message: 'Please set proper a date',
+                position: 'middle',
+                duration: 3000,
+              }).present();
+            }
+             else if((this.inthour<this.traphour) || (this.inthour==this.traphour && this.intminutes<this.trapminutes)){
+              this.toastCtrl.create({
+                message: 'Please set proper a time',
+                position: 'middle',
+                duration: 3000,
+              }).present();
+            }
+            else if(coh > 1 && coh > this.totalcount)
             {
+                if((this.inthour>=18 && this.intminutes>30) && (this.inthour<=23 && this.intminutes<=59))//night
+                {
+                  this.toastCtrl.create({
+                    message: 'Your order will be delivered tomorrow around 10:45 in the morning',
+                    duration: 3000,
+                  }).present();
+
+                  this.hour='10';
+                  this.minutes='45';
+
+                  if(((this.intmonth == 1) || (this.intmonth == 3) || (this.intmonth == 5) || (this.intmonth == 7) ||
+                  (this.intmonth == 8) || (this.intmonth == 10) || (this.intmonth == 12)) && (this.intday == 31)) 
+                  {
+                    this.day='01';
+
+                    if(this.intmonth == 12){
+                      this.month='01'
+                      this.intyear++;
+                      this.year= this.intyear.toString();
+                    }
+                    else{
+                      this.intmonth++;
+                      this.month=this.intmonth.toString();
+                    }
+                  }
+                  else if(((this.intmonth == 4) || (this.intmonth == 6) || (this.intmonth == 9) || (this.intmonth == 11))  && (this.intday == 30))
+                  {
+                    this.day='01';
+                    this.intmonth++;
+                    this.month=this.intmonth.toString();
+                  }
+                  else if(this.intmonth == 2)
+                  {
+                    if(( (this.intyear%4) == 0) && (this.intday == 29))
+                    {
+                      this.day='01';
+                      this.intmonth++;
+                      this.month=this.intmonth.toString();
+                    }
+                    else
+                    {
+                      this.day='01';
+                      this.intmonth++;
+                      this.month=this.intmonth.toString();
+                    }
+                  }
+                  else 
+                  {
+                    this.intday++;
+                    this.day= this.intday.toString(); 
+                  }
+                }
+                else if(this.inthour>=0 && this.inthour<10)//day
+                {
+                  this.toastCtrl.create({
+                    message: 'Your order will be delivered today around 10:45 in the morning',
+                    duration: 3000,
+                  }).present();
+
+                  this.hour='10';
+                  this.minutes='45';
+                }
                 for(var i=0; i<this.orderData.length; i++){
                   console.log(this.orderData[i].quantity)
                   this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
@@ -137,15 +305,16 @@ export class CartPage {
                   let hh =time.getHours();
                   let ss =time.getSeconds();
                   let min =time.getMinutes();
-                  let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
-
+                 // let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
+                this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes;
+                console.log(this.date);
                 this.sendOrder.push({
-                "orderDate": timestamp,
+                "orderDate": this.orderTime,
                 "orderTotal": this.total,
                 "orderStatus": 'pending',
                 "orderRemarks": remarks,
                 "location": delLocation,
-                "orderTime": delTime,
+                "orderTime": this.date,
                 "packaging": packaging,
                 "customerID": this.shared.getUserName(),
                 "cashTendered": coh,
@@ -163,7 +332,7 @@ export class CartPage {
             else{
                 this.toastCtrl.create({
                     message: 'Your cash tendered is less than total amount',
-                    duration: 1500,
+                    duration: 3000,
                   }).present();
             }
             
