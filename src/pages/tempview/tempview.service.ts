@@ -24,14 +24,9 @@ export class TempViewService{
     }
      
     getTemplate(){
-        return new Promise(resolve => {
-            this._http.get(this._apiUrl +  '/template/returnCustomerID/' + this.shared.getUserName() ).map(res => res.json()).subscribe(data => {
-            this.post = data;        
-            resolve(this.post);
-            console.log(this.post);
-        });
-        }
-    )};
+      
+            return this._http.get(this._apiUrl +  '/template/returnCustomerID/' + this.shared.getUserName() ).map(res => res.json());
+    }
 /*
     deleteTemplate(templateID){
         let headers = new Headers();
@@ -59,6 +54,38 @@ export class TempViewService{
         })
     };
     */
+       deleteTemplate(templateID){
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        let reqopt = new RequestOptions({
+        headers: headers
+        })
+
+        console.log(templateID);
+        if (typeof templateID === "number"){
+            console.log(templateID);
+            this.data.push({
+                "templateID": templateID
+            });
+            console.log(this.data);
+        }
+        //create loader
+        //let loading = this.loadingCtrl.create({
+        //    content: 'Please wait...',
+        //    cssClass: "loader"
+        //});
+        //loading.present();
+        //
+        return new Promise(resolve => {
+            this._http.post(this._apiUrl + '/template/deleteTemplate/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+             alert("Template has been Successfully Deleted!")
+            this.data.pop();
+            });
+        })
+    };
     editTemp(data){
         let headers = new Headers();
          headers.append('Content-Type', 'application/x-www-form-urlencoded');

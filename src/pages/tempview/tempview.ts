@@ -20,7 +20,7 @@ export class TempViewPage {
   public temp: any=[];
   public cartData: any=[];
   constructor(public tvserv: TempViewService, public ord: OrderService, public seet: SeeTempService,private shared: SharedService, private network: Network, public toastCtrl:ToastController ,private tempv: TempViewService ,public navCtrl: NavController, public navParams: NavParams) {
-    this.tempv.getTemplate().then(res => {
+    this.tempv.getTemplate().subscribe(res => {
 		  this.item=res;
       console.log(this.item);
     });
@@ -85,8 +85,41 @@ export class TempViewPage {
  
      this.navCtrl.push(TempCategPage);
    }*/
- 
-   
- 
+    delTemp(templateID){
+        this.tvserv.deleteTemplate(templateID);
+        //this.navCtrl.setRoot(TempCategPage);
+        this.tempv.getTemplate().subscribe(data => {
+           
+            var i=0;
+               for (let temp of data)
+                {
+                        
+                                //data[0].picture=this.sanitizer.bypassSecurityTrustUrl(data[0].picture);
+                                //console.log(data);
+                                this.item[i]=({
+                                    'templateID': temp.templateID, 
+                                    'customerID': temp.customerID, 
+                                    'templateName': temp.templateName, 
+                        			
+                                });
+                                i=i+1;//FINISH REFRESH DATA AND ERROR TRAPPING FOR ITEM PRICE
+                                
+                                //console.log(item);
+                                //console.log(i);
+                        }
+                        if(i < this.item.length)
+                        {
+                            let dif = this.item.length - i;
+                            let test;
+                            for(dif;dif>0;dif--)
+                            {
+                                    test=this.item.pop();
+                                    console.log(test);
+                            }
+                }
+                        i=0;   
+        });
+        
+      }
 
 }

@@ -8,6 +8,56 @@
 </ion-header>
 
 <ion-content class="card-background-page">
+<!--
+     <ion-card>
+        <img src="img/card-saopaolo.png"/>
+        <div class="card-title">São Paulo</div>
+        <div class="card-subtitle">41 Listings</div>
+        </ion-card>
+
+        <ion-card>
+        <img src="img/card-amsterdam.png"/>
+        <div class="card-title">Amsterdam</div>
+        <div class="card-subtitle">64 Listings</div>
+        </ion-card>
+
+        <ion-card>
+        <img src="img/card-sf.png"/>
+        <div class="card-title">San Francisco</div>
+        <div class="card-subtitle">72 Listings</div>
+        </ion-card>
+
+        <ion-card>
+        <img src="img/card-madison.png"/>
+        <div class="card-title">Madison</div>
+        <div class="card-subtitle">28 Listings</div>
+        </ion-card>
+-->
+        <ion-card class="dry" (click)="gotoOrder('Dry Goods')">
+            <img src="assets/imgs/food.png"/>
+           
+        </ion-card>
+        <ion-card class="bev" (click)="gotoOrder('Non-chilled Beverages')">
+                <img src="assets/imgs/beverage.png"/>
+                
+        </ion-card>
+        <ion-card class="cond" (click)="gotoOrder('Condiments')">
+                <img src="assets/imgs/condiments.png"/>
+              
+        </ion-card>
+        <ion-card class="dairy" (click)="gotoOrder('Dairy Products')">
+                <img src="assets/imgs/dairy.png"/>
+               
+        </ion-card>
+        <ion-card class="toi" (click)="gotoOrder('Toiletries')">
+                <img src="assets/imgs/toiletries.png"/>
+                
+        </ion-card>
+        <ion-card class="misc" (click)="gotoOrder('Miscellaneous')">
+                <img src="assets/imgs/misc.png"/>
+                
+        </ion-card>
+<!--
     <ion-card class="dry" (click)="gotoOrder('Dry Goods')">
             <img src="assets/imgs/food.png"/>
             <div class="card-title">Dry Goods</div>
@@ -32,4 +82,5 @@
             <img src="assets/imgs/misc.png"/>
             <div class="card-title6">Miscellaneous</div>
     </ion-card>
+    -->
 </ion-content>

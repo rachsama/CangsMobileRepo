@@ -176,6 +176,7 @@ export class CartPage {
                 alert("The item " + this.error[x].itemName + " currently has " + this.error[x].quantity + " items left. \nPlease adjust order accordingly.");
             }
       }
+      this.error=[];
       console.log(this.error);
 
   }

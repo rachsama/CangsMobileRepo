@@ -1,4 +1,5 @@
 page-category{
+    /*
         .card-background-page {
 
             ion-card.dry {
@@ -102,7 +103,22 @@ page-category{
         width:50%;
         left:70px;
     }
+*/
+.content{
+        background: #E8E8E8;
+    }
+.card-background-page {
 
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+  img{
+      position:relative;
+      left:0px;
+      width:100%;
+  }
+}
     
     
 }

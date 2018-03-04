@@ -37,14 +37,14 @@ export class HistoryPage {
                   //Network
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Online',
+              message: 'Device is online',
               duration: 2500,
             }).present();
           });
 
           this.network.onDisconnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Offline',
+              message: 'Device is offline',
               duration: 2500,
             }).present();
             this.shared.clearUserName();
