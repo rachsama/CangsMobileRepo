@@ -65,7 +65,6 @@ export class CartPage {
   delDate: String = new Date(new Date().getTime()+(31500000)).toISOString();
   timetrap: String = new Date(new Date().getTime()+(31500000)).toISOString();
   orderTime: String = new Date(new Date().getTime()+(28800000)).toISOString();
-  orderGo: boolean=true;
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
@@ -79,10 +78,10 @@ export class CartPage {
           this.trapyear = this.timetrap.substring(0,4);
           console.log(this.trapyear);
 
-          this.trapday = this.timetrap.substring(5,7);
+          this.trapday = this.timetrap.substring(8,10);
           console.log(this.trapday);
 
-          this.trapmonth = this.timetrap.substring(8,10);
+          this.trapmonth = this.timetrap.substring(5,7);
           console.log(this.trapmonth);
 
           this.traphour = this.timetrap.substring(11,13);
@@ -151,11 +150,11 @@ export class CartPage {
     this.year = delDate.substring(0,4);
     console.log(this.year);
 
-    this.day = delDate.substring(5,7);
-    console.log(this.day);
+    this.day = delDate.substring(8,10);
+    console.log(this.day + "day");
 
-    this.month = delDate.substring(8,10);
-    console.log(this.month);
+    this.month = delDate.substring(5,7);
+    console.log(this.month + "month");
 
     this.hour = delDate.substring(11,13);
     console.log(this.hour);
@@ -169,10 +168,10 @@ export class CartPage {
     console.log(this.intyear)
 
     this.intday = parseInt(this.day);
-    console.log(this.intday)
+    console.log(this.intday + "day")
     
     this.intmonth = parseInt(this.month);
-    console.log(this.intmonth)
+    console.log(this.intmonth + "month")
 
     this.inthour = parseInt(this.hour);
     console.log(this.inthour)
@@ -183,41 +182,78 @@ export class CartPage {
 
     console.log(this.totalcount);
 
-    if(this.intmonth==this.trapmonth && this.intday<this.trapday){
+    if((this.intmonth<this.trapmonth) || (this.intmonth==this.trapmonth && this.intday<this.trapday)){
       this.toastCtrl.create({
         message: 'Please set proper dates.2',
         position: 'middle',
         duration: 1500,
       }).present();
     }
-    else if(this.intmonth<this.trapmonth){
-      this.toastCtrl.create({
-        message: 'Please set proper dates.1',
-        position: 'middle',
-        duration: 1500,
-      }).present();
-    }
     else if((coh > 1 && coh > this.totalcount))
       {
-        if((this.inthour==18 && this.minutes>30) && (this.inthour<=23 && this.minutes<=59)){
+        if((this.inthour>=18 && this.intminutes>30) && (this.inthour<=23 && this.intminutes<=59))//night
+        {
           this.toastCtrl.create({
-            message: 'Your order will be delivered tomorrow around 10 in the morning.',
+            message: 'Your order will be delivered tomorrow around 10:45 in the morning.',
             duration: 1500,
           }).present();
 
           this.hour='10';
-          this.minutes='00';
-        }
+          this.minutes='45';
 
-        if((this.inthour>=0 && this.inthour<10)){
+          if(((this.intmonth == 1) || (this.intmonth == 3) || (this.intmonth == 5) || (this.intmonth == 7) ||
+          (this.intmonth == 8) || (this.intmonth == 10) || (this.intmonth == 12)) && (this.intday == 31)) 
+          {
+            this.day='01';
+
+            if(this.intmonth == 12){
+              this.month='01'
+              this.intyear++;
+              this.year= this.intyear.toString();
+            }
+            else{
+              this.intmonth++;
+              this.month=this.intmonth.toString();
+            }
+          }
+          else if(((this.intmonth == 4) || (this.intmonth == 6) || (this.intmonth == 9) || (this.intmonth == 11))  && (this.intday == 30))
+          {
+            this.day='01';
+            this.intmonth++;
+            this.month=this.intmonth.toString();
+          }
+          else if(this.intmonth == 2)
+          {
+            if(( (this.intyear%4) == 0) && (this.intday == 29))
+            {
+              this.day='01';
+              this.intmonth++;
+              this.month=this.intmonth.toString();
+            }
+            else
+            {
+              this.day='01';
+              this.intmonth++;
+              this.month=this.intmonth.toString();
+            }
+          }
+          else 
+          {
+            this.intday++;
+            this.day= this.intday.toString(); 
+          }
+        }
+        else if(this.inthour>=0 && this.inthour<10)//day
+        {
           this.toastCtrl.create({
-            message: 'Your order will be delivered today around 10 in the morning.',
+            message: 'Your order will be delivered today around 10:45 in the morning.',
             duration: 1500,
           }).present();
 
           this.hour='10';
-          this.minutes='00';
+          this.minutes='45';
         }
+
         for(var i=0; i<this.orderData.length; i++){
           console.log(this.orderData[i].quantity)
           this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
