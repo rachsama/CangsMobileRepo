@@ -57,7 +57,7 @@ export class LoginPage {
 				//	alert("DATA RETRIEVED LOGIN");
 				}, function (error) {
 				//	alert("DATA NOT RETRIEVED LOGIN");
-					alert(error);
+					//alert(error);
 				},);
 				
 				this.refreshData();
@@ -111,7 +111,7 @@ export class LoginPage {
 					else
 					{
 						if(!this.match)
-						this.error="Invalid Username";		
+						this.error="Invalid username";		
 					}
 					
 					console.log(data.cusPassword);
@@ -119,7 +119,7 @@ export class LoginPage {
 				this.presentToast();
 			}
 			else
-			alert("You are not connected to the Internet!")
+			alert("You are not connected to the internet!")
 		}
 		else
 		{
@@ -128,18 +128,18 @@ export class LoginPage {
 			{
 				if(this.user == null || this.user == "")
 				{
-					this.error="Please Enter Username";
+					this.error="Please enter username";
 					this.presentToast();
 				}
 				if(this.pass == null || this.pass == "")
 				{
-					this.error="Please Enter Password";
+					this.error="Please enter password";
 					this.presentToast();
 				}
 			}
 			else
 			{
-				this.error="Please Fill Up Login Details";
+				this.error="Please fill up login details";
 				this.presentToast();
 
 			}

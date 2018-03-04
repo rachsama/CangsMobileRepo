@@ -30,14 +30,14 @@ export class EditInfoPage {
                 //Network
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Online',
+              message: 'Device is online',
               duration: 2500,
             }).present();
           });
 
           this.network.onDisconnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Offline',
+              message: 'Device is offline',
               duration: 2500,
             }).present();
             this.shared.clearUserName();
@@ -64,7 +64,7 @@ export class EditInfoPage {
                 console.log(this.cus);
                 this.log.editCustomer(this.cus[0]);
                 setTimeout (() => {
-                    this.msg="You have Successfully Updated Your Information!";
+                    this.msg="You have successfully updated your information!";
                     this.presentToast();
                     this.verificationCode="";
                 }, 1000)
@@ -72,7 +72,7 @@ export class EditInfoPage {
         }
         else
         {
-            this.msg="Please fill up form";
+            this.msg="Please fill up the form";
             this.presentToast();
             this.msg="";
         }

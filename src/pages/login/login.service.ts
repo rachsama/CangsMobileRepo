@@ -47,7 +47,7 @@ export class LoginService{
         })
         this._http.post(this._apiUrl + "/customer/editCustomer",JSON.stringify(data), reqopt).subscribe(function(res){
             this.response=res;
-           // alert("The Customer has been Successfully Updated!");
+           
         });
      }
       forgotPass(user, fpasscode, cpass){
@@ -122,7 +122,7 @@ export class LoginService{
                         verificationCode:this.customer[0].verificationCode
                     });
                     this._http.post(this._apiUrl + "/customer/forgotPassword",JSON.stringify(this.data[0]), reqopt).subscribe(function(res){
-                        alert("Your New Password is " + cpass);
+                        alert("Your new password is " + cpass);
                     });
                 }
                 else if(this.customer[0].number == fpasscode)
@@ -142,11 +142,11 @@ export class LoginService{
                     console.log(this.data[0]);
                     console.log(this.customer[0]);
                     this._http.post(this._apiUrl + "/customer/forgotPassword",JSON.stringify(this.data[0]), reqopt).subscribe(function(res){
-                        alert("Your New Password is " + cpass);
+                        alert("Your new password is " + cpass);
                     });
                 }
                 else{
-                    alert("There has been an Error. Please Try Again.");
+                    alert("There has been an error. Please try again.");
                 }
                this.customer.pop();
                this.data.pop();

@@ -38,14 +38,14 @@ export class ResetPage {
                       //Network
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Online',
+              message: 'Device is online',
               duration: 2500,
             }).present();
           });
 
           this.network.onDisconnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Offline',
+              message: 'Device is offline',
               duration: 2500,
             }).present();
             this.shared.clearUserName();
@@ -116,7 +116,7 @@ export class ResetPage {
                                                                 this.newpass='';
                                                                 this.newpass2='';
                                                                 this.verificationCode='';
-                                                                this.error="Password Successfully Changed";
+                                                                this.error="Password successfully changed";
                                                                 this.presentToast();
                                                                 loading.dismiss();
                                                         }, 1000)
@@ -135,19 +135,19 @@ export class ResetPage {
                                         if(this.newpass == null)
                                         {
                                             console.log("test2")
-                                            this.error="Please Enter New Password";
+                                            this.error="Please enter new password";
                                             this.presentToast();
                                         }
                                         else if(this.newpass2 == null)
                                         {
                                             console.log("test2")
-                                            this.error="Please Re-Enter New Password";
+                                            this.error="Please re-enter new password";
                                             this.presentToast();
                                         }
                                         else
                                         {
                                             console.log("test2")
-                                            this.error="New Password does not Match";
+                                            this.error="New password does not match";
                                             this.presentToast();
                                         }
                                         
@@ -157,7 +157,7 @@ export class ResetPage {
                                 else
                                 {
                                     console.log("notfoundpass")
-                                    this.error="Incorrect Old Password"; 
+                                    this.error="Incorrect old password"; 
                                     this.presentToast();
                                 } 
                         }

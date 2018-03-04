@@ -85,14 +85,14 @@ export class TemplatePage {
 //Network
 				this.network.onConnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Online',
+						message: 'Device is online',
 						duration: 2500,
 					}).present();
 				});
 
 				this.network.onDisconnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Offline',
+						message: 'Device is offline',
 						duration: 2500,
 					}).present();
           this.shared.clearUserName();
@@ -193,7 +193,7 @@ export class TemplatePage {
 
     else if(this.shared.getTemplate().length == 0){
       let toast = this.toastCtrl.create({
-        message: 'Please Select Items',
+        message: 'Please select items',
         duration: 900,
         position: 'middle'
     });
@@ -233,7 +233,7 @@ export class TemplatePage {
  
      else if(this.shared.getTemplate().length == 0){
        let toast = this.toastCtrl.create({
-         message: 'Please Select Items',
+         message: 'Please select items',
          duration: 900,
          position: 'middle'
      });

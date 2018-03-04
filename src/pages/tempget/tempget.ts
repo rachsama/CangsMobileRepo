@@ -40,14 +40,14 @@ export class TempGetPage {
 //Network
 				this.network.onConnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Online',
+						message: 'Device is online',
 						duration: 2500,
 					}).present();
 				});
 
 				this.network.onDisconnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Offline',
+						message: 'Device is offline',
 						duration: 2500,
 					}).present();
           this.shared.clearUserName();
@@ -61,7 +61,7 @@ export class TempGetPage {
         console.log(this.shared.getTemplate()); 
         if(tempName == null || tempName == ""){
             let toast = this.toastCtrl.create({
-            message: 'Please Fill Template Name',
+            message: 'Please fill template name',
             duration: 3000,
             position: 'middle'
         });

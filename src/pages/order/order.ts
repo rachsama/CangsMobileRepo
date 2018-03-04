@@ -41,14 +41,14 @@ export class OrderPage {
                   //Network
     this.network.onConnect().subscribe(() => {
       this.toastCtrl.create({
-        message: 'Device is Online',
+        message: 'Device is online',
         duration: 2500,
       }).present();
     });
 
     this.network.onDisconnect().subscribe(() => {
       this.toastCtrl.create({
-        message: 'Device is Offline',
+        message: 'Device is offline',
         duration: 2500,
       }).present();
       this.shared.clearUserName();
@@ -225,7 +225,7 @@ export class OrderPage {
       }
       else if(this.shared.getCart().length == 0){
           let toast = this.toastCtrl.create({
-            message: 'Please Fill Your Cart',
+            message: 'Please fill your cart',
             duration: 2000,//kini siya
             position: 'middle'
         });
@@ -242,7 +242,7 @@ export class OrderPage {
             if(this.shared.getCart().length==0 && this.init)
             {
                   let toast = this.toastCtrl.create({
-                    message: "Please Fill up your Cart",
+                    message: "Please fill up your cart",
                     duration: 3000,
                     position:"top",
                     });

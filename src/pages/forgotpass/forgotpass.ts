@@ -32,14 +32,14 @@ export class ForgotPassPage {
 //Network
 				this.network.onConnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Online',
+						message: 'Device is online',
 						duration: 2500,
 					}).present();
 				});
 
 				this.network.onDisconnect().subscribe(() => {
 					this.toastCtrl.create({
-						message: 'Device is Offline',
+						message: 'Device is offline',
 						duration: 2500,
 					}).present();
                 this.shared.clearUserName();
@@ -63,7 +63,7 @@ export class ForgotPassPage {
                 }
                 else if((fpasscode != this.cus[i].number) || (fpasscode != this.cus[i].verificationCode)){
                     this.toastCtrl.create({
-						message: 'Your Number or Verification Code is Incorrect. Please Try Again.',
+						message: 'Your number or verification code is incorrect. Please try again.',
 						duration: 2500,
 					}).present();
                 }
@@ -71,7 +71,7 @@ export class ForgotPassPage {
         }
         if (this.success == false){
             this.toastCtrl.create({
-				message: 'Username does not exist. Please Try Again.',
+				message: 'Username does not exist. Please try again.',
 				duration: 2500,
 			}).present();
         }

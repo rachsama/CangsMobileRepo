@@ -72,7 +72,7 @@ export class TemplateService{
             });
         }
         loading.dismiss(); // loader dismiss
-        alert("Your Template has been Successfully Created!");
+        alert("Your template has been successfully created!");
         }, 5000)
         this.sendTemplateDetails.length = 0;
     }
