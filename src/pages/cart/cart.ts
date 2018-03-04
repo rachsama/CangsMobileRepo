@@ -40,6 +40,32 @@ export class CartPage {
   fee:number=20;
   withfee:boolean=false;
   with:string ="";
+
+  year: any;
+  day: any;
+  month: any;
+  hour: any;
+  minutes: any;
+  date: any;
+
+  intyear: number;
+  intday: number;
+  intmonth: number;
+  inthour: number;
+  intminutes: number;
+  intdate: number;
+
+  trapyear: any;
+  trapday: any;
+  trapmonth: any;
+  traphour: any;
+  trapminutes: any;
+  trapdate: any;
+
+  delDate: String = new Date(new Date().getTime()+(31500000)).toISOString();
+  timetrap: String = new Date(new Date().getTime()+(31500000)).toISOString();
+  orderTime: String = new Date(new Date().getTime()+(28800000)).toISOString();
+  orderGo: boolean=true;
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
@@ -49,6 +75,39 @@ export class CartPage {
                public viewCtrl:ViewController,
                private shared: SharedService,
                public log:LoginService) {
+                 
+          this.trapyear = this.timetrap.substring(0,4);
+          console.log(this.trapyear);
+
+          this.trapday = this.timetrap.substring(5,7);
+          console.log(this.trapday);
+
+          this.trapmonth = this.timetrap.substring(8,10);
+          console.log(this.trapmonth);
+
+          this.traphour = this.timetrap.substring(11,13);
+          console.log(this.traphour);
+
+          this.trapminutes = this.timetrap.substring(14,16);
+          console.log(this.trapminutes);
+
+
+          //trap to int
+          this.trapyear = parseInt(this.trapyear);
+          console.log(this.trapyear)
+
+          this.trapday = parseInt(this.trapday);
+          console.log(this.trapday)
+    
+          this.trapmonth = parseInt(this.trapmonth);
+          console.log(this.trapmonth)
+
+          this.traphour = parseInt(this.traphour);
+          console.log(this.traphour)
+
+          this.trapminutes = parseInt(this.trapminutes);
+          console.log(this.trapminutes)
+          //
                  //Network
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
@@ -83,35 +142,96 @@ export class CartPage {
       if(this.shared.getCart().length==0)
       this.navCtrl.pop();
       console.log("CONSTRUCT CART");
-     
+
   }
 
-  addOrder(delLocation, packaging, delTime, remarks, coh){
-    console.log(this.totalcount);
-      if(coh > 1 && coh > this.totalcount)
-      {
-          for(var i=0; i<this.orderData.length; i++){
-            console.log(this.orderData[i].quantity)
-            this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
-          }    console.log(this.total);
-          
-          let time = new Date();
-            console.log(time);
-            let mm =time.getMonth();
-            let dd =time.getDate();
-            let yy =time.getFullYear();
-            let hh =time.getHours();
-            let ss =time.getSeconds();
-            let min =time.getMinutes();
-            let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
+  addOrder(delLocation, packaging, delDate, remarks, coh){
+    console.log(delDate);
+    console.log(this.orderTime);
+    this.year = delDate.substring(0,4);
+    console.log(this.year);
 
-          this.sendOrder.push({
-          "orderDate": timestamp,
+    this.day = delDate.substring(5,7);
+    console.log(this.day);
+
+    this.month = delDate.substring(8,10);
+    console.log(this.month);
+
+    this.hour = delDate.substring(11,13);
+    console.log(this.hour);
+
+    this.minutes = delDate.substring(14,16);
+    console.log(this.minutes);
+
+    
+//to int
+    this.intyear = parseInt(this.year);
+    console.log(this.intyear)
+
+    this.intday = parseInt(this.day);
+    console.log(this.intday)
+    
+    this.intmonth = parseInt(this.month);
+    console.log(this.intmonth)
+
+    this.inthour = parseInt(this.hour);
+    console.log(this.inthour)
+
+    this.intminutes = parseInt(this.minutes);
+    console.log(this.intminutes)
+//
+
+    console.log(this.totalcount);
+
+    if(this.intmonth==this.trapmonth && this.intday<this.trapday){
+      this.toastCtrl.create({
+        message: 'Please set proper dates.2',
+        position: 'middle',
+        duration: 1500,
+      }).present();
+    }
+    else if(this.intmonth<this.trapmonth){
+      this.toastCtrl.create({
+        message: 'Please set proper dates.1',
+        position: 'middle',
+        duration: 1500,
+      }).present();
+    }
+    else if((coh > 1 && coh > this.totalcount))
+      {
+        if((this.inthour==18 && this.minutes>30) && (this.inthour<=23 && this.minutes<=59)){
+          this.toastCtrl.create({
+            message: 'Your order will be delivered tomorrow around 10 in the morning.',
+            duration: 1500,
+          }).present();
+
+          this.hour='10';
+          this.minutes='00';
+        }
+
+        if((this.inthour>=0 && this.inthour<10)){
+          this.toastCtrl.create({
+            message: 'Your order will be delivered today around 10 in the morning.',
+            duration: 1500,
+          }).present();
+
+          this.hour='10';
+          this.minutes='00';
+        }
+        for(var i=0; i<this.orderData.length; i++){
+          console.log(this.orderData[i].quantity)
+          this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
+        }    console.log(this.total);
+        
+        this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes;
+        console.log(this.date);
+        this.sendOrder.push({
+          "orderDate": this.orderTime,
           "orderTotal": this.total,
           "orderStatus": 'pending',
           "orderRemarks": remarks,
           "location": delLocation,
-          "orderTime": delTime,
+          "orderTime": this.date,
           "packaging": packaging,
           "customerID": this.shared.getUserName()/*LoginService.customerID*/,
           "cashTendered": coh,
@@ -120,7 +240,7 @@ export class CartPage {
         this.viewCtrl.showBackButton(false);
         this.ord.makeOrder(this.sendOrder[0],this.orderData);
         
-         setTimeout (() => {
+        setTimeout (() => {
           this.viewCtrl.showBackButton(true);
           this.menu.enable(true,"myMenu");
           this.navCtrl.setRoot(CategoryPage);

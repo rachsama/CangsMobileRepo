@@ -111,7 +111,18 @@ export class OrderService{
              });
           }
     )};
-     get1Item(id:any){
+
+    getDate(){
+        return new Promise(resolve => {      
+            this._http.get(this._apiUrl + "/orders/returnDate").map(res => res.json()).subscribe(data => {
+                    this.post = data;        
+                    resolve(this.post);
+                    console.log(this.post);
+             });
+          }
+        )};
+
+    get1Item(id:any){
             return new Promise(resolve => {
                 var url = this._apiUrl + "/item/returnItem/"+ id;         
                 this._http.get(url).map(res => res.json()).subscribe(data => {
