@@ -5,7 +5,8 @@ import { OrderService } from '../../pages/order/order.service';
 import { LoginService } from '../../pages/login/login.service';
 import { OrderPage } from '../../pages/order/order';
 import { CategoryPage } from '../../pages/category/category';
-
+import { Observable } from 'rxjs/Rx';
+import { AnonymousSubscription } from "rxjs/Subscription";
 /**
  * Generated class for the CartPage page.
  *
@@ -28,8 +29,11 @@ export class CartPage {
   public sendOrder: any=[];
   public cartData: any=[];
   public cartData2: any=[];
+  private timerSubscription: AnonymousSubscription;
+  private postsSubscription: AnonymousSubscription;
   packaging: string='Plastic';
-  
+  public stored:any=[];
+  public error:any=[];
   ngOnInit () {
     this.packaging = 'Plastic';
   }
@@ -52,14 +56,14 @@ export class CartPage {
                  //Network
           this.network.onConnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Online',
+              message: 'Device is online',
               duration: 2500,
             }).present();
           });
 
           this.network.onDisconnect().subscribe(() => {
             this.toastCtrl.create({
-              message: 'Device is Offline',
+              message: 'Device is offline',
               duration: 2500,
             }).present();
             this.shared.clearUserName();
@@ -83,117 +87,204 @@ export class CartPage {
       if(this.shared.getCart().length==0)
       this.navCtrl.pop();
       console.log("CONSTRUCT CART");
-     
+      this.ord.getStored().subscribe(data =>{
+            this.stored=data;
+      });
+      this.refreshData();
   }
 
   addOrder(delLocation, packaging, delTime, remarks, coh){
-    console.log(this.totalcount);
-      if(coh > 1 && coh > this.totalcount)
-      {
-          for(var i=0; i<this.orderData.length; i++){
-            console.log(this.orderData[i].quantity)
-            this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
-          }    console.log(this.total);
-          
-          let time = new Date();
-            console.log(time);
-            let mm =time.getMonth();
-            let dd =time.getDate();
-            let yy =time.getFullYear();
-            let hh =time.getHours();
-            let ss =time.getSeconds();
-            let min =time.getMinutes();
-            let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
-
-          this.sendOrder.push({
-          "orderDate": timestamp,
-          "orderTotal": this.total,
-          "orderStatus": 'pending',
-          "orderRemarks": remarks,
-          "location": delLocation,
-          "orderTime": delTime,
-          "packaging": packaging,
-          "customerID": this.shared.getUserName()/*LoginService.customerID*/,
-          "cashTendered": coh,
-        });
-        console.log(this.sendOrder);
-        this.viewCtrl.showBackButton(false);
-        this.ord.makeOrder(this.sendOrder[0],this.orderData);
+        for(var t=0;t<this.orderData.length;t++)
+        {
+               for(var a=0;a<this.stored.length;a++)
+               {
+                    console.log("inside 2ndloop");
+                    if(this.stored[a].itemID == this.orderData[t].itemID)
+                    {
+                        console.log("inside 1sttrue");
+                        if(this.stored[a].itemQuantityStored >= this.orderData[t].quantity)
+                        { 
+                              console.log(this.stored[a].itemQuantityStored);
+                              console.log(this.orderData[t].quantity);
+                              console.log("inside true");
+                        }
+                        else
+                        {
+                          console.log("inside false");
+                              this.error.push({
+                                    "itemName":this.orderData[t].itemName,
+                                    "quantity":this.stored[a].itemQuantityStored,
+                              });
+                        }
+                    }
+               }      
+        }
+        if(this.error.length ==0)
+        {
         
-         setTimeout (() => {
-          this.viewCtrl.showBackButton(true);
-          this.menu.enable(true,"myMenu");
-          this.navCtrl.setRoot(CategoryPage);
-          }, 3000)	
+            if(coh > 1 && coh > this.totalcount)
+            {
+                for(var i=0; i<this.orderData.length; i++){
+                  console.log(this.orderData[i].quantity)
+                  this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
+                }    console.log(this.total);
+                
+                let time = new Date();
+                  console.log(time);
+                  let mm =time.getMonth();
+                  let dd =time.getDate();
+                  let yy =time.getFullYear();
+                  let hh =time.getHours();
+                  let ss =time.getSeconds();
+                  let min =time.getMinutes();
+                  let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
+
+                this.sendOrder.push({
+                "orderDate": timestamp,
+                "orderTotal": this.total,
+                "orderStatus": 'pending',
+                "orderRemarks": remarks,
+                "location": delLocation,
+                "orderTime": delTime,
+                "packaging": packaging,
+                "customerID": this.shared.getUserName(),
+                "cashTendered": coh,
+              });
+              console.log(this.sendOrder);
+              this.viewCtrl.showBackButton(false);
+              this.ord.makeOrder(this.sendOrder[0],this.orderData);
+              
+              setTimeout (() => {
+                this.viewCtrl.showBackButton(true);
+                this.menu.enable(true,"myMenu");
+                this.navCtrl.setRoot(CategoryPage);
+                }, 3000)	
+            }
+            else{
+                this.toastCtrl.create({
+                    message: 'Your cash tendered is less than total amount',
+                    duration: 1500,
+                  }).present();
+            }
+            
       }
-      else{
-           this.toastCtrl.create({
-              message: 'Your Cash Tendered is Less than Total Amount',
-              duration: 1500,
-            }).present();
+      else
+      {
+            for(var x=0;x<this.error.length;x++)
+            {
+
+                alert("The item " + this.error[x].itemName + " currently has " + this.error[x].quantity + " items left. \nPlease adjust order accordingly.");
+            }
       }
+      console.log(this.error);
+
   }
   change(itemID,subTotal,itemPrice,input){
-    
-      //console.log(input);
-      console.log(input._value);
-      console.log(this.orderData);
-      for(var i=0; i<this.orderData.length; i++){
-          if(this.orderData[i].itemID == itemID)
-          {
-                  this.orderData[i].subTotal = itemPrice * input._value;
-                  this.totalcount=0;
-              //   console.log(this.orderData);
+    console.log(!isNaN(input._value));
+      if(!Number.isNaN(Number(input._value)))
+      {
+          //console.log(input);
+          console.log("INSIDE TRUE");
+         // console.log(input._value);
+         // console.log(this.orderData);
+          for(var i=0; i<this.orderData.length; i++){
+              if(this.orderData[i].itemID == itemID)
+              {
+                      this.orderData[i].subTotal = itemPrice * input._value;
+                      this.totalcount=0;
+                  //   console.log(this.orderData);
+                      for(var j=0; j<this.orderData.length; j++) 
+                      {
+                        
+                          this.totalcount +=this.orderData[j].subTotal;
+                    //     console.log(this.totalcount);
+                      }                      
+                      if(this.totalcount < 520)
+                        {
+                            if(this.withfee==true)
+                            this.totalcount +=20;
+                            
+                            if(this.withfee==false)
+                            {
+                                this.withfee=true;
+                                this.with=" with Fee";
+                                this.totalcount +=20;
+                            }
+                    //        console.log(this.totalcount);
+                            
+                        }
+                        if(this.totalcount >= 520 && this.withfee)
+                        {
+                    //      console.log("infalse")
+                            this.withfee=false;
+                            this.with="";
+                            this.totalcount -=20;
+                        }
+              }
+              if(input._value == "" || input._value==0 || input._value > 999)
+              {
+                console.log(input._value);
+                console.log("inord");
+                input._value=1;
+                this.orderData[i].subTotal = itemPrice * input._value;
+                this.totalcount=0;
                   for(var j=0; j<this.orderData.length; j++) 
                   {
-                    
                       this.totalcount +=this.orderData[j].subTotal;
-                //     console.log(this.totalcount);
-                  }                      
-                  if(this.totalcount < 520)
-                    {
-                        if(this.withfee==true)
-                        this.totalcount +=20;
-                        
-                        if(this.withfee==false)
-                        {
-                            this.withfee=true;
-                            this.with=" with Fee";
-                            this.totalcount +=20;
-                        }
-                //        console.log(this.totalcount);
-                        
-                    }
-                    if(this.totalcount >= 520 && this.withfee)
-                    {
-                //      console.log("infalse")
-                        this.withfee=false;
-                        this.with="";
-                        this.totalcount -=20;
-                    }
-          }
-          if(input._value == "" || input._value==0 || input._value > 999)
-          {
+              //        console.log(this.totalcount);
+              //       console.log(this.orderData);
+                  }  
+              }
+          }        
+     }
+     else
+     {
             console.log(input._value);
-            console.log("inord");
-            input._value=1;
-            this.orderData[i].subTotal = itemPrice * input._value;
+            console.log("INSIDE FALSE");
+            input._value=Number(1);
+            console.log(input._value);
+            console.log(this.orderData);
             this.totalcount=0;
-              for(var j=0; j<this.orderData.length; j++) 
-              {
-                  this.totalcount +=this.orderData[j].subTotal;
-          //        console.log(this.totalcount);
-          //       console.log(this.orderData);
-              }  
-          }
-        
+            for(var j=0; j<this.orderData.length; j++) 
+            {
+                if(this.orderData[j].itemID == itemID)
+                {
+                    this.orderData[j].subTotal = itemPrice * input._value;
+                    this.orderData[j].quantity=Number(1);
+                }
+                this.totalcount +=this.orderData[j].subTotal;
+        //        console.log(this.totalcount);
+        //       console.log(this.orderData);
+            }
+            if(this.totalcount < 520)
+            {
+                if(this.withfee==true)
+                this.totalcount +=20;
+                
+                if(this.withfee==false)
+                {
+                    this.withfee=true;
+                    this.with=" with Fee";
+                    this.totalcount +=20;
+                }
+        //        console.log(this.totalcount);
+                
+            }
+            if(this.totalcount >= 520 && this.withfee)
+            {
+        //      console.log("infalse")
+                this.withfee=false;
+                this.with="";
+                this.totalcount -=20;
+            }
      }
       //console.log(input._value);
       
   }
   
   addQty(itemID,subTotal,itemPrice,input,quantity){
-     console.log(input._value);
+     
+      console.log(input._value);
        for(var i=0;i<this.orderData.length;i++)
       {
           if(this.orderData[i].itemID == itemID)
@@ -301,4 +392,64 @@ export class CartPage {
         }
       
   }
+  private refreshData(): void {
+         
+        this.postsSubscription = this.ord.getStored().subscribe(
+
+        data  => {
+                   // console.log(this.stop);
+                          var i=0;     
+                           for (let store of data)
+                            {
+                                    //data[0].picture=this.sanitizer.bypassSecurityTrustUrl(data[0].picture);
+                                    //console.log(data);
+                                    this.stored[i]=({
+                                        'itemID': store.itemID, 
+                                        'itemQuantityStored': store.itemQuantityStored, 
+                                                     				
+                                    });
+                                    i=i+1;//FINISH REFRESH DATA AND ERROR TRAPPING FOR ITEM PRICE
+                                    
+                                    //console.log(item);
+                                    //console.log(i);
+                            }
+                          if(i < this.stored.length)
+                          {
+                              let dif = this.stored.length -i;
+                              let test;
+                              for(dif;dif>0;dif--)
+                              {
+                                      test=this.stored.pop();
+                                  //   console.log(test);
+                              }
+                          }
+                          i=0;   
+                       
+              this.subscribeToData();
+              console.log(this.stored);
+            
+        },
+        function (error) {
+            console.log(error);
+        },
+        function () {
+           // console.log("complete");
+        }
+        );
+        
+    }
+    private subscribeToData(): void {
+
+        this.timerSubscription = Observable.timer(3000)
+            .subscribe(() => this.refreshData());
+    }
+     public ngOnDestroy(): void {
+
+            if (this.postsSubscription) {
+            this.postsSubscription.unsubscribe();
+            }
+            if (this.timerSubscription) {
+            this.timerSubscription.unsubscribe();
+            }
+    }
 }

@@ -38,6 +38,9 @@ export class OrderService{
      getHistory(){
         return this._http.get(this._apiUrl + "/orders/getHistory/" +this.shared.getUserName()).map((res:Response) => res.json());
      }
+     getStored(){
+        return this._http.get(this._apiUrl + "/orders/returnQuantityStored/").map((res:Response) => res.json());
+     }
 
     getTempItem(itemID){
         return new Promise(resolve => {
@@ -107,7 +110,7 @@ export class OrderService{
             this._http.get(this._apiUrl + "/customer/getCustomer/"+customer).map(res => res.json()).subscribe(data => {
                     this.post = data;        
                     resolve(this.post);
-                    console.log(this.post);
+              //      console.log(this.post);
              });
           }
     )};
@@ -117,7 +120,7 @@ export class OrderService{
                 this._http.get(url).map(res => res.json()).subscribe(data => {
                     this.post = data;        
                     resolve(this.post);
-                    console.log(this.post);
+            //        console.log(this.post);
             });
         }
     )};
@@ -127,7 +130,7 @@ export class OrderService{
                 this._http.get(url).map(res => res.json()).subscribe(data => {
                     this.post = data;        
                     resolve(this.post);
-                    console.log(this.post);
+            //        console.log(this.post);
             });
         }
     )};
@@ -139,13 +142,13 @@ export class OrderService{
             headers: headers
         })
 
-        console.log(category);
+      //  console.log(category);
         
-            console.log(category);
+        //    console.log(category);
             this.data.push({
                 "category": category
             });
-            console.log(this.data[0]);
+           // console.log(this.data[0]);
          
         return this._http.post(this._apiUrl + '/item/returnCategory/',JSON.stringify(this.data[0]), reqopt ).map(res => res.json());
        

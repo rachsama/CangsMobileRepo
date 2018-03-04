@@ -34,7 +34,6 @@ export class OrderPage {
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public toastCtrl: ToastController,
-                
                 private shared: SharedService,
                 private network: Network,
                 public menu: MenuController) {
@@ -314,10 +313,10 @@ export class OrderPage {
         this.postsSubscription = this.log.getCategoryItem(this.navParams.get('category')).subscribe(
 
         data  => {
-                    console.log(this.stop);
+                   // console.log(this.stop);
                     if(!this.stop)
                     {
-                          console.log(this.item2.length);
+                     //     console.log(this.item2.length);
                           var k =0;
                           this.item=[];
                           if(this.item2.length !=0)
@@ -416,7 +415,7 @@ export class OrderPage {
                           // console.log("latestest");      
                   //this.items.data = data;
               this.subscribeToData();
-                  console.log(this.item);
+               //   console.log(this.item);
             }
         },
         function (error) {
