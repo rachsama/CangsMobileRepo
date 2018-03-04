@@ -63,10 +63,10 @@ export class TempEditPage {
 //Network
     }
 
-    saveEditTemplate(tempName){
+    saveEditTemplate(templateName){
 
         console.log(this.shared.getTemplate()); 
-        if(tempName == null || tempName == ""){
+        if(templateName == null || templateName == ""){
             let toast = this.toastCtrl.create({
             message: 'Please Fill Template Name',
             duration: 3000,
@@ -75,10 +75,10 @@ export class TempEditPage {
 
         toast.present();
         }
-        else if(tempName != null || tempName != ""){
+        else if(templateName != null || templateName != ""){
             this.sendEdits.push({
                 "templateID": this.navParams.get('templateID'),//LoginService.customerID,
-                "templateName": tempName,
+                "templateName": templateName,
                 "customerID": this.shared.getUserName()
             });
 

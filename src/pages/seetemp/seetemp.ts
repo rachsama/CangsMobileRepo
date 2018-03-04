@@ -102,9 +102,9 @@ export class SeeTempPage {
                 itemName: data[0].itemName,
                 itemDescription: data[0].itemDescription,
                 itemPrice: data[0].itemPrice,
-               itemQuantityStored: data[0].itemQuantityStored,
+                itemQuantityStored: data[0].itemQuantityStored,
                 picture: data[0].picture,
-               subTotal:data[0].itemPrice,
+                subTotal:data[0].itemPrice,
                 visible: true
               });
 
@@ -122,6 +122,26 @@ export class SeeTempPage {
     console.log(this.navParams.get('templateName'));// delete
   
     } 
-   
+    gotoCart(){
+		console.log("to cart");
+    this.shared.cleanCart();
+    console.log(this.shared.getCart())
+     for(var i=0; i<this.tempItems.length; i++){
+      console.log(this.tempItems[i])
+      this.cartData.push({
+        itemID: this.tempItems[i].itemID,
+        itemName: this.tempItems[i].itemName,
+        itemDescription: this.tempItems[i].itemDescription,
+        itemPrice: this.tempItems[i].itemPrice,
+        itemQuantityStored: this.tempItems[i].itemQuantityStored,
+        picture: this.tempItems[i].picture,
+        subTotal:this.tempItems[i].itemPrice,
+        visible: true
+      })
+      this.shared.setCart(this.cartData);
+      this.cartData.pop();
+    }
+		this.navCtrl.push(CartPage);
+	  }
     
 }
