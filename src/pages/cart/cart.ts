@@ -184,7 +184,14 @@ export class CartPage {
 
     if((this.intmonth<this.trapmonth) || (this.intmonth==this.trapmonth && this.intday<this.trapday)){
       this.toastCtrl.create({
-        message: 'Please set proper dates.2',
+        message: 'Please set proper dates',
+        position: 'middle',
+        duration: 1500,
+      }).present();
+    }
+    else if((this.inthour<this.traphour) || (this.inthour==this.traphour && this.intminutes<this.trapminutes)){
+      this.toastCtrl.create({
+        message: 'Please set proper a time',
         position: 'middle',
         duration: 1500,
       }).present();
@@ -195,7 +202,7 @@ export class CartPage {
         {
           this.toastCtrl.create({
             message: 'Your order will be delivered tomorrow around 10:45 in the morning.',
-            duration: 1500,
+            duration: 2000,
           }).present();
 
           this.hour='10';
@@ -243,11 +250,11 @@ export class CartPage {
             this.day= this.intday.toString(); 
           }
         }
-        else if(this.inthour>=0 && this.inthour<10)//day
+        else if((this.inthour>=0 && this.inthour<10) || (this.inthour==10 && this.intminutes<45))//day
         {
           this.toastCtrl.create({
             message: 'Your order will be delivered today around 10:45 in the morning.',
-            duration: 1500,
+            duration: 2000,
           }).present();
 
           this.hour='10';
