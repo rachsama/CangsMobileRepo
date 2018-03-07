@@ -24,7 +24,8 @@ export class OrderPage {
   initial:boolean=false;
   load:boolean=false;
   leave:boolean=false;
-  constructor( private log: OrderService ,
+  time: any; //zane zane zane zane zane zane zane zane add this
+  constructor( private ord: OrderService , //zane zane zane zane zane zane zane zane zane [log:] replace [ord:]
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public toastCtrl: ToastController,
@@ -34,6 +35,11 @@ export class OrderPage {
                 public menu: MenuController) {
                   console.log("CONSTRUCT ORDER");
                   //Network
+    this.ord.getDate().then(res => { //zane zane zane zane start
+      this.time = res;
+      console.log(this.time);
+    }); // zane zane zane zane end
+
     this.network.onConnect().subscribe(() => {
       this.toastCtrl.create({
         message: 'Device is Online',
@@ -56,7 +62,7 @@ export class OrderPage {
     console.log("in2");
     this.load=false;
     this.leave=false;
-    this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+    this.ord.getCategoryItem(this.navParams.get('category')).then(res => {
 		this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){
@@ -189,9 +195,11 @@ export class OrderPage {
   }
 
   gotoCart(){
-      if(this.shared.getCart().length != 0){
+      if(this.shared.getCart().length != 0){ 
         console.log("to cart");
-        this.navCtrl.push(CartPage);
+        this.navCtrl.push(CartPage, {
+          time: this.time,//zane zane zane zane this line
+        });
       }
       else if(this.shared.getCart().length == 0){
           let toast = this.toastCtrl.create({
@@ -203,6 +211,7 @@ export class OrderPage {
         console.log(this.shared.getCart().length);
 	    }
   }
+
   ionViewWillEnter(){
        console.log("in");
        this.leave=false;
@@ -221,7 +230,7 @@ export class OrderPage {
             this.init=true;
             this.item2=[];
             this.item=[];
-            this.log.getCategoryItem(this.navParams.get('category')).then(res => {
+            this.ord.getCategoryItem(this.navParams.get('category')).then(res => {
                 this.item2=res;
                 for(var i=0; i<this.item2.length; i++){
                     for(var j=0; j<this.shared.getCart().length; j++)

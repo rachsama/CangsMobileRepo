@@ -6,14 +6,14 @@
 
 <ion-footer>
     
-        <button class="savebtn"ion-button (click)="saveEditTemplate(tempName)"sticky><b>Save Template</b></button>
+        <button class="savebtn"ion-button (click)="saveEditTemplate(templateName)"sticky><b>Save Template</b></button>
     
 </ion-footer>
 
 <ion-content>
     <ion-item>
       <ion-label style="color:black" stacked><h2>Template Name</h2></ion-label>
-     <ion-input  style="color:black" type="text" value="{{templateName}}" [(ngModel)]="tempName"></ion-input>
+     <ion-input  style="color:black" type="text" value="{{templateName}}" [(ngModel)]="templateName"></ion-input>
     </ion-item>
     <ion-card *ngFor="let items of tempgetData">
         <ion-item>

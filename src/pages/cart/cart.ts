@@ -32,6 +32,7 @@ export class CartPage {
   
   ngOnInit () {
     this.packaging = 'Plastic';
+    this.delDate = new Date(this.orderTime + 31500000).toISOString();
   }
   currentval:number = 1;
   total: number=0;
@@ -40,6 +41,8 @@ export class CartPage {
   fee:number=20;
   withfee:boolean=false;
   with:string ="";
+  address: string;
+  cus: any=[];
 
   year: any;
   day: any;
@@ -62,19 +65,39 @@ export class CartPage {
   trapminutes: any;
   trapdate: any;
 
-  delDate: String = new Date(new Date().getTime()+(31500000)).toISOString();
-  timetrap: String = new Date(new Date().getTime()+(31500000)).toISOString();
-  orderTime: String = new Date(new Date().getTime()+(28800000)).toISOString();
-  constructor( public navCtrl: NavController, 
-               public navParams: NavParams, 
-               public ord: OrderService, 
-               public toastCtrl: ToastController,
-               private network: Network,
-               public menu:MenuController,
-               public viewCtrl:ViewController,
-               private shared: SharedService,
-               public log:LoginService) {
+  delDate: String;//= new Date(new Date().getTime()+(31500000)).toISOString();
+  timetrap: String;//= new Date(new Date().getTime()+(31500000)).toISOString();
+  orderTime: any;
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public ord: OrderService, 
+              public toastCtrl: ToastController,
+              private network: Network,
+              public menu:MenuController,
+              public viewCtrl:ViewController,
+              private shared: SharedService,
+              public log:LoginService) {
+                this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
+					        this.cus=res;
+                  console.log(this.cus);
+                  this.address= this.cus[0].barangay + ", " + this.cus[0].address;
+                  console.log(this.address);
+				        }, function (error) {
+					      alert(error);
+				        },);
+                
+                console.log(this.navParams.get('time'));
+                this.orderTime = this.navParams.get('time').substring(6,19);
+                this.orderTime = parseInt(this.orderTime);
+                this.delDate = new Date(this.orderTime + 31500000).toISOString();
+                console.log(this.orderTime);
+                console.log(this.delDate + "delDate");
+                this.timetrap = new Date(this.orderTime + 31500000).toISOString();
+                console.log(this.timetrap);
+
+
                  
+
           this.trapyear = this.timetrap.substring(0,4);
           console.log(this.trapyear);
 
@@ -144,7 +167,7 @@ export class CartPage {
 
   }
 
-  addOrder(delLocation, packaging, delDate, remarks, coh){
+  addOrder(address, packaging, delDate, remarks, coh){
     console.log(delDate);
     console.log(this.orderTime);
     this.year = delDate.substring(0,4);
@@ -200,10 +223,11 @@ export class CartPage {
       {
         if((this.inthour>=18 && this.intminutes>30) && (this.inthour<=23 && this.intminutes<=59))//night
         {
-          this.toastCtrl.create({
-            message: 'Your order will be delivered tomorrow around 10:45 in the morning.',
-            duration: 2000,
-          }).present();
+          // alert("Your order will be delivered  at around 10:45 in the morning");
+          // this.toastCtrl.create({
+          //   message: 'Your order will be delivered tomorrow around 10:45 in the morning.',
+          //   duration: 2000,
+          // }).present();
 
           this.hour='10';
           this.minutes='45';
@@ -249,13 +273,16 @@ export class CartPage {
             this.intday++;
             this.day= this.intday.toString(); 
           }
+
+          alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning");
         }
         else if((this.inthour>=0 && this.inthour<10) || (this.inthour==10 && this.intminutes<45))//day
         {
-          this.toastCtrl.create({
+          alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning.");
+          /*this.toastCtrl.create({
             message: 'Your order will be delivered today around 10:45 in the morning.',
             duration: 2000,
-          }).present();
+          }).present();*/
 
           this.hour='10';
           this.minutes='45';
@@ -273,7 +300,7 @@ export class CartPage {
           "orderTotal": this.total,
           "orderStatus": 'pending',
           "orderRemarks": remarks,
-          "location": delLocation,
+          "location": address,
           "orderTime": this.date,
           "packaging": packaging,
           "customerID": this.shared.getUserName()/*LoginService.customerID*/,

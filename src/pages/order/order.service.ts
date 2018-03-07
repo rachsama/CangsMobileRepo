@@ -20,9 +20,9 @@ export class OrderService{
     public data: any=[];
     constructor(private _http: Http, 
                 public shared:SharedService,
-                 public menu :MenuController,
-                 public loadingCtrl: LoadingController,
-                 ){
+                public menu :MenuController,
+                public loadingCtrl: LoadingController,
+                ){
         console.log("GetItems");
     }
     
@@ -35,10 +35,13 @@ export class OrderService{
         });
         }
      )};
+
+     //zane zane zane zane zane zane zane start
      getHistory(){
         return this._http.get(this._apiUrl + "/orders/getHistory/" +this.shared.getUserName()).map((res:Response) => res.json());
      }
-
+     //zane zane zane zane zane zane end
+     
     getTempItem(itemID){
         return new Promise(resolve => {
             this._http.get(this._apiUrl + '/item/returnItem/' + itemID ).map(res => res.json()).subscribe(data => {
@@ -49,7 +52,9 @@ export class OrderService{
         }
     )};
 
-
+    getOrderStatus(id){
+        return this._http.get(this._apiUrl+'/updateOrderStatus/returnOrderID/' + id).map(res => res.json());
+    }
     
     makeOrder(data,orderData){
         let headers = new Headers();

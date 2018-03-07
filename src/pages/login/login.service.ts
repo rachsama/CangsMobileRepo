@@ -119,7 +119,8 @@ export class LoginService{
                         cusLastName:this.customer[0].cusLastName,
                         cusFirstName:this.customer[0].cusFirstName,
                         cusMiddleName:this.customer[0].cusMiddleName,
-                        verificationCode:this.customer[0].verificationCode
+                        verificationCode:this.customer[0].verificationCode,
+                        barangay:this.customer[0].barangay //zane zane zane add
                     });
                     this._http.post(this._apiUrl + "/customer/forgotPassword",JSON.stringify(this.data[0]), reqopt).subscribe(function(res){
                         alert("Your New Password is " + cpass);
@@ -137,7 +138,8 @@ export class LoginService{
                         cusLastName:this.customer[0].cusLastName,
                         cusFirstName:this.customer[0].cusFirstName,
                         cusMiddleName:this.customer[0].cusMiddleName,
-                        verificationCode:this.customer[0].verificationCode
+                        verificationCode:this.customer[0].verificationCode,
+                        barangay:this.customer[0].barangay //zane zane zane add
                     });
                     console.log(this.data[0]);
                     console.log(this.customer[0]);

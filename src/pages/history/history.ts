@@ -51,8 +51,6 @@ export class HistoryPage {
             this.navCtrl.setRoot(LoginPage);
           });
       //Network
-          console.log(this.navParams.get('data1'));
-          console.log(this.navParams.get('data2'));
           console.log(this.shared.getUserName());
           this.ord.getHistory().subscribe(data =>{
               this.history=data;
@@ -60,7 +58,7 @@ export class HistoryPage {
           });
           this.refreshData();
       }
-      getDetails(orderID,customerID,orderTotal,card)
+      getDetails(orderID,customerID,orderTotal,card, orderStatus)
       { 
           this.clicked=true;
           console.log(card);
@@ -73,7 +71,7 @@ export class HistoryPage {
          setTimeout (() => {
               console.log(this.customer);
               console.log(this.details);
-              let modal = this.modalCtrl.create(ModalPage, {customer: this.customer, details:this.details, total:orderTotal});
+              let modal = this.modalCtrl.create(ModalPage, {customer: this.customer, details:this.details, total:orderTotal, status:orderStatus, /* zane*/orderID:orderID});
               modal.present();
               console.log("test");
               this.clicked=false;

@@ -14,13 +14,12 @@
  <h4 text-center style="color: #0847ad">User Information</h4> <br>
 </div>
   <ion-item id="user">
-    <ion-input  placeholder="Enter New Number" type="number" name="number" [(ngModel)]="number"></ion-input>
+    <ion-label color="black" stacked>Phone Number</ion-label>
+    <ion-input  placeholder="Enter New Number" type="number" name="number" [(ngModel)]="number" ></ion-input>
   </ion-item>
   <ion-item id="pw">
+    <ion-label color="black" stacked>Address</ion-label>
     <ion-input  placeholder="Enter New Address" type="text" name="address" [(ngModel)]="address"></ion-input>
-  </ion-item>
-  <ion-item id="pw">
-    <ion-input  placeholder="Enter Verification Code" type="text" name="verificationCode" [(ngModel)]="verificationCode"></ion-input>
   </ion-item>
 </ion-list>
 <div text-center> 

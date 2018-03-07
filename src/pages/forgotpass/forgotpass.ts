@@ -63,10 +63,16 @@ export class ForgotPassPage {
                 }
                 else if((fpasscode != this.cus[i].number) || (fpasscode != this.cus[i].verificationCode)){
                     this.toastCtrl.create({
-						message: 'Your Number or Verification Code is Incorrect. Please Try Again.',
+						message: 'Your mobile number or verification code is incorrect. Please try again.',
 						duration: 2500,
 					}).present();
                 }
+            }
+            else if(user != this.cus[i].customerID){
+                this.toastCtrl.create({
+					message: 'Your Username is incorrect. Please try again.',
+					duration: 2500,
+				}).present();
             }
         }
         if (this.success == false){
