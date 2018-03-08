@@ -244,22 +244,26 @@ export class CartPage {
                 duration: 3000,
               }).present();
             }
-             else if((this.inthour<this.traphour) || (this.inthour==this.traphour && this.intminutes<this.trapminutes)){
+            
+             else if(((this.inthour<this.traphour) || (this.inthour==this.traphour && this.intminutes<this.trapminutes)) && (this.trapday == this.intday) ){
               this.toastCtrl.create({
                 message: 'Please set proper a time',
                 position: 'middle',
                 duration: 3000,
               }).present();
             }
+            
             else if(coh > 1 && coh > this.totalcount)
             {
-                if((this.inthour>=18 && this.intminutes>30) && (this.inthour<=23 && this.intminutes<=59))//night
+                if((this.inthour>18 || (this.inthour == 18 && this.intminutes>30)) && (this.inthour<23 || (this.inthour==23 && this.intminutes<=59)))//night
                 {
+                  /*
                   this.toastCtrl.create({
                     message: 'Your order will be delivered tomorrow around 10:45 in the morning',
                     duration: 3000,
                   }).present();
-
+                  */
+                  
                   this.hour='10';
                   this.minutes='45';
 
@@ -304,10 +308,12 @@ export class CartPage {
                     this.intday++;
                     this.day= this.intday.toString(); 
                   }
+                  console.log("should alert");
                   alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning");
                 }
                 else if(this.inthour>=0 && this.inthour<10 || (this.inthour==10 && this.intminutes<45))//day
                 {
+                  console.log("should alert2");
                   alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning.");
                 /*  this.toastCtrl.create({
                     message: 'Your order will be delivered today around 10:45 in the morning',
