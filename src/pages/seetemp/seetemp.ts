@@ -30,10 +30,15 @@ export class SeeTempPage {
     public cartData: any=[];
     public tempItems: any=[];
      public editData: any=[];
+     time:any;
     check: boolean=false;
     constructor(private network: Network,private toastCtrl: ToastController, public tvserv: TempViewService, public shared: SharedService, public navCtrl: NavController, public navParams: NavParams, public log:LoginService, public seet:SeeTempService, public ord: OrderService) {
        this.check = false; //new
-+      console.log(this.navParams.get('templateName'));
+        console.log(this.navParams.get('templateName'));
+        this.ord.getDate().then(res =>{
+        this.time=res;
+        console.log(this.time);
+    });
       this.seet.getTemplateDetails(this.navParams.get('templateID')).then(res => {
 		    this.temp=res;
         console.log(this.temp)
@@ -141,7 +146,10 @@ export class SeeTempPage {
       this.shared.setCart(this.cartData);
       this.cartData.pop();
     }
-		this.navCtrl.push(CartPage);
+    console.log(this.time);
+		this.navCtrl.push(CartPage, {
+          time: this.time,//zane zane zane zane this line
+        });
 	  }
     
 }

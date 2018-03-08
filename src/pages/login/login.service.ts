@@ -15,8 +15,8 @@ export class LoginService{
     data: any=[];
     newPass: any;
     customer:any=[];
-    private _loginUrl =  'http://192.168.1.219:1025/customer/all';
-    private _apiUrl =  'http://192.168.1.219:1025';//http://192.168.0.24:1025
+    private _loginUrl =  'http://192.168.0.24:1025/customer/all';
+    private _apiUrl =  'http://192.168.0.24:1025';//http://192.168.0.24:1025
     constructor(private _http: Http,
                 public loadingCtrl: LoadingController
      ){

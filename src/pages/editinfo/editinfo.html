@@ -18,9 +18,45 @@
     <ion-input  placeholder="Enter New Number" type="number" name="number" [(ngModel)]="number"></ion-input>
   </ion-item>
   <ion-item id="pw">
+    <!--
     <ion-label color="black" stacked>Address</ion-label>
-    <ion-input  placeholder="Enter New Address" type="text" name="address" [(ngModel)]="address"></ion-input>
+    <ion-input  placeholder="Enter New Address" type="text" name="address" [(ngModel)]="address"></ion-input>-->
+     <ion-label color="black" stacked>Barangay</ion-label>
+      <ion-select [(ngModel)]="barangay">
+        <ion-option value="Bagacay">Bagacay</ion-option>
+        <ion-option value="Bajumpandan">Bajumpandan</ion-option>
+        <ion-option value="Balugo">Balugo</ion-option>
+        <ion-option value="Banilad">Banilad</ion-option>
+        <ion-option value="Bantayan">Bantayan</ion-option>
+        <ion-option value="Batinguel">Batinguel</ion-option>
+        <ion-option value="Buñao">Buñao</ion-option>
+        <ion-option value="Business District">Business District</ion-option>
+        <ion-option value="Cadawinonan">Cadawinonan</ion-option>
+        <ion-option value="Cambagroy">Cambagroy</ion-option>
+        <ion-option value="Calindagan">Calindagan</ion-option>
+        <ion-option value="Camanjac">Camanjac</ion-option>
+        <ion-option value="Cervantes Extension">Cervantes Extension</ion-option>
+        <ion-option value="Daro">Daro</ion-option>
+        <ion-option value="Junob">Junob</ion-option>
+        <ion-option value="Looc">Looc</ion-option>
+        <ion-option value="Mangga">Mangga</ion-option>
+        <ion-option value="Mangnao-Canal">Mangnao-Canal</ion-option>
+        <ion-option value="Motong">Motong</ion-option>
+        <ion-option value="Piapi">Piapi</ion-option>
+        <ion-option value="Pulantubig">Pulantubig</ion-option>
+        <ion-option value="Rizal Boulevard">Rizal Boulevard</ion-option>
+        <ion-option value="Silliman Area">Silliman Area</ion-option>
+        <ion-option value="Tabuc-tubig">Tabuc-tubig</ion-option>
+        <ion-option value="Taclobo">Taclobo</ion-option>
+        <ion-option value="Talay">Talay</ion-option>
+        <ion-option value="Tinago">Tinago</ion-option>
+        <ion-option value="Upper Lukewright">Upper Lukewright</ion-option>
+    </ion-select>
   </ion-item>
+  <ion-item id="pw">
+    <ion-label color="black" stacked>Street</ion-label>
+    <ion-input [(ngModel)]="address"></ion-input>
+   </ion-item>
 </ion-list>
 <div text-center> 
     <button ion-button outline round style="color: white; background-color:#2d42e5" (click)="changeInfo($event)">Confirm</button>

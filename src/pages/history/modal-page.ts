@@ -22,6 +22,9 @@ export class ModalPage {
   public orderID: string;
   public orderStatus: any=[];
   public location:any;
+  time:any;
+  delDate:any;
+  address: string;
   constructor(public navParams: NavParams,
               public navCtrl: NavController,
               public ord:OrderService,
@@ -37,7 +40,10 @@ export class ModalPage {
               duration: 2500,
             }).present();
           });
-
+          this.ord.getDate().then(res =>{
+        this.time=res;
+        console.log(this.time);
+    });
           this.network.onDisconnect().subscribe(() => {
             this.toastCtrl.create({
               message: 'Device is offline',
@@ -59,6 +65,7 @@ export class ModalPage {
       this.status = this.navParams.get('status')
       this.orderID = this.navParams.get('orderID');
       this.location= this.navParams.get('location');
+       this.address = this.navParams.get('barangay') + ", " +this.navParams.get('address')
       console.log(this.navParams.get('location'));
       //console.log(this.total);
       //console.log(this.customer);
@@ -73,7 +80,10 @@ export class ModalPage {
         this.history=data;
         console.log(this.history);
       });
-
+      this.ord.getDeliveryDate(this.orderID).then(res =>{
+        this.delDate=res[0].orderDate;
+       console.log(this.delDate);
+      });
       setTimeout(() => {
         if(this.status == 'pending'){
           this.note= "Your order is currently being processed. Thank you for your patronage";
@@ -81,7 +91,7 @@ export class ModalPage {
         else if(this.status == 'cancelled'){
           this.note = this.orderStatus[0].orstatRemarks;
       }// zane zane zane zane zane zane zane zane zane end
-      }, 1000)
+      }, 2000)
   }
 
     dismiss(data) {
@@ -116,6 +126,7 @@ export class ModalPage {
                 this.viewCtrl.dismiss();
                 this.app.getRootNav().push(CartPage,{
                    // cartData: this.newcart,
+                    time: this.time,
                     user:this.shared.getUserName(),//this.navParams.get('data1')
                 });
             }, 1000)

@@ -70,6 +70,7 @@ export class CartPage {
   trapdate: any;
   cus:any=[];
   address:any;
+  address2: string;
   delDate: String; //= new Date(new Date().getTime()+(31500000)).toISOString();
   timetrap: String; //= new Date(new Date().getTime()+(31500000)).toISOString();
   orderTime: any;// = new Date(new Date().getTime()+(28800000)).toISOString();
@@ -87,7 +88,8 @@ export class CartPage {
           this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
 					        this.cus=res;
                   console.log(this.cus);
-                  this.address= this.cus[0].address + ", " + this.cus[0].barangay;
+                  this.address= this.cus[0].address + ", " + this.cus[0].barangay;               
+                  this.address2 = this.address;
                   console.log(this.address);
 				        }, function (error) {
 					      alert(error);
@@ -327,7 +329,9 @@ export class CartPage {
                   console.log(this.orderData[i].quantity)
                   this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
                 }    console.log(this.total);
-                
+                if(address == "" || address == null){
+                  address = this.address2;
+                }
                 let time = new Date();
                   console.log(time);
                   let mm =time.getMonth();

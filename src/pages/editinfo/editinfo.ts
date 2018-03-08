@@ -18,6 +18,10 @@ export class EditInfoPage {
     address:any;
     verificationCode:any;
     msg:any="";
+    barangay:any;// add
+    barangay2: any;
+    address2: any;
+    number2: any;
     public cus:any=[];
     private timerSubscription: AnonymousSubscription;
     private postsSubscription: AnonymousSubscription;
@@ -50,17 +54,22 @@ export class EditInfoPage {
                     console.log(this.cus[0].number);
                     this.number=this.cus[0].number;
                     this.address=this.cus[0].address;
+                    this.barangay=this.cus[0].barangay;// add this
+                    this.barangay2 = this.barangay;//add for check for changes
+                    this.number2 = this.number;//add for check for changes
+                   this.address2 = this.address;//add for check for changes
 		    });
             //this.refreshData();
     }
     changeInfo(){
         console.log(this.number);
         console.log(this.address);
-        if(this.number != null && this.address != null && this.number != "" && this.address != "")
+        if(this.number != null && this.address != null && /*add*/ this.barangay != null && this.number != "" && this.address != "")
         {
            
                 this.cus[0].number=this.number;
                 this.cus[0].address=this.address;
+                this.cus[0].barangay=this.barangay;
                 console.log(this.cus);
                 this.log.editCustomer(this.cus[0]);
                 setTimeout (() => {
