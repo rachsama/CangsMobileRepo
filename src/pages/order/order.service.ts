@@ -15,8 +15,8 @@ export class OrderService{
     public sendOrderDetails: any=[];
     public static orderID: any;
     post: any;
-    private _loginUrl =  'http://192.168.0.24:1025/item/all';
-    private _apiUrl =  'http://192.168.0.24:1025';
+    private _loginUrl =  'http://192.168.1.219:1025/item/all';
+    private _apiUrl =  'http://192.168.1.219:1025';
     public data: any=[];
     constructor(private _http: Http, 
                 public shared:SharedService,
@@ -35,6 +35,9 @@ export class OrderService{
         });
         }
      )};
+    getOrderStatus(id){
+        return this._http.get(this._apiUrl+'/updateOrderStatus/returnOrderID/' + id).map(res => res.json());
+    }
      getHistory(){
         return this._http.get(this._apiUrl + "/orders/getHistory/" +this.shared.getUserName()).map((res:Response) => res.json());
      }
@@ -45,6 +48,15 @@ export class OrderService{
     getTempItem(itemID){
         return new Promise(resolve => {
             this._http.get(this._apiUrl + '/item/returnItem/' + itemID ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+        });
+        }
+    )};
+    getDate(){
+        return new Promise(resolve => {
+            this._http.get(this._apiUrl + '/orders/returnDate/').map(res => res.json()).subscribe(data => {
             this.post = data;        
             resolve(this.post);
             console.log(this.post);

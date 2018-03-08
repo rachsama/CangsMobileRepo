@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-footer>
-     <button ion-button block class="orderbtn" (click)="addOrder(delLocation, packaging, delDate, remarks, coh)" sticky><h2>Order</h2></button> 
+     <button ion-button block class="orderbtn" (click)="addOrder(address, packaging, delDate, remarks, coh)" sticky><h2>Order</h2></button> 
 </ion-footer>
 
 <ion-content>
@@ -30,7 +30,7 @@
   <ion-list>
     <ion-item id="inparea">
       <ion-label color="black" stacked>Location of Delivery</ion-label>
-      <ion-textarea class="inp"type="text" [(ngModel)]="delLocation"></ion-textarea>
+      <ion-textarea class="inp"type="text" [(ngModel)]="address"></ion-textarea>
     </ion-item>
     <ion-item id="inp">
       <ion-label>Packaging</ion-label>
@@ -53,7 +53,7 @@
     </ion-item>
     <ion-item id="inp">
       <ion-label color="black">Cash on Hand: ₱</ion-label>
-      <ion-input type="number" [(ngModel)]="coh" min="1"></ion-input>
+      <ion-input text-right class="inp3" type="number" [(ngModel)]="coh" min="1"></ion-input>
        
     </ion-item>
   </ion-list>

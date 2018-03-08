@@ -36,6 +36,7 @@ page-history, page-modal {
         font-size:18px;
         color:#02359d;
     }  
+    
 }
 page-history{
     button{
@@ -81,6 +82,12 @@ page-modal {
         border-radius: 13px;
         position:relative;
         left:0;
+    }
+     .stat{
+        margin-top: 50px;
+        background-color: #d0d3dd;
+        padding: 10px;
+        
     }
   
 }

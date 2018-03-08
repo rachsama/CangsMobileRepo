@@ -13,8 +13,8 @@ export class TemplateService{
     public static templateID: any;
     post: any;
     temdeQuantity: number;
-    private _loginUrl =  'http://192.168.0.24:1025/item/all';
-    private _apiUrl =  'http://192.168.0.24:1025';
+    private _loginUrl =  'http://192.168.1.219:1025/item/all';
+    private _apiUrl =  'http://192.168.1.219:1025';
     constructor(private _http: Http, public shared: SharedService,
                 public loadingCtrl: LoadingController,
                  ){

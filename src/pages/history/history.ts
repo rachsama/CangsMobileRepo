@@ -12,6 +12,8 @@ import { SharedService } from '../../app/app.service';
 import { ToastController,MenuController } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 import { Network } from '@ionic-native/network';
+
+
 @Component({
   selector: 'page-history',
   templateUrl: 'history.html'
@@ -60,7 +62,7 @@ export class HistoryPage {
           });
           this.refreshData();
       }
-      getDetails(orderID,customerID,orderTotal,card)
+      getDetails(orderID,customerID,orderTotal,card,orderStatus,location)
       { 
           this.clicked=true;
           console.log(card);
@@ -73,7 +75,7 @@ export class HistoryPage {
          setTimeout (() => {
               console.log(this.customer);
               console.log(this.details);
-              let modal = this.modalCtrl.create(ModalPage, {customer: this.customer, details:this.details, total:orderTotal});
+              let modal = this.modalCtrl.create(ModalPage, {customer: this.customer, details:this.details, total:orderTotal,status:orderStatus, /* zane*/orderID:orderID,location:location});
               modal.present();
               console.log("test");
               this.clicked=false;

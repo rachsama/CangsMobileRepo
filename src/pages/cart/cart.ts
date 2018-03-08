@@ -7,6 +7,7 @@ import { OrderPage } from '../../pages/order/order';
 import { CategoryPage } from '../../pages/category/category';
 import { Observable } from 'rxjs/Rx';
 import { AnonymousSubscription } from "rxjs/Subscription";
+
 /**
  * Generated class for the CartPage page.
  *
@@ -36,6 +37,7 @@ export class CartPage {
   public error:any=[];
   ngOnInit () {
     this.packaging = 'Plastic';
+    this.delDate = new Date(this.orderTime + 31500000).toISOString();
   }
   currentval:number = 1;
   total: number=0;
@@ -66,10 +68,11 @@ export class CartPage {
   traphour: any;
   trapminutes: any;
   trapdate: any;
-  
-  delDate: String = new Date(new Date().getTime()+(31500000)).toISOString();
-  timetrap: String = new Date(new Date().getTime()+(31500000)).toISOString();
-  orderTime: String = new Date(new Date().getTime()+(28800000)).toISOString();
+  cus:any=[];
+  address:any;
+  delDate: String; //= new Date(new Date().getTime()+(31500000)).toISOString();
+  timetrap: String; //= new Date(new Date().getTime()+(31500000)).toISOString();
+  orderTime: any;// = new Date(new Date().getTime()+(28800000)).toISOString();
   constructor( public navCtrl: NavController, 
                public navParams: NavParams, 
                public ord: OrderService, 
@@ -80,6 +83,26 @@ export class CartPage {
                private shared: SharedService,
                public log:LoginService) {
                  //Network
+
+          this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
+					        this.cus=res;
+                  console.log(this.cus);
+                  this.address= this.cus[0].address + ", " + this.cus[0].barangay;
+                  console.log(this.address);
+				        }, function (error) {
+					      alert(error);
+				        },);
+                
+                console.log(this.navParams.get('time'));
+                console.log("HERE");
+                this.orderTime = this.navParams.get('time').substring(6,19);
+                console.log("HERE");
+                this.orderTime = parseInt(this.orderTime);
+                this.delDate = new Date(this.orderTime + 31500000).toISOString();
+                console.log(this.orderTime);
+                console.log(this.delDate + "delDate");
+                this.timetrap = new Date(this.orderTime + 31500000).toISOString();
+                console.log(this.timetrap);
            this.trapyear = this.timetrap.substring(0,4);
           console.log(this.trapyear);
 
@@ -150,7 +173,7 @@ export class CartPage {
       this.refreshData();
   }
 
-  addOrder(delLocation, packaging, delDate, remarks, coh){
+  addOrder(address, packaging, delDate, remarks, coh){
         console.log(delDate);
         console.log(this.orderTime);
         this.year = delDate.substring(0,4);
@@ -281,13 +304,15 @@ export class CartPage {
                     this.intday++;
                     this.day= this.intday.toString(); 
                   }
+                  alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning");
                 }
-                else if(this.inthour>=0 && this.inthour<10)//day
+                else if(this.inthour>=0 && this.inthour<10 || (this.inthour==10 && this.intminutes<45))//day
                 {
-                  this.toastCtrl.create({
+                  alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning.");
+                /*  this.toastCtrl.create({
                     message: 'Your order will be delivered today around 10:45 in the morning',
                     duration: 3000,
-                  }).present();
+                  }).present();*/
 
                   this.hour='10';
                   this.minutes='45';
@@ -313,7 +338,7 @@ export class CartPage {
                 "orderTotal": this.total,
                 "orderStatus": 'pending',
                 "orderRemarks": remarks,
-                "location": delLocation,
+                "location": address,
                 "orderTime": this.date,
                 "packaging": packaging,
                 "customerID": this.shared.getUserName(),

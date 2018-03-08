@@ -30,13 +30,18 @@ export class OrderPage {
   load:boolean=false;
   leave:boolean=false;
   stop:boolean=false;
-  constructor( private log: OrderService ,
+   time: any; 
+  constructor( private ord: OrderService ,
                 public navCtrl: NavController, 
                 public navParams: NavParams, 
                 public toastCtrl: ToastController,
                 private shared: SharedService,
                 private network: Network,
                 public menu: MenuController) {
+    this.ord.getDate().then(res =>{
+        this.time=res;
+        console.log(this.time);
+    });
                   console.log("CONSTRUCT ORDER");
                   //Network
     this.network.onConnect().subscribe(() => {
@@ -62,7 +67,7 @@ export class OrderPage {
     this.load=false;
     this.leave=false;
     
-    this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
+    this.ord.getCategoryItem(this.navParams.get('category')).subscribe(res => {
 		this.item2=res;
       
       for(var i=0; i<this.item2.length; i++){
@@ -221,7 +226,9 @@ export class OrderPage {
   gotoCart(){
       if(this.shared.getCart().length != 0){
         console.log("to cart");
-        this.navCtrl.push(CartPage);
+        this.navCtrl.push(CartPage, {
+          time: this.time,//zane zane zane zane this line
+        });
       }
       else if(this.shared.getCart().length == 0){
           let toast = this.toastCtrl.create({
@@ -251,7 +258,7 @@ export class OrderPage {
             this.init=true;
             this.item2=[];
             this.item=[];
-            this.log.getCategoryItem(this.navParams.get('category')).subscribe(res => {
+            this.ord.getCategoryItem(this.navParams.get('category')).subscribe(res => {
                 this.item2=res;
                 for(var i=0; i<this.item2.length; i++){
                     for(var j=0; j<this.shared.getCart().length; j++)
@@ -310,7 +317,7 @@ export class OrderPage {
   
    private refreshData(): void {
          
-        this.postsSubscription = this.log.getCategoryItem(this.navParams.get('category')).subscribe(
+        this.postsSubscription = this.ord.getCategoryItem(this.navParams.get('category')).subscribe(
 
         data  => {
                    // console.log(this.stop);

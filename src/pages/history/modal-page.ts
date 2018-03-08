@@ -16,6 +16,12 @@ export class ModalPage {
   public details:any=[];
   public total:any="test";
   public newcart:any=[];
+  public history: any=[];
+  public note: string;
+  public status: string;
+  public orderID: string;
+  public orderStatus: any=[];
+  public location:any;
   constructor(public navParams: NavParams,
               public navCtrl: NavController,
               public ord:OrderService,
@@ -47,6 +53,35 @@ export class ModalPage {
       //console.log(this.total);
       //console.log(this.customer);
       //console.log(this.details);
+      this.customer = this.navParams.get('customer');
+      this.details = this.navParams.get('details');
+      this.total = this.navParams.get('total');
+      this.status = this.navParams.get('status')
+      this.orderID = this.navParams.get('orderID');
+      this.location= this.navParams.get('location');
+      console.log(this.navParams.get('location'));
+      //console.log(this.total);
+      //console.log(this.customer);
+      //console.log(this.details);
+      console.log(this.orderID);
+      this.ord.getOrderStatus(this.orderID).subscribe(res =>{
+        this.orderStatus=res;
+        console.log(this.orderStatus);
+      });
+
+      this.ord.getHistory().subscribe(data =>{
+        this.history=data;
+        console.log(this.history);
+      });
+
+      setTimeout(() => {
+        if(this.status == 'pending'){
+          this.note= "Your order is currently being processed. Thank you for your patronage";
+        }
+        else if(this.status == 'cancelled'){
+          this.note = this.orderStatus[0].orstatRemarks;
+      }// zane zane zane zane zane zane zane zane zane end
+      }, 1000)
   }
 
     dismiss(data) {

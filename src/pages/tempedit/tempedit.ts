@@ -97,6 +97,7 @@ export class TempEditPage {
                 }
             });
             this.tvserv.addEditedTemDe(this.tempgetData, this.navParams.get('templateID'));
+            this.sendEdits.pop();
             this.navCtrl.setRoot(TempViewPage);
         
         }
