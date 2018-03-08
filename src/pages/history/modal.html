@@ -28,8 +28,11 @@
         <ion-row justify-content-end>
             <ion-col col-8>TOTAL: <b>{{total | currency:'PHP':true:'1.2-2'}}</b></ion-col>
         </ion-row>
-        <ion-row justify-content-start *ngFor="let customers of customer">
-            <ion-col>Customer Address: {{customers.address}}</ion-col>
+        <ion-row justify-content-start>
+            <ion-col>Customer Address: {{address}}</ion-col>
+        </ion-row>
+        <ion-row justify-content-start>
+            <ion-col>Delivery Date: {{delDate}}</ion-col>
         </ion-row>
         <ion-card class="stat">
             <ion-col color="danger">{{note}}</ion-col>

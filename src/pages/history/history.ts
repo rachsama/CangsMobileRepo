@@ -67,11 +67,12 @@ export class HistoryPage {
           });
           this.ord.get1Customer(customerID).then(data =>{
               this.customer=data;
+              console.log(this.customer);
           });
          setTimeout (() => {
               console.log(this.customer);
               console.log(this.details);
-              let modal = this.modalCtrl.create(ModalPage, {customer: this.customer, details:this.details, total:orderTotal, status:orderStatus, /* zane*/orderID:orderID});
+              let modal = this.modalCtrl.create(ModalPage, {/*add here*/address:this.customer[0].address, barangay:this.customer[0].barangay/*add to here*/, customer: this.customer, details:this.details, total:orderTotal, status:orderStatus, /* zane*/orderID:orderID});
               modal.present();
               console.log("test");
               this.clicked=false;

@@ -43,6 +43,7 @@ export class CartPage {
   with:string ="";
   address: string;
   cus: any=[];
+  address2: string;
 
   year: any;
   day: any;
@@ -78,9 +79,10 @@ export class CartPage {
               private shared: SharedService,
               public log:LoginService) {
                 this.log.get1Customer(this.shared.getUserName()).subscribe(res =>{
-					        this.cus=res;
+					        this.cus = res;
                   console.log(this.cus);
-                  this.address= this.cus[0].barangay + ", " + this.cus[0].address;
+                  this.address = this.cus[0].barangay + ", " + this.cus[0].address;
+                  this.address2 = this.address;
                   console.log(this.address);
 				        }, function (error) {
 					      alert(error);
@@ -293,6 +295,9 @@ export class CartPage {
           this.total += this.orderData[i].itemPrice * this.orderData[i].quantity; 
         }    console.log(this.total);
         
+        if(address == "" || address == null){
+          address = this.address2;
+        }
         this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes;
         console.log(this.date);
         this.sendOrder.push({

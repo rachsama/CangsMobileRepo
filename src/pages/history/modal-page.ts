@@ -19,13 +19,15 @@ export class ModalPage {
   public history: any=[];
   public note: string;
   public status: string;
+  delDate:any; //add
   public orderID: string;
   public orderStatus: any=[];
+  address: string; //add
   constructor(public navParams: NavParams,
               public navCtrl: NavController,
               public ord:OrderService,
               public viewCtrl: ViewController,
-               public toastCtrl: ToastController,
+              public toastCtrl: ToastController,
               private network: Network,
               public app:App,
               public shared:SharedService) {
@@ -47,11 +49,12 @@ export class ModalPage {
           });
       //Network
       //zane zane zane zane zane zane zane zane zane zane start
-      this.customer = this.navParams.get('customer');
       this.details = this.navParams.get('details');
       this.total = this.navParams.get('total');
-      this.status = this.navParams.get('status')
+      this.status = this.navParams.get('status');
       this.orderID = this.navParams.get('orderID');
+      this.address = this.navParams.get('barangay') + ", " +this.navParams.get('address'); //add
+      console.log(this.address)
       //console.log(this.total);
       //console.log(this.customer);
       //console.log(this.details);
@@ -60,6 +63,12 @@ export class ModalPage {
         this.orderStatus=res;
         console.log(this.orderStatus);
       });
+      //addhere
+      this.ord.getDeliveryDate(this.orderID).then(res =>{
+        this.delDate=res[0].orderDate;
+        console.log(this.delDate);
+      });
+      //add end
 
       this.ord.getHistory().subscribe(data =>{
         this.history=data;

@@ -51,7 +51,17 @@ export class OrderService{
         });
         }
     )};
-
+    //add here
+    getDeliveryDate(id){
+        return new Promise(resolve => {
+            this._http.get(this._apiUrl + '/orders/returnOrderID/' + id ).map(res => res.json()).subscribe(data => {
+            this.post = data;        
+            resolve(this.post);
+            console.log(this.post);
+        });
+        }
+    )};
+    //add end
     getOrderStatus(id){
         return this._http.get(this._apiUrl+'/updateOrderStatus/returnOrderID/' + id).map(res => res.json());
     }
