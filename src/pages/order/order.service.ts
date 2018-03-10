@@ -109,7 +109,7 @@ export class OrderService{
             //alert("The OrderDetail has been Successfully Updated!");
             });
             }
-            alert("Your order has been sent!");
+            //alert("Your order has been sent!");
             loading.dismiss(); // loader dismiss
         }, 3000)
         this.sendOrderDetails.length = 0;

@@ -31,17 +31,16 @@
         <ion-row justify-content-start *ngFor="let customers of customer" >
             <ion-col>Customer Address: {{customers.address}}, Barangay {{customers.barangay}}</ion-col>    
         </ion-row>
-        <ion-row justify-content-start *ngFor="let customers of customer" >
-            <ion-col>For inquiries please contact: 09276405170</ion-col>    
-        </ion-row>
+         
+        
         <ion-row justify-content-start>
-            <ion-col>Location: {{location}}</ion-col>    
+            <ion-col>Delivery Address: {{location}}</ion-col>    
         </ion-row>
          <ion-row justify-content-start>
             <ion-col>Delivery Date: {{delDate}}</ion-col>
          </ion-row>
         <ion-card class="stat">
-            <ion-col color="danger">{{note}}</ion-col>
+            <ion-col color="danger">{{note}}. For inquiries, please contact: 09276405170.</ion-col>
         </ion-card>
     </ion-grid>    
 </ion-content>

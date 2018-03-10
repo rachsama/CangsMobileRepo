@@ -86,7 +86,7 @@ export class ModalPage {
       });
       setTimeout(() => {
         if(this.status == 'pending'){
-          this.note= "Your order is currently being processed. Thank you for your patronage";
+          this.note= "Your order is currently being processed. Thank  you for your patronage";
         }
         else if(this.status == 'cancelled'){
           this.note = this.orderStatus[0].orstatRemarks;
