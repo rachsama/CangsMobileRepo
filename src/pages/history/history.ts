@@ -75,7 +75,8 @@ export class HistoryPage {
          setTimeout (() => {
               console.log(this.customer);
               console.log(this.details);
-              let modal = this.modalCtrl.create(ModalPage, {/*add here*/address:this.customer[0].address, barangay:this.customer[0].barangay/*add to here*/, customer: this.customer, details:this.details, total:orderTotal, status:orderStatus, /* zane*/orderID:orderID});
+              console.log(location);
+              let modal = this.modalCtrl.create(ModalPage, {/*add here*/address:this.customer[0].address, barangay:this.customer[0].barangay/*add to here*/, customer: this.customer, details:this.details, total:orderTotal, status:orderStatus, /* zane*/orderID:orderID, location:location});
               modal.present();
               console.log("test");
               this.clicked=false;

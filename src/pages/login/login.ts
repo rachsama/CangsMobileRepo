@@ -145,6 +145,9 @@ export class LoginPage {
 			}
 			
 		}
+
+		this.shared.cleanCart();
+		this.shared.cleanTemplate();
 	}
 	presentToast() {
         console.log("test2");

@@ -133,6 +133,7 @@ export class CartPage {
 
           this.traphour = parseInt(this.traphour);
           console.log(this.traphour)
+          
 
           this.trapminutes = parseInt(this.trapminutes);
           console.log(this.trapminutes)
@@ -255,7 +256,15 @@ export class CartPage {
               }).present();
             }
             
-            else if(coh > 1 && coh > this.totalcount)
+            else if(this.inthour<10 || (this.inthour==10 && this.intminutes<45) || (this.inthour==18 && this.intminutes>30) || this.inthour>18 )
+            {
+              this.toastCtrl.create({
+                message: 'Allowed time of delivery are between 10:45 am to 6:30 pm',
+                position: 'middle',
+                duration: 3000,
+              }).present();
+            }
+            else if(coh > 1 && coh >= this.totalcount)
             {
                 if((this.inthour>18 || (this.inthour == 18 && this.intminutes>30)) && (this.inthour<23 || (this.inthour==23 && this.intminutes<=59)))//night
                 {
@@ -311,11 +320,13 @@ export class CartPage {
                     this.day= this.intday.toString(); 
                   }
                   console.log("should alert");
+                //   alert("MAO NI NI SULOD3");
                   alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning");
                 }
                 else if(this.inthour>=0 && this.inthour<10 || (this.inthour==10 && this.intminutes<45))//day
                 {
                   console.log("should alert2");
+              //     alert("MAO NI NI SULOD2");
                   alert("Your order will be delivered on " + this.month + "/" + this.day + "/" + this.year + " around 10:45 in the morning.");
                 /*  this.toastCtrl.create({
                     message: 'Your order will be delivered today around 10:45 in the morning',
@@ -324,6 +335,24 @@ export class CartPage {
 
                   this.hour='10';
                   this.minutes='45';
+                }
+                else
+                {
+              //    alert("MAO NI NI SULOD");
+                  this.hour = parseInt(this.hour);
+                  if(this.hour >= 12)
+                  {
+                    this.hour = parseInt(this.hour);
+                    this.hour = this.hour - 12;
+                    this.hour = this.hour.toString();
+                    console.log(this.hour+ "MAO NI");
+                    this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes + "PM";
+                  }
+                  else 
+                  {
+                    this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes + "AM";
+                  }
+                    alert("Your order will be delivered on " + this.date+ ".");
                 }
                 for(var i=0; i<this.orderData.length; i++){
                   console.log(this.orderData[i].quantity)
@@ -341,7 +370,20 @@ export class CartPage {
                   let ss =time.getSeconds();
                   let min =time.getMinutes();
                  // let timestamp=mm+1 + "/" + dd + "/" + yy + " " + hh + ":" + min + ":" + ss;
-                this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes;
+                /*this.hour = parseInt(this.hour);
+                if(this.hour >= 12)
+                {
+                  this.hour = parseInt(this.hour);
+                  this.hour = this.hour - 12;
+                  this.hour = this.hour.toString();
+                  console.log(this.hour+ "MAO NI");
+                  this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes + "PM";
+                }
+                else 
+                {
+                  this.date = this.month + "/" + this.day + "/" + this.year + "  " + this.hour + ":" + this.minutes + "AM";
+                }*/
+                console.log(this.orderTime);
                 console.log(this.date);
                 this.sendOrder.push({
                 "orderDate": this.orderTime,

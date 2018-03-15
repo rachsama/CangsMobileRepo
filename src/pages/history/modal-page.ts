@@ -17,7 +17,7 @@ export class ModalPage {
   public total:any="test";
   public newcart:any=[];
   public history: any=[];
-  public note: string;
+  public note: string="";
   public status: string;
   public orderID: string;
   public orderStatus: any=[];
@@ -81,16 +81,25 @@ export class ModalPage {
         console.log(this.history);
       });
       this.ord.getDeliveryDate(this.orderID).then(res =>{
-        this.delDate=res[0].orderDate;
+        this.delDate=res[0].orderTime;
        console.log(this.delDate);
       });
       setTimeout(() => {
         if(this.status == 'pending'){
           this.note= "Your order is currently being processed. Thank  you for your patronage";
         }
-        else if(this.status == 'cancelled'){
-          this.note = this.orderStatus[0].orstatRemarks;
-      }// zane zane zane zane zane zane zane zane zane end
+        else if(this.status == 'cancelled')
+        {
+          this.note = "Order status cancelled. Reason: "+ this.orderStatus[0].orstatRemarks;
+        }// zane zane zane zane zane zane zane zane zane end
+        else if(this.status == 'verified')
+        {
+          this.note = "Your order has been verified, it is now being delivered";
+        }
+        else if(this.status == 'delivered')
+        {
+          this.note = "Your order has been delivered";
+        }
       }, 2000)
   }
 

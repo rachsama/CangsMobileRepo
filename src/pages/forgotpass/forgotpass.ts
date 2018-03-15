@@ -69,7 +69,29 @@ export class ForgotPassPage {
                 }
             }
         }
-        if (this.success == false){
+        if((user == "" || user == null) && (fpasscode == "" || fpasscode == null))
+        {
+            this.toastCtrl.create({
+				message: 'Please fill up the forgot password details.',
+				duration: 2500,
+			}).present();
+        }
+        else if(fpasscode == "" || fpasscode == null)
+        {
+            this.toastCtrl.create({
+				message: 'Please input your mobile number/verification code.',
+				duration: 2500,
+			}).present();
+        }
+        else if(user == "" || user == null)
+        {
+            this.toastCtrl.create({
+				message: 'Please input username.',
+				duration: 2500,
+			}).present();
+        }
+        else    if (this.success == false)
+        {
             this.toastCtrl.create({
 				message: 'Username does not exist. Please try again.',
 				duration: 2500,

@@ -22,14 +22,14 @@
             <ion-col>{{detail.itemID}}</ion-col>
             <ion-col>{{detail.itemName}} {{detail.itemDescription}}</ion-col> 
            <!-- <ion-col>{{detail.ordetPrice | currency:'PHP':true:'1.2-2'}}</ion-col>-->
-            <ion-col>{{detail.ordetSubtotal | currency:'PHP':true:'1.2-2'}}</ion-col>                    
+            <ion-col text-right>{{detail.ordetSubtotal | currency:'PHP':true:'1.2-2'}}</ion-col>                    
            <!-- <ion-col>{{detail.ordetQuantity}}</ion-col>-->
         </ion-row>
-        <ion-row justify-content-end>
+        <ion-row justify-content-end>            
             <ion-col col-8>TOTAL: <b>{{total | currency:'PHP':true:'1.2-2'}}</b></ion-col>
         </ion-row>
         <ion-row justify-content-start *ngFor="let customers of customer" >
-            <ion-col>Customer Address: {{customers.address}}, Barangay {{customers.barangay}}</ion-col>    
+            <ion-col>Customer Address: {{customers.address}}, {{customers.barangay}}</ion-col>    
         </ion-row>
          
         
