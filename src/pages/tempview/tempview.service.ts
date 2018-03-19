@@ -15,8 +15,8 @@ export class TempViewService{
      public sendDetails: any=[];
     post: any;
     public data: any=[];
-    private _loginUrl =  'http://192.168.1.219:1025/template/all';
-    private _apiUrl =  'http://192.168.1.219:1025';
+    private _loginUrl =  'http://192.168.0.24:1025/template/all';
+    private _apiUrl =  'http://192.168.0.24:1025';
     constructor(private _http: Http, public shared:SharedService,public loadingCtrl: LoadingController ){
         console.log("getTemplate");
         

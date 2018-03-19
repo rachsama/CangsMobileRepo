@@ -35,6 +35,8 @@ export class CartPage {
   packaging: string='Plastic';
   public stored:any=[];
   public error:any=[];
+  color='black';
+  color2='black';
   ngOnInit () {
     this.packaging = 'Plastic';
     this.delDate = new Date(this.orderTime + 31500000).toISOString();
@@ -240,20 +242,221 @@ export class CartPage {
         }
         if(this.error.length ==0)
         {
+          /*
+              var mon=this.trapmonth;
+              var mon2=this.intmonth;
+              var day=this.trapday;
+              var day2=this.intday;*/
+              var err=false;          
+              if(((this.intmonth-this.trapmonth)==1))
+              { 
+                  
+                  if(this.trapmonth<8 && this.trapmonth%2==0)
+                  {
+                     if(this.trapmonth%2==0)
+                     { 
+                          if(this.trapmonth==2 && ((this.trapyear % 4 == 0) && (this.trapyear % 100 != 0)) || (this.trapyear % 400 == 0))
+                          {
+                              if(this.trapday==29 && ((this.intday-this.trapday)!= -26))
+                              {
+                                  err=true;
+                              }
+                              else if(this.trapday==28 && ((this.intday-this.trapday)!= -26))
+                              {
+                                  err=true;
+                              }
+                              else if(this.trapday==27 && ((this.intday-this.trapday)!= -26))
+                              {
+                                  err=true;
+                              }
+                              else
+                              {
+                                  if(this.trapday==29 || this.trapday==28 || this.trapday==27)
+                                  {
+
+                                  }
+                                  else
+                                  {
+                                      err=true;
+                                  }
+                              }
+                          }
+                          else 
+                          {
+                              if(this.trapmonth==2)
+                              {
+                                      if(this.trapday==28 && ((this.intday-this.trapday)!= -25))
+                                      {
+                                          err=true;
+                                      }
+                                      else if(this.trapday==27 && ((this.intday-this.trapday)!= -25))
+                                      {
+                                          err=true;
+                                      }
+                                      else if(this.trapday==26 && ((this.intday-this.trapday)!= -25))
+                                      {
+                                          err=true;
+                                      }
+                                      else
+                                      {
+                                          if(this.trapday==28 || this.trapday==27 || this.trapday==26)
+                                          {
+
+                                          }
+                                          else
+                                          {
+                                              err=true;
+                                          }
+                                      }
+                              }
+                              else
+                              {  
+                                      if(this.trapday==30 && ((this.intday-this.trapday)!= -27))
+                                      {
+                                          err=true;
+                                      }
+                                      else if(this.trapday==29 && ((this.intday-this.trapday)!= -27))
+                                      {
+                                          err=true;
+                                      }
+                                      else if(this.trapday==28 && ((this.intday-this.trapday)!= -27))
+                                      {
+                                          err=true;
+                                      }
+                                      else
+                                      {
+                                          if(this.trapday==30 || this.trapday==29 || this.trapday==28)
+                                          {
+
+                                          }
+                                          else
+                                          {
+                                              err=true;
+                                          }
+                                      }
+                              }  
+                          }
+                     }
+                     else
+                     {
+                            if(this.trapday==31 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else if(this.trapday==30 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else if(this.trapday==29 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else
+                            {
+                                if(this.trapday==31 || this.trapday==30 || this.trapday==29)
+                                {
+
+                                }
+                                else
+                                {
+                                     err=true;
+                                }
+                            }
+                     }
+                  }
+                  else
+                  {
+                        if(this.month%2==0)
+                        {
+                            if(this.trapday==31 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else if(this.trapday==30 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else if(this.trapday==29 && ((this.intday-this.trapday)!= -28))
+                            {
+                                err=true;
+                            }
+                            else
+                            {
+                                if(this.trapday==31 || this.trapday==30 || this.trapday==29)
+                                {
+
+                                }
+                                else
+                                {
+                                     err=true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                              if(this.trapday==30 && ((this.intday-this.trapday)!= -27))
+                              {
+                                  err=true;
+                              }
+                              else if(this.trapday==29 && ((this.intday-this.trapday)!= -27))
+                              {
+                                  err=true;
+                              }
+                              else if(this.trapday==28 && ((this.intday-this.trapday)!= -27))
+                              {
+                                  err=true;
+                              }
+                              else
+                              {
+                                  if(this.trapday==30 || this.trapday==29 || this.trapday==28)
+                                  {
+
+                                  }
+                                  else
+                                  {
+                                      err=true;
+                                  }
+                              }
+                              
+                        }
+                  }
+              }
+              else
+              {
+                  if(((this.intmonth-this.trapmonth)==0))
+                  {
+                      
+                  }
+                  else
+                  {
+                      err=true;
+                  }
+
+              }
               if((this.intmonth<this.trapmonth) || (this.intmonth==this.trapmonth && this.intday<this.trapday)){
               this.toastCtrl.create({
                 message: 'Please set proper a date',
                 position: 'middle',
                 duration: 3000,
               }).present();
+              this.color='red';
             }
-            
+            else if((this.intmonth==this.trapmonth && ((this.intday-this.trapday)>3)) ||  err )
+            {
+                   this.toastCtrl.create({
+                    message: 'Please set proper a date',
+                    position: 'middle',
+                    duration: 3000,
+                  }).present();
+                  this.color='red';
+            }
              else if(((this.inthour<this.traphour) || (this.inthour==this.traphour && this.intminutes<this.trapminutes)) && (this.trapday == this.intday) ){
               this.toastCtrl.create({
                 message: 'Please set proper a time',
                 position: 'middle',
                 duration: 3000,
               }).present();
+              this.color2='red';
             }
             
             else if(this.inthour<10 || (this.inthour==10 && this.intminutes<45) || (this.inthour==18 && this.intminutes>30) || this.inthour>18 )
@@ -263,9 +466,12 @@ export class CartPage {
                 position: 'middle',
                 duration: 3000,
               }).present();
+              this.color2='red';
             }
             else if(coh > 1 && coh >= this.totalcount)
             {
+                this.color='black';
+                this.color2='black';
                 if((this.inthour>18 || (this.inthour == 18 && this.intminutes>30)) && (this.inthour<23 || (this.inthour==23 && this.intminutes<=59)))//night
                 {
                   /*
@@ -399,7 +605,9 @@ export class CartPage {
               console.log(this.sendOrder);
               this.viewCtrl.showBackButton(false);
               this.ord.makeOrder(this.sendOrder[0],this.orderData);
-              
+              err=false;
+              this.color='black';
+                this.color2='black';
               setTimeout (() => {
                 this.viewCtrl.showBackButton(true);
                 this.menu.enable(true,"myMenu");
@@ -407,6 +615,8 @@ export class CartPage {
                 }, 3000)	
             }
             else{
+              this.color='black';
+                this.color2='black';
                 this.toastCtrl.create({
                     message: 'Your cash tendered is less than total amount',
                     duration: 3000,

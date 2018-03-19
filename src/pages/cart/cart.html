@@ -41,11 +41,11 @@
     </ion-item>
      <ion-item id="inp">
       <ion-label color="black" stacked>Preferred Delivery Date</ion-label>
-      <ion-datetime displayFormat="MMM DD(DDD)" pickerFormat="MMM DD" [(ngModel)]="delDate"></ion-datetime>
+      <ion-datetime [style.color]="color" displayFormat="MMM DD(DDD)" pickerFormat="MMM DD" [(ngModel)]="delDate"></ion-datetime>
     </ion-item>
     <ion-item id="inp">
       <ion-label color="black" stacked>Preferred Delivery Time</ion-label>
-      <ion-datetime displayFormat="hh:mm A" pickerFormat="hh mm A" [(ngModel)]="delDate"></ion-datetime>
+      <ion-datetime [style.color]="color2" displayFormat="hh:mm A" pickerFormat="hh mm A" [(ngModel)]="delDate"></ion-datetime>
     </ion-item>
     <ion-item id="inparea">
       <ion-label color="black" stacked>Remarks</ion-label>
